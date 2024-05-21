@@ -122,9 +122,12 @@ namespace StarterAssets
             }
         }
 
+        // 플레이어 컨트롤러 파라미터
+        private PlayerController playerController;
 
         private void Awake()
         {
+            playerController = GetComponent<PlayerController>();
             // get a reference to our main camera
             if (_mainCamera == null)
             {
@@ -213,6 +216,9 @@ namespace StarterAssets
 
         private void Move()
         {
+            // 플레이어 컨트롤러 파라미터 (장비를 착용중일때는 움직이지 않음)
+            if (playerController.isEquipping || playerController.isBlocking || playerController.isKicking || playerController.isAttacking) return;
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
@@ -300,7 +306,7 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                if (_input.jump && _jumpTimeoutDelta <= 0.0f && !playerController.isBlocking)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
