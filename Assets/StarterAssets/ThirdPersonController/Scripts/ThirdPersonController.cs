@@ -214,7 +214,7 @@ namespace StarterAssets
                 _cinemachineTargetYaw, 0.0f);
         }
 
-        private void Move()
+        public void Move()
         {
             // 플레이어 컨트롤러 파라미터 (장비를 착용중일때는 움직이지 않음)
             if (playerController.isEquipping || playerController.isBlocking || playerController.isKicking || playerController.isAttacking) return;

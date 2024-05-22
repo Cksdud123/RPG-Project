@@ -12820,6 +12820,40 @@ MonoBehaviour:
   isKicking: 0
   isAttacking: 0
   currentAttack: 0
+  dodgeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.2221735
+      outSlope: 3.2221735
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07277968
+    - serializedVersion: 3
+      time: 0.49705786
+      value: 0.9882153
+      inSlope: 0.025005328
+      outSlope: 0.025005328
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.12401764
+    - serializedVersion: 3
+      time: 1
+      value: 0.012270033
+      inSlope: -2.7699301
+      outSlope: -2.7699301
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06165275
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  isDodgeing: 0
 --- !u!4 &6983258930626336602
 Transform:
   m_ObjectHideFlags: 0
