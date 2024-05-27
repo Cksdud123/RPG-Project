@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public bool isDodgeing;
 
     float dodgeTimer, dodge_coolDown;
+
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
