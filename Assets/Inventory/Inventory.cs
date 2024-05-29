@@ -24,22 +24,22 @@ public class Inventory : MonoBehaviour
         Debug.Log("아이템 습득 완료!!");
         for (int i = 0; i < slots.Length; i++)
         {
-            // 슬롯에 아이템이 있고 아이템의 아이디가 같을때
+            // 슬롯에 아이템이 있고 아이템의 아이디가 같으면서 최대스택이 아닐때
             if (slots[i].ItemInSlot != null && slots[i].ItemInSlot.ID == itemObj.iteminfo.ID && slots[i].ItemInSlot.MAXSTACK != slots[i].AmountInSlot)
             {
                 // 최대스택에 도달하지 않았다면
                 if (!limitStack(i, itemObj.amount))
                 {
-                    // 아이템을 추가하고 객체를 파괴함
+                    // 아이템의 수량을 추가해 줌
                     slots[i].AmountInSlot += itemObj.amount;
-                    slots[i].AddSlot();
                     Destroy(itemObj.gameObject);
+                    slots[i].AddSlot();
                     return;
                 }
-                // 최대 스택에 도달했으면
+                // 최대스택에 도달했다면
                 else
                 {
-                    // 남은 양을 계산해서 재귀호출
+                    // 남은 양을 계산해서 재귀적으로 슬롯에 집어넣음
                     int result = NeededToFill(i);
                     itemObj.amount = RemainingAmount(i, itemObj.amount);
                     slots[i].AmountInSlot += result;
@@ -47,7 +47,6 @@ public class Inventory : MonoBehaviour
                     pickUpItem(itemObj);
                     return;
                 }
-                
             }
             // 슬롯에 아이템이 없을때
             else if(slots[i].ItemInSlot == null)
@@ -56,12 +55,12 @@ public class Inventory : MonoBehaviour
                 slots[i].ItemInSlot = itemObj.iteminfo;
                 slots[i].AmountInSlot = itemObj.amount;
                 slots[i].AddSlot();
+                slots[i].UpdateSlot();
                 Destroy(itemObj.gameObject);
                 return;
             }
         }
     }
-
     bool limitStack(int index, int amount)
     {
         // AmountInSlot + amount 이 값이 최대스택보다 크다면

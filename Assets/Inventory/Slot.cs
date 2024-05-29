@@ -35,4 +35,14 @@ public class Slot : MonoBehaviour
         icon.texture = ItemInSlot.ITEMICON;
         txt_amount.text = $"{AmountInSlot}";
     }
+    public void UpdateSlot()
+    {
+        // 자식 객체의 컴포넌트를 참조
+        icon = GetComponentInChildren<RawImage>();
+        txt_amount = GetComponentInChildren<TextMeshProUGUI>();
+
+        // 인자값으로 받은 아이템의 정보를 설정
+        icon.texture = ItemInSlot.ITEMICON;
+        txt_amount.text = $"{AmountInSlot}";
+    }
 }
