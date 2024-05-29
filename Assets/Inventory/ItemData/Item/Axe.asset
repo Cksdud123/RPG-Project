@@ -16,4 +16,6 @@ MonoBehaviour:
   _name: Axe
   description: axe
   maxStack: 1
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 1831818441289607540, guid: 2ff3ceec58cb52b42bfd947b6aa04175,
+    type: 3}
+  itemIcon: {fileID: 2800000, guid: 6d4f7652b9310e54ca402fa99b3b3673, type: 3}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2338007737791971310}
   - component: {fileID: 612499192658218232}
   - component: {fileID: 6250114470968558106}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,4 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iteminfo: {fileID: 11400000, guid: 9f112a45d70498d49884bf7e599bf5fa, type: 2}
-  amount: 10
+  amount: 30

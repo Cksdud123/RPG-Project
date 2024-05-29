@@ -16,4 +16,6 @@ MonoBehaviour:
   _name: Tomato
   description: food
   maxStack: 64
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 8143594523909760816, guid: d8f1ce734a812c54a853e9f14351bcdf,
+    type: 3}
+  itemIcon: {fileID: 2800000, guid: ab7c0e50365a64543a7694392968d3a0, type: 3}

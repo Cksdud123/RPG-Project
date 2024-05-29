@@ -8,11 +8,16 @@ public class InventoryInteraction : MonoBehaviour
 {
     public GameObject PanelInventory;
 
+    [Header("Ray")]
     [SerializeField] private int hitrange = 10;
     [SerializeField] private LayerMask itemLayer;
     [SerializeField] private Camera cam;
+    [SerializeField] private GameObject PlayerCamera;
 
+    [Header("Inventory")]
+    [SerializeField] private Inventory inventory;
     [SerializeField] TextMeshProUGUI txt_item;
+    
 
     // Update is called once per frame
     void Update()
@@ -26,17 +31,17 @@ public class InventoryInteraction : MonoBehaviour
         {
             if (PanelInventory.activeSelf)
             {
-                // 인벤토리가 활성화 상태일 때, 비활성화합니다.
                 Cursor.lockState = CursorLockMode.Locked;
                 PanelInventory.SetActive(false);
+                PlayerCamera.SetActive(true);
                 Time.timeScale = 1f;
             }
             else
             {
-                // 인벤토리가 비활성화 상태일 때, 활성화합니다.
                 Cursor.lockState = CursorLockMode.None;
                 PanelInventory.transform.position = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
                 PanelInventory.SetActive(true);
+                PlayerCamera.SetActive(false);
                 Time.timeScale = 0f;
             }
         }
@@ -59,7 +64,7 @@ public class InventoryInteraction : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-
+                    inventory.pickUpItem(hit.collider.GetComponent<ItemInfo>());
                 }
             }
         }
