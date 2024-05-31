@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour
+public class Slot : MonoBehaviour, IDropHandler
 {
     public ItemData ItemInSlot;
     public int AmountInSlot;
@@ -44,5 +45,12 @@ public class Slot : MonoBehaviour
         // 인자값으로 받은 아이템의 정보를 설정
         icon.texture = ItemInSlot.ITEMICON;
         txt_amount.text = $"{AmountInSlot}";
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        DragSlot dragSlot = eventData.pointerDrag.GetComponent<DragSlot>();
+
+        // 드래그할 
     }
 }

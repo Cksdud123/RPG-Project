@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Inventory : MonoBehaviour
 {
@@ -55,7 +54,6 @@ public class Inventory : MonoBehaviour
                 slots[i].ItemInSlot = itemObj.iteminfo;
                 slots[i].AmountInSlot = itemObj.amount;
                 slots[i].AddSlot();
-                slots[i].UpdateSlot();
                 Destroy(itemObj.gameObject);
                 return;
             }
