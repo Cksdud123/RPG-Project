@@ -49,8 +49,42 @@ public class Slot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        DragSlot dragSlot = eventData.pointerDrag.GetComponent<DragSlot>();
+        GameObject dropped = eventData.pointerDrag;
+        DragSlot draggableItem = dropped.GetComponent<DragSlot>();
 
-        // 드래그할 
+        // 아이템에 슬롯이 없으면
+        if (ItemInSlot == null)
+        {
+            // 옮겨진 아이템의 아이콘을 현재 슬롯으로 옮김
+            draggableItem.dragItemIcon.SetParent(transform);
+            draggableItem.dragItemIcon.localPosition = Vector3.zero;
+
+            // 현재 슬롯의 아이템 데이터 갱신
+            ItemInSlot = draggableItem.originItemIcon.GetComponent<Slot>().ItemInSlot;
+
+            // 드래그한 아이템의 아이콘을 초기화
+            draggableItem.dragItemIcon = null;
+            // 이동한 슬롯의 아이템 데이터 초기화
+            draggableItem.originItemIcon.GetComponent<Slot>().ItemInSlot = null;
+
+            Transform emptyRawImage = FindEmptyRawImage(transform);
+            if (emptyRawImage != null)
+            {
+                emptyRawImage.SetParent(draggableItem.originItemIcon);
+                emptyRawImage.localPosition = Vector3.zero;
+            }
+        }
+    }
+    private Transform FindEmptyRawImage(Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            RawImage rawImage = child.GetComponent<RawImage>();
+            if (rawImage != null && rawImage.texture == null)
+            {
+                return child;
+            }
+        }
+        return null;
     }
 }
