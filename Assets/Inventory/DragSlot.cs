@@ -12,7 +12,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public Transform dragItemIcon;
     public Transform dragItemAmount;
 
-    [HideInInspector] public Transform originItemIcon;
+    [HideInInspector] public Transform originParent;
 
 
     private void Awake()
@@ -30,8 +30,10 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         dragItemIcon = transform.GetComponentInChildren<RawImage>().transform;
         dragItemIcon.GetComponent<RawImage>().raycastTarget = false;
 
-        // 드래그 전 아이템의 부모 정보를 저장
-        originItemIcon = transform;
+        originParent = transform;
+
+        dragItemAmount = transform;
+        dragItemAmount.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
 
         if (dragItemIcon != null)
         {
@@ -58,13 +60,17 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if(dragItemIcon.parent == canvas )
             {
                 // 드래그한 아이템의 부모를 드래그 하기전 부모로 바꾸고
-                dragItemIcon.SetParent(originItemIcon);
+                dragItemIcon.SetParent(originParent);
 
                 // 원래 위치로 되돌림
                 dragItemIcon.transform.localPosition = Vector3.zero;
 
                 // raycastTarget을 활성화 한 뒤에
                 dragItemIcon.GetComponent<RawImage>().raycastTarget = true;
+                dragItemAmount.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
+                // 드래그한 아이템의 데이터 초기화 (다시 드래를 할 수있도록)
+                dragItemIcon = null;
+                dragItemAmount = null;
             }
         }
     }

@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
                     // 아이템의 수량을 추가해 줌
                     slots[i].AmountInSlot += itemObj.amount;
                     Destroy(itemObj.gameObject);
-                    slots[i].AddSlot();
+                    slots[i].SetSlot();
                     return;
                 }
                 // 최대스택에 도달했다면
@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour
                     int result = NeededToFill(i);
                     itemObj.amount = RemainingAmount(i, itemObj.amount);
                     slots[i].AmountInSlot += result;
-                    slots[i].AddSlot();
+                    slots[i].SetSlot();
                     pickUpItem(itemObj);
                     return;
                 }
@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
                 // 아이템이 없다면 아이템의 정보를 업데이트 해준뒤에 추가함
                 slots[i].ItemInSlot = itemObj.iteminfo;
                 slots[i].AmountInSlot = itemObj.amount;
-                slots[i].AddSlot();
+                slots[i].SetSlot();
                 Destroy(itemObj.gameObject);
                 return;
             }

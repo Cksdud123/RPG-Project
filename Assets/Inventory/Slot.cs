@@ -20,7 +20,7 @@ public class Slot : MonoBehaviour, IDropHandler
             transform.GetChild(i).gameObject.SetActive(false);
         }
     }
-    public void AddSlot()
+    public void SetSlot()
     {
         // Slot의 자식객체를 활성화 한 뒤
         for (int i = 0; i < transform.childCount; i++)
@@ -57,22 +57,32 @@ public class Slot : MonoBehaviour, IDropHandler
         {
             // 옮겨진 아이템의 아이콘을 현재 슬롯으로 옮김
             draggableItem.dragItemIcon.SetParent(transform);
+            draggableItem.dragItemIcon.SetSiblingIndex(0);
             draggableItem.dragItemIcon.localPosition = Vector3.zero;
 
             // 현재 슬롯의 아이템 데이터 갱신
-            ItemInSlot = draggableItem.originItemIcon.GetComponent<Slot>().ItemInSlot;
+            ItemInSlot = draggableItem.originParent.GetComponent<Slot>().ItemInSlot;
+            AmountInSlot = draggableItem.originParent.GetComponent<Slot>().AmountInSlot;
 
-            // 드래그한 아이템의 아이콘을 초기화
+            // 드래그한 아이템의 데이터 초기화 (다시 드래를 할 수있도록)
             draggableItem.dragItemIcon = null;
-            // 이동한 슬롯의 아이템 데이터 초기화
-            draggableItem.originItemIcon.GetComponent<Slot>().ItemInSlot = null;
+            draggableItem.dragItemAmount = null;
 
+            // 원래 슬롯의 아이템 데이터 초기화
+            draggableItem.originParent.GetComponent<Slot>().ItemInSlot = null;
+            draggableItem.originParent.GetComponent<Slot>().AmountInSlot = 0;
+
+            // 원래 슬롯의 자식객체에 있는 텍스트 정보 초기화
+            draggableItem.originParent.GetComponentInChildren<TextMeshProUGUI>().text = "0";
+            //draggableItem.originParent.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
+
+            // RawImage의 값이 null인 객체를 찾아서 변경
             Transform emptyRawImage = FindEmptyRawImage(transform);
-            if (emptyRawImage != null)
-            {
-                emptyRawImage.SetParent(draggableItem.originItemIcon);
-                emptyRawImage.localPosition = Vector3.zero;
-            }
+            emptyRawImage.SetParent(draggableItem.originParent);
+            emptyRawImage.SetSiblingIndex(0);
+            emptyRawImage.localPosition = Vector3.zero;
+
+            SetSlot();
         }
     }
     private Transform FindEmptyRawImage(Transform parent)
