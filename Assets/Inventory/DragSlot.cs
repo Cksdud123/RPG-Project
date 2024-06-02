@@ -14,6 +14,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     [HideInInspector] public Transform originParent;
 
+    private int originalSiblingIndex;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         dragItemIcon.GetComponent<RawImage>().raycastTarget = false;
 
         originParent = transform;
+        originalSiblingIndex = dragItemIcon.GetSiblingIndex();
 
         dragItemAmount = transform;
         dragItemAmount.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
@@ -54,6 +56,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     // 드래그가 끝날 때 호출
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log("OnEndDrag실행");
         if (dragItemIcon != null)
         {
             // 드래그가 끝난뒤에 부모가 캔버스로 설정되어 있었다면 
@@ -61,6 +64,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             {
                 // 드래그한 아이템의 부모를 드래그 하기전 부모로 바꾸고
                 dragItemIcon.SetParent(originParent);
+                dragItemIcon.SetSiblingIndex(originalSiblingIndex);
 
                 // 원래 위치로 되돌림
                 dragItemIcon.transform.localPosition = Vector3.zero;
@@ -68,7 +72,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 // raycastTarget을 활성화 한 뒤에
                 dragItemIcon.GetComponent<RawImage>().raycastTarget = true;
                 dragItemAmount.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
-                // 드래그한 아이템의 데이터 초기화 (다시 드래를 할 수있도록)
+
                 dragItemIcon = null;
                 dragItemAmount = null;
             }

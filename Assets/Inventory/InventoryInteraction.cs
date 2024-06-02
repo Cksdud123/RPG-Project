@@ -17,6 +17,7 @@ public class InventoryInteraction : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] private Inventory inventory;
     [SerializeField] TextMeshProUGUI txt_item;
+    [SerializeField] private GameObject CrossHair;
     
 
     // Update is called once per frame
@@ -27,23 +28,22 @@ public class InventoryInteraction : MonoBehaviour
     }
     public void ActiveInventory()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (PanelInventory.activeInHierarchy && Input.GetKeyDown(KeyCode.I))
         {
-            if (PanelInventory.activeSelf)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                PanelInventory.SetActive(false);
-                PlayerCamera.SetActive(true);
-                Time.timeScale = 1f;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                PanelInventory.transform.position = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
-                PanelInventory.SetActive(true);
-                PlayerCamera.SetActive(false);
-                Time.timeScale = 0f;
-            }
+            Cursor.lockState = CursorLockMode.Locked;
+            PanelInventory.SetActive(false);
+            CrossHair.SetActive(true);
+            PlayerCamera.SetActive(true);
+            Time.timeScale = 1f;
+        }
+        else if (!PanelInventory.activeInHierarchy && Input.GetKeyDown(KeyCode.I))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            PanelInventory.transform.position = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
+            PanelInventory.SetActive(true);
+            CrossHair.SetActive(false);
+            PlayerCamera.SetActive(false);
+            Time.timeScale = 0f;
         }
     }
 
