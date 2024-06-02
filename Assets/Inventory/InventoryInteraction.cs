@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class InventoryInteraction : MonoBehaviour
@@ -34,6 +33,7 @@ public class InventoryInteraction : MonoBehaviour
             PanelInventory.SetActive(false);
             CrossHair.SetActive(true);
             PlayerCamera.SetActive(true);
+            txt_item.gameObject.SetActive(true);
             Time.timeScale = 1f;
         }
         else if (!PanelInventory.activeInHierarchy && Input.GetKeyDown(KeyCode.I))
@@ -43,6 +43,7 @@ public class InventoryInteraction : MonoBehaviour
             PanelInventory.SetActive(true);
             CrossHair.SetActive(false);
             PlayerCamera.SetActive(false);
+            txt_item.gameObject.SetActive(false);
             Time.timeScale = 0f;
         }
     }

@@ -12,11 +12,6 @@ public class Slot : MonoBehaviour, IDropHandler
 
     RawImage icon;
     TextMeshProUGUI txt_amount;
-    private void Start()
-    {
-        // 슬롯 인덱스를 로그로 출력
-        Debug.Log($"Slot {transform.GetSiblingIndex()} initialized");
-    }
     public void initSlot()
     {
         for(int i = 0; i < transform.childCount; i++)
