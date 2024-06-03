@@ -16,7 +16,6 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-
     public void pickUpItem(ItemInfo itemObj)
     {
         // 아이템 습득, 슬롯을 확인해서 슬롯에 집어넣음
