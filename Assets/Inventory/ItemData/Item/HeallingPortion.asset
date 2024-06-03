@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e006f5163c704a4f85c6b343f517d9c, type: 3}
-  m_Name: Potion
+  m_Name: HeallingPortion
   m_EditorClassIdentifier: 
-  _id: 1
-  _name: Potion
-  description: potion
-  maxStack: 32
-  itemPrefab: {fileID: 7595495283220474277, guid: ef32e39a3ba899f498d281d9ba9afdb0,
+  _id: 2
+  _name: HeallingPortion
+  rarity: 0
+  itemtype: 1
+  description: HeallingPortion
+  maxStack: 64
+  price: 20
+  weight: 0.1
+  Durability: 0
+  RecoveryAmount: 50
+  itemPrefab: {fileID: 3465875873062568494, guid: 6c264ba3d3b890246b60e64696750c97,
     type: 3}
-  itemIcon: {fileID: 2800000, guid: 6fe4c2a9ac2165b449752dd9bb5d7e25, type: 3}
+  itemIcon: {fileID: 2800000, guid: 6640b580b0c7e48458b9db87e378d8bd, type: 3}

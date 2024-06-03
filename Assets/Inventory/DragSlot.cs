@@ -29,8 +29,11 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         // 슬롯에 저장된 아이템이 없다면 리턴
         if (transform.GetComponent<Slot>().ItemInSlot == null) return;
 
-        // 쉬프트 모드 여부 확인
-        isShiftMode = Input.GetKey(KeyCode.LeftShift);
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            isShiftMode = true;
+        }
+        else isShiftMode = false;
 
         // 드래그할 오브젝트의 정보를 가져옴
         dragItemIcon = transform.GetComponentInChildren<RawImage>().transform;
@@ -75,12 +78,12 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
                 // raycastTarget을 활성화 한 뒤에
                 dragItemIcon.GetComponent<RawImage>().raycastTarget = true;
-                dragItemAmount.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
+
+                if (dragItemAmount.GetComponentInChildren<TextMeshProUGUI>() != null) dragItemAmount.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
             }
             dragItemIcon = null;
             dragItemAmount = null;
         }
     }
-
     public bool ShihtMode => isShiftMode;
 }

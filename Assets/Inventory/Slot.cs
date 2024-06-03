@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -94,8 +95,8 @@ public class Slot : MonoBehaviour, IDropHandler
         slot.AmountInSlot = 0;
 
         // 원래 슬롯의 자식객체에 있는 텍스트 정보 초기화
-        draggableItem.originParent.GetComponentInChildren<TextMeshProUGUI>().text = slot.AmountInSlot.ToString();
-        draggableItem.originParent.GetComponentInChildren<TextMeshProUGUI>().gameObject.SetActive(false);
+        slot.txt_amount.text = slot.AmountInSlot.ToString();
+        slot.txt_amount.gameObject.SetActive(false);
 
         // RawImage의 값이 null인 객체를 찾아서 변경
         Transform emptyRawImage = FindEmptyRawImage(transform);
@@ -119,7 +120,7 @@ public class Slot : MonoBehaviour, IDropHandler
         slot.AmountInSlot -= AmountInSlot;
         slot.UpdateSlot();
     }
-    // 두 아이템을 스왑함
+    // 두 아이템을 교체
     private void SwapItems(DragSlot draggableItem,Slot slot)
     {
         // 현재 슬롯의 아이템 데이터를 임시 변수에 저장
@@ -143,6 +144,38 @@ public class Slot : MonoBehaviour, IDropHandler
         if(AmountInSlot == ItemInSlot.MAXSTACK && slot.AmountInSlot == slot.ItemInSlot.MAXSTACK) return;
         // 두개의 슬롯에 있는 아이템중 하나라도 최대 수량일때
         if(AmountInSlot == ItemInSlot.MAXSTACK || slot.AmountInSlot == slot.ItemInSlot.MAXSTACK) SwapItems(draggableItem, slot);
+        // 두개의 슬롯에 있는 아이템을 더했을때 최대 수량을 넘기지 않을때
+        if(AmountInSlot + slot.AmountInSlot <= ItemInSlot.MAXSTACK)
+        {
+            // 현재 슬롯에 수량을 더한 뒤
+            AmountInSlot += slot.AmountInSlot;
+            UpdateSlot();
+
+            // 원래 슬롯의 아이템 데이터 초기화
+            slot.ItemInSlot = null;
+            slot.AmountInSlot = 0;
+
+            // 원래 슬롯의 자식객체에 있는 데이터를 초기화
+            slot.icon.texture = null;
+            slot.icon.gameObject.SetActive(false);
+            slot.txt_amount.text = slot.AmountInSlot.ToString();
+            slot.txt_amount.gameObject.SetActive(false);
+
+            slot.UpdateSlot();
+        }
+        // 두개의 슬롯에 있는 아이템을 더했을때 최대 수량을 넘길때
+        else if (AmountInSlot + slot.AmountInSlot >= ItemInSlot.MAXSTACK)
+        {
+            // 모두합친 수량을 구한 뒤
+            int overStack = AmountInSlot + slot.AmountInSlot;
+
+            // 현재 슬롯의 수량을 최대로
+            AmountInSlot = ItemInSlot.MAXSTACK;
+            UpdateSlot();
+            // 원래 슬롯엔 남은 수량을 더함
+            slot.AmountInSlot = overStack - AmountInSlot;
+            slot.UpdateSlot();
+        }
     }
     // 자식객체중 RawImage를 찾음
     private Transform FindEmptyRawImage(Transform parent)

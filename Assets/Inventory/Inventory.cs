@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public Slot[] slots = new Slot[25];
+    public Slot[] slots = new Slot[31];
 
     private void Awake()
     {
@@ -18,8 +18,6 @@ public class Inventory : MonoBehaviour
     }
     public void pickUpItem(ItemInfo itemObj)
     {
-        // 아이템 습득, 슬롯을 확인해서 슬롯에 집어넣음
-        Debug.Log("아이템 습득 완료!!");
         for (int i = 0; i < slots.Length; i++)
         {
             // 슬롯에 아이템이 있고 아이템의 아이디가 같으면서 최대스택이 아닐때

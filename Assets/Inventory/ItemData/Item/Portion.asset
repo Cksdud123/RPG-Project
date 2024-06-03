@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e006f5163c704a4f85c6b343f517d9c, type: 3}
-  m_Name: Tomato
+  m_Name: Portion
   m_EditorClassIdentifier: 
-  _id: 0
-  _name: Tomato
-  description: food
+  _id: 1
+  _name: Portion
+  rarity: 0
+  itemtype: 1
+  description: Portion
   maxStack: 64
-  itemPrefab: {fileID: 8143594523909760816, guid: d8f1ce734a812c54a853e9f14351bcdf,
+  price: 10
+  weight: 0.1
+  Durability: 0
+  RecoveryAmount: 50
+  itemPrefab: {fileID: 3621125714051429211, guid: ef32e39a3ba899f498d281d9ba9afdb0,
     type: 3}
-  itemIcon: {fileID: 2800000, guid: ab7c0e50365a64543a7694392968d3a0, type: 3}
+  itemIcon: {fileID: 2800000, guid: 6fe4c2a9ac2165b449752dd9bb5d7e25, type: 3}
