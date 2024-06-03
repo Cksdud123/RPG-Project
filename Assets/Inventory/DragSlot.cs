@@ -16,6 +16,8 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private int originalSiblingIndex;
 
+    private bool isShiftMode = false; // 쉬프트 모드 여부
+
     private void Awake()
     {
         canvas = FindObjectOfType<Canvas>().transform;
@@ -26,6 +28,9 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         // 슬롯에 저장된 아이템이 없다면 리턴
         if (transform.GetComponent<Slot>().ItemInSlot == null) return;
+
+        // 쉬프트 모드 여부 확인
+        isShiftMode = Input.GetKey(KeyCode.LeftShift);
 
         // 드래그할 오브젝트의 정보를 가져옴
         dragItemIcon = transform.GetComponentInChildren<RawImage>().transform;
@@ -56,7 +61,6 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     // 드래그가 끝날 때 호출
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag실행");
         if (dragItemIcon != null)
         {
             // 드래그가 끝난뒤에 부모가 캔버스로 설정되어 있었다면 
@@ -72,10 +76,11 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 // raycastTarget을 활성화 한 뒤에
                 dragItemIcon.GetComponent<RawImage>().raycastTarget = true;
                 dragItemAmount.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
-
-                dragItemIcon = null;
-                dragItemAmount = null;
             }
+            dragItemIcon = null;
+            dragItemAmount = null;
         }
     }
+
+    public bool ShihtMode => isShiftMode;
 }

@@ -13,12 +13,6 @@ public class Slot : MonoBehaviour, IDropHandler
     RawImage icon;
     TextMeshProUGUI txt_amount;
 
-    [HideInInspector] public Inventory inventory;
-
-    private void Start()
-    {
-        inventory = GetComponentInParent<Inventory>();
-    }
     // 슬롯 초기화
     public void initSlot()
     {
@@ -40,10 +34,7 @@ public class Slot : MonoBehaviour, IDropHandler
         icon = GetComponentInChildren<RawImage>();
         txt_amount = GetComponentInChildren<TextMeshProUGUI>();
 
-        // 인자값으로 받은 아이템의 정보를 설정
-        icon.texture = ItemInSlot.ITEMICON;
-        txt_amount.text = $"{AmountInSlot}";
-        txt_amount.enabled = true;
+        UpdateSlot();
     }
     // 슬롯 업데이트
     public void UpdateSlot()
@@ -57,13 +48,14 @@ public class Slot : MonoBehaviour, IDropHandler
         else
         {
             icon.texture = null;
-            txt_amount.text = "";
+            txt_amount.text = "0";
             txt_amount.enabled = false;
         }
     }
 
     public void OnDrop(PointerEventData eventData)
     {
+        
         GameObject dropped = eventData.pointerDrag;
         DragSlot draggableItem = dropped.GetComponent<DragSlot>();
         Slot slot = draggableItem.originParent.GetComponent<Slot>();
@@ -71,12 +63,18 @@ public class Slot : MonoBehaviour, IDropHandler
         // 현재 아이템 슬롯이 비었을때
         if (ItemInSlot == null)
         {
-            ChangeEmptySlot(draggableItem, slot);
+            // 쉬프트 모드일 때
+            if (draggableItem.ShihtMode) HalfItemAmount(draggableItem, slot);
+            // 일반 모드 일때
+            else ChangeEmptySlot(draggableItem, slot);
         }
         // 현재 아이템 슬롯이 있고 아이디가 다를때
-        else if(ItemInSlot != null && ItemInSlot.ID != slot.ItemInSlot.ID)
+        else if(ItemInSlot != null && ItemInSlot.ID != slot.ItemInSlot.ID) SwapItems(draggableItem, slot);
+        // 현재 아이템 슬롯이 있고 아이디가 같을때
+        else if(ItemInSlot != null && ItemInSlot.ID == slot.ItemInSlot.ID)
         {
-            SwapItems(draggableItem, slot);
+            // 현재 슬롯에 eventData 아이템을 더함
+            AddItems(draggableItem, slot);
         }
     }
     // 아이템을 빈 슬롯으로 가져다 놓음
@@ -106,13 +104,23 @@ public class Slot : MonoBehaviour, IDropHandler
         emptyRawImage.localPosition = Vector3.zero;
 
         SetSlot();
+    }
+    private void HalfItemAmount(DragSlot draggableItem, Slot slot)
+    {
+        // 현재 수량이 1이면 리턴
+        if (slot.AmountInSlot == 1) return;
 
-        // 드롭이 완료된 후 드래그 아이템을 초기화
-        draggableItem.dragItemIcon = null;
-        draggableItem.dragItemAmount = null;
+        // 현재 슬롯의 아이템 데이터 갱신
+        ItemInSlot = slot.ItemInSlot;
+        AmountInSlot = Mathf.CeilToInt(slot.AmountInSlot / 2f);
+        SetSlot();
+
+        // 원래 슬롯의 아이템 데이터 갱신
+        slot.AmountInSlot -= AmountInSlot;
+        slot.UpdateSlot();
     }
     // 두 아이템을 스왑함
-    private void SwapItems(DragSlot draggableItem, Slot slot)
+    private void SwapItems(DragSlot draggableItem,Slot slot)
     {
         // 현재 슬롯의 아이템 데이터를 임시 변수에 저장
         ItemData tempItem = ItemInSlot;
@@ -127,8 +135,14 @@ public class Slot : MonoBehaviour, IDropHandler
         slot.ItemInSlot = tempItem;
         slot.AmountInSlot = tempAmount;
         slot.UpdateSlot();
-
-        SetSlot();
+    }
+    // 아이디가 같을때 더함
+    private void AddItems(DragSlot draggableItem, Slot slot)
+    {
+        // 두개의 슬롯에 있는 아이템이 전부 최대 수량일때
+        if(AmountInSlot == ItemInSlot.MAXSTACK && slot.AmountInSlot == slot.ItemInSlot.MAXSTACK) return;
+        // 두개의 슬롯에 있는 아이템중 하나라도 최대 수량일때
+        if(AmountInSlot == ItemInSlot.MAXSTACK || slot.AmountInSlot == slot.ItemInSlot.MAXSTACK) SwapItems(draggableItem, slot);
     }
     // 자식객체중 RawImage를 찾음
     private Transform FindEmptyRawImage(Transform parent)
