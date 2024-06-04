@@ -5,8 +5,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerExitHandler
 {
+    [SerializeField] private GameObject Tooltip;
+
     private Transform canvas;
 
     public Transform dragItemIcon;
@@ -84,6 +86,22 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             dragItemIcon = null;
             dragItemAmount = null;
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        GameObject dropped = eventData.pointerDrag;
+        Slot slot = dropped.GetComponent<Slot>();
+
+        if (slot.ItemInSlot == null) return;
+
+        Tooltip.GetComponent<ActiveToolTip>().clickedSlot = slot;
+        Tooltip.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Tooltip.SetActive(false);
     }
     public bool ShihtMode => isShiftMode;
 }

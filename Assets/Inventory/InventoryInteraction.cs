@@ -61,7 +61,7 @@ public class InventoryInteraction : MonoBehaviour
 
             else
             {
-                txt_item.text = $"PRESS 'F' GET ITEM {hit.collider.GetComponent<ItemInfo>().iteminfo.name} AMOUNT : {hit.collider.GetComponent<ItemInfo>().amount}";
+                txt_item.text = $"아이템 줍기(F)";
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {

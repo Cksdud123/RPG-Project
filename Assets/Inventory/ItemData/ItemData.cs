@@ -33,8 +33,8 @@ public class ItemData : ScriptableObject
     [SerializeField] private int maxStack;
     [SerializeField] private int price;
     [SerializeField] private float weight;
-    [SerializeField] private float Durability;
-    [SerializeField] private float RecoveryAmount;
+    [SerializeField] private float durability;
+    [SerializeField] private float recoveryAmount;
 
     [Header("Item Info")]
     [SerializeField] private GameObject itemPrefab;
@@ -43,4 +43,10 @@ public class ItemData : ScriptableObject
     public Texture ITEMICON => itemIcon;
     public int ID => _id;
     public int MAXSTACK => maxStack;
+    public float Weight => weight;
+    public float Price => price;
+    public Rarity RARITY => rarity;
+    public ItemType ITEMTYPE => itemtype;
+    public float Durability => durability;
+    public string Description => description;
 }
