@@ -8,12 +8,12 @@ using UnityEngine.UI;
 public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject Tooltip;
-
-    private Transform canvas;
+    [SerializeField] private DropItem dropItem;
 
     public Transform dragItemIcon;
     public Transform dragItemAmount;
 
+    [HideInInspector] public Transform canvas;
     [HideInInspector] public Transform originParent;
 
     private int originalSiblingIndex;
@@ -68,20 +68,46 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (dragItemIcon != null)
         {
-            // 드래그가 끝난뒤에 부모가 캔버스로 설정되어 있었다면 
-            if(dragItemIcon.parent == canvas )
+            // 드래그가 끝난 뒤 아이템을 드랍
+            if (dragItemIcon.parent == canvas)
             {
-                // 드래그한 아이템의 부모를 드래그 하기전 부모로 바꾸고
-                dragItemIcon.SetParent(originParent);
-                dragItemIcon.SetSiblingIndex(originalSiblingIndex);
+                // 드랍 위치가 인벤토리 패널 외부인지 확인
+                Slot slot = originParent.GetComponent<Slot>();
+                RectTransform inventoryPanelRect = slot.InventoryPanel.GetComponent<RectTransform>();
 
-                // 원래 위치로 되돌림
-                dragItemIcon.transform.localPosition = Vector3.zero;
+                // 현재 드래그한 아이템 데이터가 inventoryPanelRect에 있지 않으면서 좌클릭으로만 나눌때
+                if (!RectTransformUtility.RectangleContainsScreenPoint(inventoryPanelRect, eventData.position, Camera.main) && eventData.button != PointerEventData.InputButton.Right)
+                {
+                    GameObject dropped = eventData.pointerDrag;
+                    Slot dropslot = dropped.GetComponent<Slot>();
 
-                // raycastTarget을 활성화 한 뒤에
-                dragItemIcon.GetComponent<RawImage>().raycastTarget = true;
+                    dropItem.GetComponent<DropItem>().DropSlot = dropslot;
+                    dropItem.gameObject.SetActive(true);
 
-                if (dragItemAmount.GetComponentInChildren<TextMeshProUGUI>() != null) dragItemAmount.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
+                    // 드래그한 아이템의 부모를 드래그하기 전 부모로 변경
+                    dragItemIcon.SetParent(originParent);
+                    dragItemIcon.SetSiblingIndex(originalSiblingIndex);
+                    dragItemIcon.transform.localPosition = Vector3.zero;
+
+                    // raycastTarget을 활성화
+                    dragItemIcon.GetComponent<RawImage>().raycastTarget = true;
+
+                    if (dragItemAmount.GetComponentInChildren<TextMeshProUGUI>() != null) dragItemAmount.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
+                }
+                else
+                {
+                    // 드래그한 아이템의 부모를 드래그하기 전 부모로 변경
+                    dragItemIcon.SetParent(originParent);
+                    dragItemIcon.SetSiblingIndex(originalSiblingIndex);
+
+                    // 원래 위치로 되돌림
+                    dragItemIcon.transform.localPosition = Vector3.zero;
+
+                    // raycastTarget을 활성화
+                    dragItemIcon.GetComponent<RawImage>().raycastTarget = true;
+
+                    if (dragItemAmount.GetComponentInChildren<TextMeshProUGUI>() != null) dragItemAmount.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
+                }
             }
             dragItemIcon = null;
             dragItemAmount = null;

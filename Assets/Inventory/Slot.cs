@@ -10,9 +10,17 @@ public class Slot : MonoBehaviour, IDropHandler
 {
     public ItemData ItemInSlot;
     public int AmountInSlot;
+    [SerializeField] private DropItem dropItems;
 
     RawImage icon;
     TextMeshProUGUI txt_amount;
+
+    [HideInInspector]public Transform InventoryPanel;
+
+    private void Awake()
+    {
+        InventoryPanel = GetComponentInParent<Inventory>().transform;
+    }
 
     // 슬롯 초기화
     public void initSlot()
@@ -71,11 +79,8 @@ public class Slot : MonoBehaviour, IDropHandler
         // 현재 아이템 슬롯이 있고 아이디가 다를때
         else if(ItemInSlot != null && ItemInSlot.ID != slot.ItemInSlot.ID) SwapItems(draggableItem, slot);
         // 현재 아이템 슬롯이 있고 아이디가 같을때
-        else if(ItemInSlot != null && ItemInSlot.ID == slot.ItemInSlot.ID)
-        {
-            // 현재 슬롯에 eventData 아이템을 더함
-            AddItems(draggableItem, slot);
-        }
+        else if(ItemInSlot != null && ItemInSlot.ID == slot.ItemInSlot.ID) AddItems(draggableItem, slot);
+
     }
     // 아이템을 빈 슬롯으로 가져다 놓음
     private void ChangeEmptySlot(DragSlot draggableItem, Slot slot)
@@ -173,6 +178,43 @@ public class Slot : MonoBehaviour, IDropHandler
             UpdateSlot();
             // 원래 슬롯엔 남은 수량을 더함
             slot.AmountInSlot = overStack - AmountInSlot;
+            slot.UpdateSlot();
+        }
+    }
+    // 아이템을 삭제
+    public void DropItems(Slot slot)
+    {
+        // 0개면 리턴
+        if(slot.AmountInSlot == 0) return;
+
+        // 버리는 값이 최대스택이면
+        if(dropItems.dropAmount == slot.ItemInSlot.MAXSTACK)
+        {
+            // 원래 슬롯의 아이템 데이터 초기화
+            slot.ItemInSlot = null;
+            slot.AmountInSlot = 0;
+
+            // 원래 슬롯의 자식객체에 있는 텍스트 정보 초기화
+            slot.txt_amount.text = AmountInSlot.ToString();
+            slot.txt_amount.gameObject.SetActive(false);
+            // 원래 슬롯의 아이콘 초기화
+            slot.icon.texture = null;
+            slot.icon.gameObject.SetActive(false);
+
+            slot.UpdateSlot();
+        }
+        // 최대스택이 아니라면
+        else if (dropItems.dropAmount <= slot.ItemInSlot.MAXSTACK)
+        {
+            // 원래 슬롯의 아이템 데이터 초기화
+            slot.AmountInSlot -= dropItems.dropAmount;
+
+            // DropItem의 Slider 최대 갯수를 줄임
+            dropItems.DropCountSlider.maxValue = slot.AmountInSlot;
+
+            // 원래 슬롯의 자식객체에 있는 텍스트 정보 초기화
+            slot.txt_amount.text = slot.AmountInSlot.ToString();
+
             slot.UpdateSlot();
         }
     }

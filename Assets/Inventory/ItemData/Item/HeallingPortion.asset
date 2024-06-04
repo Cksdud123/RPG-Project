@@ -9,19 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e006f5163c704a4f85c6b343f517d9c, type: 3}
+  m_Script: {fileID: 11500000, guid: c2f107cc09f69dc4ab89ade5968b5600, type: 3}
   m_Name: HeallingPortion
   m_EditorClassIdentifier: 
   _id: 2
-  _name: HeallingPortion
+  _name: "\uCCB4\uB825\uD3EC\uC158"
   rarity: 0
   itemtype: 1
-  description: "\uCCB4\uB825\uC744 \uD68C\uBCF5\uD558\uAC8C \uD574\uC8FC\uB294 \uD3EC\uC158\uC774\uB2E4"
-  maxStack: 64
-  price: 20
-  weight: 0.1
+  description: "\uCCB4\uB825\uD3EC\uC158\uC774\uB2E4"
+  maxStack: 32
+  price: 10
+  weight: 0.05
   durability: 0
-  recoveryAmount: 0
   itemPrefab: {fileID: 3465875873062568494, guid: 6c264ba3d3b890246b60e64696750c97,
     type: 3}
-  itemIcon: {fileID: 2800000, guid: 6640b580b0c7e48458b9db87e378d8bd, type: 3}
+  itemIcon: {fileID: 2800000, guid: e52ea25af699fd445b7046374f81a5b9, type: 3}

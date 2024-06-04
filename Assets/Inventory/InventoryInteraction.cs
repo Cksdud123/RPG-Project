@@ -39,7 +39,7 @@ public class InventoryInteraction : MonoBehaviour
         else if (!PanelInventory.activeInHierarchy && Input.GetKeyDown(KeyCode.I))
         {
             Cursor.lockState = CursorLockMode.None;
-            PanelInventory.transform.position = new Vector3(Camera.main.pixelWidth / 2, (Camera.main.pixelHeight / 2) + 50.0f);
+            PanelInventory.transform.position = new Vector3(Camera.main.pixelWidth / 2 - 100.0f, (Camera.main.pixelHeight / 2));
             PanelInventory.SetActive(true);
             CrossHair.SetActive(false);
             PlayerCamera.SetActive(false);

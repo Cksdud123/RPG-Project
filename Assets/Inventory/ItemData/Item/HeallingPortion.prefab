@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3307390534234477633}
   - component: {fileID: 2492095320680269232}
   - component: {fileID: 2667538946024379370}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HeallingPortion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26fefb85d6749ee40a92b7963e5bca90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iteminfo: {fileID: 11400000, guid: 16315957dc491994fb8cc19970100f29, type: 2}
+  iteminfo: {fileID: 11400000, guid: a96442e9cb457704d8e4c470053ebc4f, type: 2}
   amount: 32

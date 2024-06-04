@@ -9,19 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e006f5163c704a4f85c6b343f517d9c, type: 3}
+  m_Script: {fileID: 11500000, guid: c2f107cc09f69dc4ab89ade5968b5600, type: 3}
   m_Name: Portion
   m_EditorClassIdentifier: 
   _id: 1
-  _name: Portion
+  _name: "\uB9C8\uB098\uD3EC\uC158"
   rarity: 0
   itemtype: 1
-  description: "\uB9C8\uB098\uB97C \uD68C\uBCF5\uD558\uAC8C \uD574\uC8FC\uB294 \uD3EC\uC158\uC774\uB2E4"
-  maxStack: 64
-  price: 10
+  description: "\uB9C8\uB098\uD3EC\uC158\uC774\uB2E4 \uBA39\uC73C\uBA74 \uB9C8\uB098\uB97C
+    \uD68C\uBCF5\uC2DC\uCF1C\uC900\uB2E4"
+  maxStack: 32
+  price: 5
   weight: 0.1
   durability: 0
-  recoveryAmount: 0
   itemPrefab: {fileID: 3621125714051429211, guid: ef32e39a3ba899f498d281d9ba9afdb0,
     type: 3}
-  itemIcon: {fileID: 2800000, guid: 6fe4c2a9ac2165b449752dd9bb5d7e25, type: 3}
+  itemIcon: {fileID: 2800000, guid: 6592b916f86b19e428db6f6847c7b6dd, type: 3}

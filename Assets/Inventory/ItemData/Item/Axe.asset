@@ -9,19 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e006f5163c704a4f85c6b343f517d9c, type: 3}
+  m_Script: {fileID: 11500000, guid: 76b8b07ac4cae034798e19ddacd6eb5c, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
   _id: 0
-  _name: Axe
+  _name: "\uC232\uC758 \uB3C4\uB07C"
   rarity: 1
   itemtype: 0
-  description: "\uC798 \uAC08\uC544\uC9C4 \uB3C4\uB07C\uC774\uB2E4."
+  description: "\uB0A0\uC774 \uC798 \uAC08\uC544\uC838 \uC788\uB294 \uB3C4\uB07C\uC774\uB2E4"
   maxStack: 1
   price: 200
   weight: 3
-  durability: 0
-  recoveryAmount: 0
+  durability: 100
   itemPrefab: {fileID: 1524742574261294866, guid: 2ff3ceec58cb52b42bfd947b6aa04175,
     type: 3}
-  itemIcon: {fileID: 2800000, guid: 6d4f7652b9310e54ca402fa99b3b3673, type: 3}
+  itemIcon: {fileID: 2800000, guid: 172774604c1bee84185a69041576525b, type: 3}

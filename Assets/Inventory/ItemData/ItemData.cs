@@ -17,8 +17,6 @@ public enum ItemType
     Consumable,
     Misecellaneous
 }
-[CreateAssetMenu(fileName = "New Item", menuName = "Create new Item")]
-[System.Serializable]
 public class ItemData : ScriptableObject
 {
     [Header("Item serial number")]
@@ -34,7 +32,6 @@ public class ItemData : ScriptableObject
     [SerializeField] private int price;
     [SerializeField] private float weight;
     [SerializeField] private float durability;
-    [SerializeField] private float recoveryAmount;
 
     [Header("Item Info")]
     [SerializeField] private GameObject itemPrefab;
@@ -42,6 +39,7 @@ public class ItemData : ScriptableObject
 
     public Texture ITEMICON => itemIcon;
     public int ID => _id;
+    public string Name => _name;
     public int MAXSTACK => maxStack;
     public float Weight => weight;
     public float Price => price;
