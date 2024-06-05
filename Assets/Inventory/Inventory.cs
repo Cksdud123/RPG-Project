@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,50 +63,66 @@ public class Inventory : MonoBehaviour
     }
     public void SortInventory()
     {
-        int SortCount = 0;
-
         // SortSlot이라는 변수를 선언한 뒤
         var SortSlot = slots
             // 각 slots에서 아이템이 있는 경우에만
             .Where(slot => slot.ItemInSlot != null)
-            // 그 slots의 아이템 정보를 뽑아서 slot에 저장한뒤
-            .Select(slot => new { slot.ItemInSlot, slot.AmountInSlot })
-            // ID 순으로 정렬 후에
-            .OrderBy(slot => slot.ItemInSlot.ID)
+            // 같은 아이디끼리 그룹화
+            .GroupBy(slot => slot.ItemInSlot.ID)
+            // 그룹 내에서 아이템의 총량을 계산
+            .Select(group => new {Item = group.First().ItemInSlot, TotalAmount = group.Sum(slot => slot.AmountInSlot) })
+            // ID 순으로 정렬
+            .OrderBy(slot => slot.Item.ID)
             // 리스트로 저장후 SortSlot에 반환
             .ToList();
 
-        // 정렬할 Count를 더한 다음
-        for(int i = 0; i< SortSlot.Count; i++)
+        int slotIndex = 0;
+
+        // SortSlot에 아이템이 저장되 있는 경우에만
+        foreach (var itemGroup in SortSlot)
         {
-            SortCount += SortSlot[i].AmountInSlot;
-        }
-        // 정렬된 데이터를 다시 슬롯에 할당
-        for (int i = 0; i < slots.Length; i++)
-        {
-            // 정렬된 데이터의 크기까지만 슬롯을 채움
-            if (i < SortSlot.Count)
+            // 아이템의 최대값을 저장한 뒤에
+            int CurrentAmount = itemGroup.TotalAmount;
+
+            // 남은 아이템이 있고, 슬롯 인덱스가 슬롯의 길이보다 작은 경우 
+            while (CurrentAmount > 0 && slotIndex < slots.Length)
             {
-                // 정렬할 SortCount의 갯수가 최대스택보다 작다면 그냥 집어넣음
-                if (SortCount <= slots[i].ItemInSlot.MAXSTACK && slots[i] == null)
+                // 현재 아이템의 최대값이 최대스택보다 크다면
+                if (CurrentAmount > itemGroup.Item.MAXSTACK)
                 {
-                    slots[i].ItemInSlot = SortSlot[i].ItemInSlot;
-                    slots[i].AmountInSlot = SortCount;
+                    // 최대스택을 할당한 뒤에
+                    slots[slotIndex].ItemInSlot = itemGroup.Item;
+                    slots[slotIndex].AmountInSlot = itemGroup.Item.MAXSTACK;
+                    // 남은양을 구한뒤에
+                    CurrentAmount -= itemGroup.Item.MAXSTACK;
                 }
-                // 그렇지 않다면
+                // 현재 아이템의 최대값이 최대스택보다 작다면
                 else
                 {
-
+                    // 남은양을 슬롯에 할당한 뒤에
+                    slots[slotIndex].ItemInSlot = itemGroup.Item;
+                    slots[slotIndex].AmountInSlot = CurrentAmount;
+                    // 현재 아이템의 값을 0으로 설정
+                    CurrentAmount = 0;
                 }
+                // 현재 인덱스의 슬롯을 설정한 뒤
+                slots[slotIndex].SetSlot();
+                // 아이템이 없는 슬롯을 비활성화 
+                if (slots[slotIndex].ItemInSlot == null) slots[slotIndex].initSlot();
+                // 인덱스 증가
+                slotIndex++;
             }
-            else
-            {
-                slots[i].ItemInSlot = null;
-                slots[i].AmountInSlot = 0;
-            }
+        }
 
-            slots[i].SetSlot();
-            if (slots[i].ItemInSlot == null) slots[i].initSlot();
+        // 남은 슬롯 초기화
+        while (slotIndex < slots.Length)
+        {
+            slots[slotIndex].ItemInSlot = null;
+            slots[slotIndex].AmountInSlot = 0;
+            slots[slotIndex].SetSlot();
+
+            if (slots[slotIndex].ItemInSlot == null) slots[slotIndex].initSlot();
+            slotIndex++;
         }
     }
 
@@ -128,4 +145,3 @@ public class Inventory : MonoBehaviour
         return (slots[index].AmountInSlot + amount) - slots[index].ItemInSlot.MAXSTACK;
     }
 }
-

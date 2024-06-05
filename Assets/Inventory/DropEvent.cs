@@ -7,18 +7,25 @@ public class DropEvent : MonoBehaviour,IDropHandler
 {
     [SerializeField] private DropItem dropItems;
 
+    RectTransform inventoryPanel;
+    private void Awake()
+    {
+        inventoryPanel = GetComponent<RectTransform>();
+    }
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerDrag;
         DragSlot draggableItem = dropped.GetComponent<DragSlot>();
-        Slot slot = draggableItem.originParent.GetComponent<Slot>();
+        if (draggableItem == null || draggableItem.originParent == null) return;
 
-        RectTransform inventoryPanel = GetComponent<RectTransform>();
-
-        if (!RectTransformUtility.RectangleContainsScreenPoint(inventoryPanel, eventData.position, Camera.main))
+        Slot slot = draggableItem.originParent.GetComponentInParent<Slot>();
+        if (slot.ItemInSlot != null)
         {
-            dropItems.GetComponent<DropItem>().DropSlot = slot;
-            dropItems.gameObject.SetActive(true);
+            if (!RectTransformUtility.RectangleContainsScreenPoint(inventoryPanel, eventData.pointerDrag.transform.position, Camera.main) && eventData.button != PointerEventData.InputButton.Right)
+            {
+                dropItems.GetComponent<DropItem>().DropSlot = slot;
+                dropItems.gameObject.SetActive(true);
+            }
         }
     }
 }

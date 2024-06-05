@@ -59,6 +59,9 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         GameObject dropped = eventData.pointerDrag;
         DragSlot draggableItem = dropped.GetComponent<DragSlot>();
+
+        if (draggableItem == null || draggableItem.originParent == null) return;
+
         Slot slot = draggableItem.originParent.GetComponent<Slot>();
 
         // 현재 아이템 슬롯이 비었을때
@@ -73,7 +76,6 @@ public class Slot : MonoBehaviour, IDropHandler
         else if(ItemInSlot != null && ItemInSlot.ID != slot.ItemInSlot.ID) SwapItems(draggableItem, slot);
         // 현재 아이템 슬롯이 있고 아이디가 같을때
         else if(ItemInSlot != null && ItemInSlot.ID == slot.ItemInSlot.ID) AddItems(draggableItem, slot);
-
     }
     // 아이템을 빈 슬롯으로 가져다 놓음
     private void ChangeEmptySlot(DragSlot draggableItem, Slot slot)
@@ -135,7 +137,7 @@ public class Slot : MonoBehaviour, IDropHandler
         slot.UpdateSlot();
     }
     // 아이디가 같을때 더함
-    private void AddItems(DragSlot draggableItem, Slot slot)
+    public void AddItems(DragSlot draggableItem, Slot slot)
     {
         // 두개의 슬롯에 있는 아이템이 전부 최대 수량일때
         if(AmountInSlot == ItemInSlot.MAXSTACK && slot.AmountInSlot == slot.ItemInSlot.MAXSTACK) return;
@@ -178,10 +180,10 @@ public class Slot : MonoBehaviour, IDropHandler
     public void DropItems(Slot slot)
     {
         // 0개면 리턴
-        if(slot.AmountInSlot == 0) return;
+        if (slot.AmountInSlot == 0) return;
 
         // 버리는 값이 현재 스택값과 같다면
-        if(dropItems.dropAmount == slot.AmountInSlot)
+        if (dropItems.dropAmount == slot.AmountInSlot)
         {
             // 원래 슬롯의 아이템 데이터 초기화
             slot.ItemInSlot = null;

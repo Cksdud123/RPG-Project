@@ -16,6 +16,9 @@ public class DropItem : MonoBehaviour
     private void OnEnable()
     {
         txt_DropItemName.text = DropSlot.ItemInSlot.Name.ToString();
+    }
+    private void Start()
+    {
         DropCountSlider.maxValue = DropSlot.AmountInSlot;
     }
     private void Update()
@@ -46,12 +49,12 @@ public class DropItem : MonoBehaviour
     public void DropButon()
     {
         DropSlot.DropItems(DropSlot);
-        this.gameObject.SetActive(false);
     }
     public void CancelButton()
     {
         DropCountSlider.value = 0;
         txt_ButtonText.text = "";
+        DropSlot = null;
         gameObject.SetActive(false);
     }
 }
