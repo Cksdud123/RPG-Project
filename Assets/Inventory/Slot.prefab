@@ -229,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemInSlot: {fileID: 0}
   AmountInSlot: 0
+  dropItems: {fileID: 0}
   InventoryPanel: {fileID: 0}
 --- !u!114 &8282528269113694205
 MonoBehaviour:

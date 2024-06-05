@@ -17,6 +17,7 @@ public class InventoryInteraction : MonoBehaviour
     [SerializeField] private Inventory inventory;
     [SerializeField] TextMeshProUGUI txt_item;
     [SerializeField] private GameObject CrossHair;
+    [SerializeField] private GameObject DropEventPanel;
     
 
     // Update is called once per frame
@@ -30,7 +31,9 @@ public class InventoryInteraction : MonoBehaviour
         if (PanelInventory.activeInHierarchy && Input.GetKeyDown(KeyCode.I))
         {
             Cursor.lockState = CursorLockMode.Locked;
+            DropEventPanel.SetActive(false);
             PanelInventory.SetActive(false);
+
             CrossHair.SetActive(true);
             PlayerCamera.SetActive(true);
             txt_item.gameObject.SetActive(true);
@@ -40,7 +43,9 @@ public class InventoryInteraction : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             PanelInventory.transform.position = new Vector3(Camera.main.pixelWidth / 2 - 100.0f, (Camera.main.pixelHeight / 2));
+            DropEventPanel.SetActive(true);
             PanelInventory.SetActive(true);
+
             CrossHair.SetActive(false);
             PlayerCamera.SetActive(false);
             txt_item.gameObject.SetActive(false);

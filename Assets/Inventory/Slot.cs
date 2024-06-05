@@ -15,13 +15,6 @@ public class Slot : MonoBehaviour, IDropHandler
     RawImage icon;
     TextMeshProUGUI txt_amount;
 
-    [HideInInspector]public Transform InventoryPanel;
-
-    private void Awake()
-    {
-        InventoryPanel = GetComponentInParent<Inventory>().transform;
-    }
-
     // ΩΩ∑‘ √ ±‚»≠
     public void initSlot()
     {

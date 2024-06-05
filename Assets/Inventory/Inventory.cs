@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Inventory : MonoBehaviour
 {
@@ -75,3 +76,4 @@ public class Inventory : MonoBehaviour
         return (slots[index].AmountInSlot + amount) - slots[index].ItemInSlot.MAXSTACK;
     }
 }
+
