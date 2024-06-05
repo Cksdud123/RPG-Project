@@ -46,6 +46,7 @@ public class DropItem : MonoBehaviour
     public void DropButon()
     {
         DropSlot.DropItems(DropSlot);
+        this.gameObject.SetActive(false);
     }
     public void CancelButton()
     {

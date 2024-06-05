@@ -180,8 +180,8 @@ public class Slot : MonoBehaviour, IDropHandler
         // 0개면 리턴
         if(slot.AmountInSlot == 0) return;
 
-        // 버리는 값이 최대스택이면
-        if(dropItems.dropAmount == slot.ItemInSlot.MAXSTACK)
+        // 버리는 값이 현재 스택값과 같다면
+        if(dropItems.dropAmount == slot.AmountInSlot)
         {
             // 원래 슬롯의 아이템 데이터 초기화
             slot.ItemInSlot = null;

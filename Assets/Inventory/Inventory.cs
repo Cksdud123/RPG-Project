@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Inventory : MonoBehaviour
 {
@@ -57,6 +60,55 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+    public void SortInventory()
+    {
+        int SortCount = 0;
+
+        // SortSlot이라는 변수를 선언한 뒤
+        var SortSlot = slots
+            // 각 slots에서 아이템이 있는 경우에만
+            .Where(slot => slot.ItemInSlot != null)
+            // 그 slots의 아이템 정보를 뽑아서 slot에 저장한뒤
+            .Select(slot => new { slot.ItemInSlot, slot.AmountInSlot })
+            // ID 순으로 정렬 후에
+            .OrderBy(slot => slot.ItemInSlot.ID)
+            // 리스트로 저장후 SortSlot에 반환
+            .ToList();
+
+        // 정렬할 Count를 더한 다음
+        for(int i = 0; i< SortSlot.Count; i++)
+        {
+            SortCount += SortSlot[i].AmountInSlot;
+        }
+        // 정렬된 데이터를 다시 슬롯에 할당
+        for (int i = 0; i < slots.Length; i++)
+        {
+            // 정렬된 데이터의 크기까지만 슬롯을 채움
+            if (i < SortSlot.Count)
+            {
+                // 정렬할 SortCount의 갯수가 최대스택보다 작다면 그냥 집어넣음
+                if (SortCount <= slots[i].ItemInSlot.MAXSTACK && slots[i] == null)
+                {
+                    slots[i].ItemInSlot = SortSlot[i].ItemInSlot;
+                    slots[i].AmountInSlot = SortCount;
+                }
+                // 그렇지 않다면
+                else
+                {
+
+                }
+            }
+            else
+            {
+                slots[i].ItemInSlot = null;
+                slots[i].AmountInSlot = 0;
+            }
+
+            slots[i].SetSlot();
+            if (slots[i].ItemInSlot == null) slots[i].initSlot();
+        }
+    }
+
     bool limitStack(int index, int amount)
     {
         // AmountInSlot + amount 이 값이 최대스택보다 크다면
