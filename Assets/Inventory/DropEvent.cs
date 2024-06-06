@@ -16,6 +16,7 @@ public class DropEvent : MonoBehaviour,IDropHandler
     {
         GameObject dropped = eventData.pointerDrag;
         DragSlot draggableItem = dropped.GetComponent<DragSlot>();
+
         if (draggableItem == null || draggableItem.originParent == null) return;
 
         Slot slot = draggableItem.originParent.GetComponentInParent<Slot>();
