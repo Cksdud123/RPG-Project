@@ -6,6 +6,7 @@ TagManager:
   tags:
   - playerCamera
   - CinemachineTarget
+  - WayPoints
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Obstacle
   - Item
-  - 
+  - Enemy
   - 
   - 
   - 

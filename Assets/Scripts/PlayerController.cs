@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
 
-        if (Input.GetMouseButtonDown(0) && playerAnim.GetBool("Grounded") && timeSinceAttack > 0.8f)
+        if (Input.GetMouseButtonDown(0) && playerAnim.GetBool("Grounded") && timeSinceAttack > 0.7f)
         {
             if (!isEquipped)
                 return;
