@@ -4,26 +4,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float health = 3;
-
-    GameObject player;
-    Animator animator;
-    // Start is called before the first frame update
-    void Awake()
-    {
-        player = GameObject.FindWithTag("Player");
-        animator = GetComponent<Animator>();
-    }
-
+    public float HP = 100;
+    public Animator animator;
     public void TakeDamage(float damageAmount)
     {
-        health -= damageAmount;
-        animator.SetTrigger("Damage");
+        HP -= damageAmount;
 
-        if (health <= 0) Die();
-    }
-    void Die()
-    {
-        Destroy(this.gameObject);
+        if(HP <= 0)
+        {
+            animator.SetTrigger("Die");
+            GetComponent<Collider>().enabled = false;
+        }
+        else
+        {
+            animator.SetTrigger("Damage");
+        }
     }
 }
