@@ -17,7 +17,7 @@ public class AttackPoint : MonoBehaviour
             Enemy enemy = hits[0].gameObject.GetComponentInParent<Enemy>();
             if (enemy != null)
             {
-                enemy.TakeDamage(damage);
+                enemy.Damage(damage);
                 gameObject.SetActive(false);
             }
         }

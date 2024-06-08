@@ -587,8 +587,9 @@ GameObject:
   - component: {fileID: 1200267118129831906}
   - component: {fileID: 451477391229278726}
   - component: {fileID: 5263257733461001481}
-  - component: {fileID: 6187239361448807101}
   - component: {fileID: 7504588687883029158}
+  - component: {fileID: 7916389291692836673}
+  - component: {fileID: -2816104124384671600}
   m_Layer: 8
   m_Name: NightmareDragon
   m_TagString: Dragon
@@ -656,20 +657,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6187239361448807101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1988015665072521389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23c615fbd43679946b58575c066e9ec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP: 100
-  animator: {fileID: 451477391229278726}
 --- !u!65 &7504588687883029158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -691,6 +678,31 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.16864, y: 3.6922092, z: 8.394043}
   m_Center: {x: -0.3161316, y: 2.0935884, z: -0.027832031}
+--- !u!114 &7916389291692836673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988015665072521389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c099f4ae9b0f0ed44a5cc0af1194d3eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 451477391229278726}
+--- !u!114 &-2816104124384671600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988015665072521389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64f35a52aa1efa49b6224b36bb9682c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1995541615986713465
 GameObject:
   m_ObjectHideFlags: 0
