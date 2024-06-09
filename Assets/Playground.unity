@@ -30256,7 +30256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelInventory: {fileID: 284621558}
-  hitrange: 4
+  hitrange: 6
   itemLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -59186,7 +59186,7 @@ Transform:
   m_GameObject: {fileID: 8236187708463222532}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 259.1, y: 4.8500004, z: 405.6}
+  m_LocalPosition: {x: 330, y: 3.69, z: 364.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -68179,7 +68179,7 @@ Transform:
   m_GameObject: {fileID: 7248956790218200424}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 258.6, y: 2.8, z: 409.1}
+  m_LocalPosition: {x: 329.5, y: 1.64, z: 367.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -75612,7 +75612,7 @@ Transform:
   m_GameObject: {fileID: 8944336656349189697}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 259.1, y: 4.8500004, z: 405.6}
+  m_LocalPosition: {x: 330, y: 3.69, z: 364.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

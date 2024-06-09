@@ -16,8 +16,7 @@ MonoBehaviour:
   _name: "\uB9C8\uB098\uD3EC\uC158"
   rarity: 0
   itemtype: 1
-  description: "\uB9C8\uB098\uD3EC\uC158\uC774\uB2E4 \uBA39\uC73C\uBA74 \n\uB9C8\uB098\uB97C
-    \uD68C\uBCF5\uC2DC\uCF1C\uC900\uB2E4"
+  description: "\uB9C8\uB098\uB97C \uD68C\uBCF5 \uC2DC\uCF1C \uC900\uB2E4"
   maxStack: 32
   price: 5
   weight: 0.1

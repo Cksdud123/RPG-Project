@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class Golem : Enemy
 {
-    Rigidbody rigid;
+    [SerializeField] private EnemyHealthBar healthBar;
 
+    private Rigidbody rigid;
     void Awake()
     {
         base.Awake();
-        MaxHealth = 50; // Skeleton 클래스의 MaxHealth 설정
         rigid = GetComponent<Rigidbody>();
+        MaxHealth = 20; // Skeleton 클래스의 MaxHealth 설정
     }
     void Start()
     {
         CurrentHealth = MaxHealth;
+        healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
     }
     public override void Damage(float damageAmount)
     {
         CurrentHealth -= damageAmount;
+        healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
 
         if (CurrentHealth <= 0f)
         {
