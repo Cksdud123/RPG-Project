@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MuscomorphController
+  m_Controller: {fileID: 9100000, guid: 8166ad2c09869aa4a93d6bb23bfa93bd, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e6a84557d6aca2f4daa1b608739267d9, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 2f0be1e513f23994f9d6ccdf4ab0cb1d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e225de8969f5f7348aa6e6a2c92c7859, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 6ec8ae6c81d0fc946b2bc7f6808e67f8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 57b96fcfb13429847939b2e633026c89, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 6ec8ae6c81d0fc946b2bc7f6808e67f8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a8d68f882ac2f2f48982204cc9c22f27, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 7b77ccd882a7cfe409ac45f079f0fdb6, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4b1dcfc331de54549a94b650385f751e, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: bfc296d1b9d07d0498172ed5971e7044, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a640f611148020047b485abcfdbb49cf, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 54e5943e530bc564d9f09ba26515a39b, type: 2}

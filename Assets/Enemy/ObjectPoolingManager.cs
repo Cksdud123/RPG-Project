@@ -32,6 +32,8 @@ public class ObjectPoolingManager : MonoBehaviour
     private string objectName;
     private Transform Pos;
     private Material objMat;
+    // 오브젝트를 담을 부모객체
+    public Transform ObjectParent;
 
     // 오브젝트풀들을 관리할 딕셔너리
     private Dictionary<string, IObjectPool<GameObject>> ojbectPoolDic = new Dictionary<string, IObjectPool<GameObject>>();
@@ -83,7 +85,7 @@ public class ObjectPoolingManager : MonoBehaviour
     {
         // 오브젝트 풀을 생성할 때 무작위 위치를 정합니다.
         Vector3 randomSpawnPosition = Pos.transform.position;
-        GameObject poolGo = Instantiate(goDic[objectName], randomSpawnPosition, Quaternion.identity);
+        GameObject poolGo = Instantiate(goDic[objectName],randomSpawnPosition, Quaternion.identity,ObjectParent);
         poolGo.GetComponent<Poolable>().Pool = ojbectPoolDic[objectName];
         return poolGo;
     }
