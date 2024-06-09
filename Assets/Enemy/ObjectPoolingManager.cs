@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -30,6 +31,7 @@ public class ObjectPoolingManager : MonoBehaviour
     // 생성할 오브젝트의 key값지정을 위한 변수
     private string objectName;
     private Transform Pos;
+    private Material objMat;
 
     // 오브젝트풀들을 관리할 딕셔너리
     private Dictionary<string, IObjectPool<GameObject>> ojbectPoolDic = new Dictionary<string, IObjectPool<GameObject>>();

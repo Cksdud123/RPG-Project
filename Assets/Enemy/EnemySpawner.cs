@@ -9,8 +9,11 @@ public class EnemySpawner : MonoBehaviour
     NavMeshSurface Nav;
 
     private int CurrentEnemyCount;
-    public int MaxEnemyCount = 5;
 
+    public int MaxEnemyCount = 5;
+    public string enemyName;
+
+    public Material[] materials;
     private void Awake()
     {
         Nav = GetComponent<NavMeshSurface>();
@@ -31,8 +34,19 @@ public class EnemySpawner : MonoBehaviour
     {
         // 현재 위치에서 설정한 영역만큼 +-를 해서 랜덤으로 위치를 설정 
         Vector3 randomSpawnPosition = transform.position + new Vector3(Random.Range(-Nav.size.x / 2, Nav.size.x / 2), Nav.center.y, Random.Range(-Nav.size.z / 2, Nav.size.z / 2));
-        var enemyDragon = ObjectPoolingManager.instance.GetGo("Dragon");
-        enemyDragon.transform.position = randomSpawnPosition;
-        enemyDragon.transform.rotation = Quaternion.identity;
+        var enemy = ObjectPoolingManager.instance.GetGo(enemyName);
+
+        // 랜덤한 메테리얼 선택
+        Material randomMaterial = materials[Random.Range(0, materials.Length)];
+
+        // 오브젝트의 렌더러 컴포넌트에서 메테리얼을 변경
+        Renderer renderer = enemy.GetComponentInChildren<Renderer>();
+        if (renderer != null)
+        {
+            renderer.material = randomMaterial;
+        }
+
+        enemy.transform.position = randomSpawnPosition;
+        enemy.transform.rotation = Quaternion.identity;
     }
 }

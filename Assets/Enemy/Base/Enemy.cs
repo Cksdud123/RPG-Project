@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Pool;
 
 public class Enemy : MonoBehaviour, IDamageable
@@ -9,11 +10,16 @@ public class Enemy : MonoBehaviour, IDamageable
     public float CurrentHealth { get; set; }
     public Animator animator;
 
+    NavMeshAgent agent;
+    public void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
     private void Start()
     {
         CurrentHealth = MaxHealth;
     }
-    public void Damage(float damageAmount)
+    public virtual void Damage(float damageAmount)
     {
         CurrentHealth -= damageAmount;
 
@@ -27,9 +33,11 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    public void Die()
+    public virtual void Die()
     {
         animator.SetTrigger("Die");
+
         GetComponent<Collider>().enabled = false;
+        agent.enabled = false;
     }
 }
