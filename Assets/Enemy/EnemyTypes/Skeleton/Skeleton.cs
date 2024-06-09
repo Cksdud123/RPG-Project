@@ -6,7 +6,6 @@ public class Skeleton : Enemy
 {
     Rigidbody rigid;
 
-
     void Awake()
     {
         base.Awake();
@@ -33,5 +32,6 @@ public class Skeleton : Enemy
     public override void Die()
     {
         base.Die(); // 기본 클래스 Die 메서드 호출
+        rigid.isKinematic = true;
     }
 }

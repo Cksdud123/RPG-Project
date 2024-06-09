@@ -24,11 +24,7 @@ public class SkeletonChaseState : StateMachineBehaviour
         if (distance > 15)
             animator.SetBool("isChasing", false);
 
-        if (distance < 2.5f)
-        {
-            animator.transform.LookAt(player);
-            animator.SetBool("isAttacking", true);
-        }
+        if (distance < 2.5f) animator.SetBool("isAttacking", true);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
