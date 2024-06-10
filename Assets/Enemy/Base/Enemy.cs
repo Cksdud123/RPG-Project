@@ -9,11 +9,14 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
     public Animator animator;
+    public ExperienceManager levelManaged;
+    
 
     NavMeshAgent agent;
     public void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        levelManaged = FindObjectOfType<ExperienceManager>();
     }
     private void Start()
     {
@@ -36,7 +39,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public virtual void Die()
     {
         animator.SetTrigger("Die");
-
+        levelManaged.AddExperience(Random.Range(10, 50));
         GetComponent<Collider>().enabled = false;
         agent.enabled = false;
     }

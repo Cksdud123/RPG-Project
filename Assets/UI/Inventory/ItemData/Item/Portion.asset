@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f107cc09f69dc4ab89ade5968b5600, type: 3}
+  m_Name: Portion
+  m_EditorClassIdentifier: 
+  _id: 1
+  _name: "\uB9C8\uB098\uD3EC\uC158"
+  rarity: 0
+  itemtype: 1
+  description: "\uB9C8\uB098\uB97C \uD68C\uBCF5 \uC2DC\uCF1C \uC900\uB2E4"
+  maxStack: 32
+  price: 5
+  weight: 0.1
+  durability: 0
+  itemPrefab: {fileID: 3621125714051429211, guid: ef32e39a3ba899f498d281d9ba9afdb0,
+    type: 3}
+  itemIcon: {fileID: 2800000, guid: 6592b916f86b19e428db6f6847c7b6dd, type: 3}

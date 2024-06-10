@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a75dae561249a342b74a1ae2c90631c, type: 3}
+  m_Name: GolemCore
+  m_EditorClassIdentifier: 
+  _id: 8
+  _name: "\uACE8\uB818\uC758 \uD575"
+  rarity: 2
+  itemtype: 2
+  description: "\uACE8\uB818\uC758 \uD575, \uBE44\uC2F8\uB2E4"
+  maxStack: 1
+  price: 500
+  weight: 1.5
+  durability: 0
+  itemPrefab: {fileID: 1131127871072055157, guid: 93b2ef297084f9c4586bec616c6eb818,
+    type: 3}
+  itemIcon: {fileID: 2800000, guid: e7d29a79bc7fae248887c8a08a160303, type: 3}
