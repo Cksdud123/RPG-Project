@@ -6,6 +6,11 @@ public class Dragon : Enemy
 {
     [SerializeField] private EnemyHealthBar healthBar;
 
+    [Header("Item Drop")]
+    [SerializeField] private Transform dropItemPos;
+    [SerializeField] private float nondrop;
+    public WeightedRandomList<GameObject> lootTable;
+
     private Rigidbody rigid;
     void Awake()
     {
@@ -35,6 +40,18 @@ public class Dragon : Enemy
     public override void Die()
     {
         base.Die(); // 기본 클래스 Die 메서드 호출
+        ItemDropEnemy();
         rigid.isKinematic = true;
+    }
+    public override void ItemDropEnemy()
+    {
+        lootTable.Value = nondrop;
+        GameObject dropItem = lootTable.GetRandom();
+        if (dropItem != null)
+        {
+            Instantiate(dropItem, dropItemPos.position, Quaternion.identity);
+            Debug.Log("아이템 드롭" + dropItem.name);
+        }
+        else Debug.Log("아이템이 드롭되지 않았습니다");
     }
 }

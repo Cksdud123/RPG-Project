@@ -2482,7 +2482,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2537,6 +2537,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 897582294658765680}
   healthBar: {fileID: 5009686145015083974}
+  dropItemPos: {fileID: 0}
+  nondrop: 0.7
+  lootTable:
+    list:
+    - item: {fileID: 3869753012996783010, guid: 74a93cc5ffff1c24b8a0e4c0b9f52e6d,
+        type: 3}
+      weight: 3
 --- !u!54 &6755800001393621522
 Rigidbody:
   m_ObjectHideFlags: 0

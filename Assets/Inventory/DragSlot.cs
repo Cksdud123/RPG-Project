@@ -21,7 +21,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private void Awake()
     {
-        canvas = FindObjectOfType<Canvas>().transform;
+        canvas = GameObject.FindGameObjectWithTag("InventoryCanvas").transform;
     }
 
     // 드래그를 시작할 때 호출

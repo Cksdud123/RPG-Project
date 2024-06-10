@@ -8,6 +8,7 @@ TagManager:
   - CinemachineTarget
   - WayPoints
   - Dragon
+  - InventoryCanvas
   layers:
   - Default
   - TransparentFX

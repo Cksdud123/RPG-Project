@@ -1741,6 +1741,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2565762440649606385}
   healthBar: {fileID: 3702471406987058334}
+  dropItemPos: {fileID: 2465971696050119085}
+  nondrop: 0.5
+  lootTable:
+    list:
+    - item: {fileID: 2473609441268864162, guid: f5981d8c36783fe41af933b112a78711,
+        type: 3}
+      weight: 2
+    - item: {fileID: 7268973070511305291, guid: 5b6647de606eab944ab867be548b5a6f,
+        type: 3}
+      weight: 2
+    - item: {fileID: 3621125714051429211, guid: ef32e39a3ba899f498d281d9ba9afdb0,
+        type: 3}
+      weight: 1
+    - item: {fileID: 3815993898225564126, guid: 26e88fa8135598542a0671d743331762,
+        type: 3}
+      weight: 1
 --- !u!54 &-1495373738990673051
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -40,4 +40,5 @@ public class Enemy : MonoBehaviour, IDamageable
         GetComponent<Collider>().enabled = false;
         agent.enabled = false;
     }
+    public virtual void ItemDropEnemy() {}
 }

@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 3327518301600066323}
   - component: {fileID: 341450522481751286}
   - component: {fileID: 558723145766142951}
-  - component: {fileID: 2596062438810295018}
+  - component: {fileID: 3952408875572057709}
   m_Layer: 8
   m_Name: Wolf
   m_TagString: Untagged
@@ -268,7 +268,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1001926306429024389}
   healthBar: {fileID: 4530170509924154477}
---- !u!54 &2596062438810295018
+  dropItemPos: {fileID: 2591437824571932074}
+  nondrop: 0.5
+  lootTable:
+    list:
+    - item: {fileID: 3869753012996783010, guid: 74a93cc5ffff1c24b8a0e4c0b9f52e6d,
+        type: 3}
+      weight: 3
+    - item: {fileID: 3621125714051429211, guid: ef32e39a3ba899f498d281d9ba9afdb0,
+        type: 3}
+      weight: 2
+--- !u!54 &3952408875572057709
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

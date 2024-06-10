@@ -290,6 +290,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 440280470451687331}
   healthBar: {fileID: 727647551165083792}
+  dropItemPos: {fileID: 3039453001194142311}
+  nondrop: 0.4
+  lootTable:
+    list:
+    - item: {fileID: 1131127871072055157, guid: 93b2ef297084f9c4586bec616c6eb818,
+        type: 3}
+      weight: 1
+    - item: {fileID: 8011122907524490092, guid: 0514a1f6e779a6a4d984140d49dee653,
+        type: 3}
+      weight: 3
+    - item: {fileID: 3465875873062568494, guid: 6c264ba3d3b890246b60e64696750c97,
+        type: 3}
+      weight: 2
 --- !u!54 &5569487281198104749
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -33,8 +33,8 @@ public class Inventory : MonoBehaviour
                 {
                     // 아이템의 수량을 추가해 줌
                     slots[i].AmountInSlot += itemObj.amount;
+                    slots[i].UpdateSlot();
                     Destroy(itemObj.gameObject);
-                    slots[i].SetSlot();
                     return;
                 }
                 // 최대스택에 도달했다면
@@ -129,7 +129,7 @@ public class Inventory : MonoBehaviour
     bool limitStack(int index, int amount)
     {
         // AmountInSlot + amount 이 값이 최대스택보다 크다면
-        if (slots[index].ItemInSlot.MAXSTACK <= slots[index].AmountInSlot + amount)
+        if (slots[index].ItemInSlot.MAXSTACK < slots[index].AmountInSlot + amount)
             return true;
         else
             return false;
