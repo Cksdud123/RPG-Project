@@ -17,7 +17,6 @@ public class EnemySpawner : MonoBehaviour
 
     public Material[] materials;
 
-    private string clonename = "(Clone)";
     private void Awake()
     {
         Nav = GetComponent<NavMeshSurface>();

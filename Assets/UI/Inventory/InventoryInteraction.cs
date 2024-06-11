@@ -10,6 +10,7 @@ public class InventoryInteraction : MonoBehaviour
     [Header("Ray")]
     [SerializeField] private int hitrange = 10;
     [SerializeField] private LayerMask itemLayer;
+    [SerializeField] private LayerMask ShopLayer;
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject PlayerCamera;
 
@@ -18,12 +19,17 @@ public class InventoryInteraction : MonoBehaviour
     [SerializeField] TextMeshProUGUI txt_item;
     [SerializeField] private GameObject CrossHair;
     [SerializeField] private GameObject DropEventPanel;
-    
+    [SerializeField] private GameObject equipment;
+    [SerializeField] private GameObject ShopPanel;
+
+    private bool isEquipmentActive = false;
 
     // Update is called once per frame
     void Update()
     {
         ActiveInventory();
+        ActiveEquipment();
+        UpdateTimeScale();
         CheckItem();
     }
     public void ActiveInventory()
@@ -37,22 +43,52 @@ public class InventoryInteraction : MonoBehaviour
             CrossHair.SetActive(true);
             PlayerCamera.SetActive(true);
             txt_item.gameObject.SetActive(true);
-            Time.timeScale = 1f;
         }
         else if (!PanelInventory.activeInHierarchy && Input.GetKeyDown(KeyCode.I))
         {
             Cursor.lockState = CursorLockMode.None;
-            PanelInventory.transform.position = new Vector3(Camera.main.pixelWidth / 2 - 100.0f, (Camera.main.pixelHeight / 2));
+            PanelInventory.transform.position = new Vector3(Camera.main.pixelWidth / 2 + 500.0f, (Camera.main.pixelHeight / 2));
             DropEventPanel.SetActive(true);
             PanelInventory.SetActive(true);
+            PlayerCamera.SetActive(false);
 
             CrossHair.SetActive(false);
-            PlayerCamera.SetActive(false);
             txt_item.gameObject.SetActive(false);
-            Time.timeScale = 0f;
         }
     }
+    public void ActiveEquipment()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            isEquipmentActive = !isEquipmentActive;
 
+            if (isEquipmentActive)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                PlayerCamera.SetActive(false);
+                equipment.transform.position = new Vector3(Camera.main.pixelWidth / 2 - 500.0f, (Camera.main.pixelHeight / 2));
+                equipment.SetActive(true);
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                PlayerCamera.SetActive(true);
+                equipment.SetActive(false);
+            }
+        }
+    }
+    // 둘중하나라도 열려있으면 정지
+    private void UpdateTimeScale()
+    {
+        if (PanelInventory.activeInHierarchy || isEquipmentActive)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+        }
+    }
     public void CheckItem()
     {
         RaycastHit hit;
@@ -67,10 +103,27 @@ public class InventoryInteraction : MonoBehaviour
             else
             {
                 txt_item.text = $"아이템 줍기(F)";
+                txt_item.color = Color.white;
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     inventory.pickUpItem(hit.collider.GetComponent<ItemInfo>());
+                }
+            }
+        }
+        else if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, hitrange, ShopLayer))
+        {
+            if (!hit.collider.GetComponent<Collider>()) return;
+
+            else
+            {
+                txt_item.text = $"상점이용(F)";
+                txt_item.color = Color.white;
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    ShopPanel.gameObject.SetActive(true);
+                    txt_item.gameObject.SetActive(false);
                 }
             }
         }

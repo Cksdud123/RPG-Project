@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     private ThirdPersonController thirdPersonController;
     private CharacterController characterController;
+    
 
     //장비 파라미터
     [SerializeField]
@@ -37,7 +38,6 @@ public class PlayerController : MonoBehaviour
     public bool isDodgeing;
 
     float dodgeTimer, dodge_coolDown;
-
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
         // dodgeCurve를 사용하여 부드럽게 높이와 센터 변경
         while (time < duration)
         {
-            // 애니메이션 커브 값 평가
+            // 애니메이션 커브 값 저장
             float curveValue = dodgeCurve.Evaluate(time);
 
             // 현재 시간에 따라 높이와 센터를 선형 보간
