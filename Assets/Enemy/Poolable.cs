@@ -7,6 +7,7 @@ public class Poolable : MonoBehaviour
 {
     public IObjectPool<GameObject> Pool { get; set; }
 
+    // 스포너에서 갯수를 받아 처리
     public void ReleaseObject()
     {
         Pool.Release(gameObject);

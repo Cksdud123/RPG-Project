@@ -25,4 +25,8 @@ public class EnemyHealthBar : MonoBehaviour
     {
         target = currentHealth / maxHealth;
     }
+    public void ResetHealthBar()
+    {
+        healthBarSprite.fillAmount = 1.0f;
+    }
 }

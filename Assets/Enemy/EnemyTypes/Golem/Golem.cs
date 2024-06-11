@@ -12,7 +12,7 @@ public class Golem : Enemy
     public WeightedRandomList<GameObject> lootTable;
 
     private Rigidbody rigid;
-    void Awake()
+    protected override void Awake()
     {
         base.Awake();
         rigid = GetComponent<Rigidbody>();
