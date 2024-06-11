@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: -2816104124384671600}
   - component: {fileID: 2101027989340333835}
   m_Layer: 8
-  m_Name: NightmareDragon
+  m_Name: Dragon
   m_TagString: Dragon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

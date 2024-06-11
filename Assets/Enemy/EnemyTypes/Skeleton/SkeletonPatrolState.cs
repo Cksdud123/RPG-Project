@@ -58,7 +58,10 @@ public class SkeletonPatrolState : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent.SetDestination(agent.transform.position);
+        if (agent != null && agent.isOnNavMesh) // agent가 null이 아니고 NavMesh 위에 있는지 확인
+        {
+            agent.SetDestination(agent.transform.position);
+        }
     }
 
     Vector3 GetRandomPositionOnNavMesh()

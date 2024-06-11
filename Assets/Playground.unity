@@ -854,6 +854,7 @@ MonoBehaviour:
   MaxEnemyCount: 5
   CurrentEnemyCount: 0
   enemyName: Dragon
+  enemyParent: {fileID: 1519462850}
   DeathCount: 0
   materials:
   - {fileID: 2100000, guid: 81d2b67dc7484724095d4343217c4e31, type: 2}
@@ -3396,6 +3397,7 @@ MonoBehaviour:
   MaxEnemyCount: 5
   CurrentEnemyCount: 0
   enemyName: Muscomorph
+  enemyParent: {fileID: 1519462850}
   DeathCount: 0
   materials:
   - {fileID: 2100000, guid: 9bd190bded9e9254dbc594bbaa050dfd, type: 2}
@@ -4783,6 +4785,7 @@ MonoBehaviour:
   MaxEnemyCount: 5
   CurrentEnemyCount: 0
   enemyName: Skeleton
+  enemyParent: {fileID: 1519462850}
   DeathCount: 0
   materials:
   - {fileID: 2100000, guid: 8aeeca0b2c2b19a4db4983b729fec3e2, type: 2}
@@ -18997,6 +19000,7 @@ MonoBehaviour:
   MaxEnemyCount: 5
   CurrentEnemyCount: 0
   enemyName: Wolf
+  enemyParent: {fileID: 1519462850}
   DeathCount: 0
   materials:
   - {fileID: 2100000, guid: c19ce37bb54b73e45890d692ff1cd854, type: 2}
@@ -26294,6 +26298,7 @@ MonoBehaviour:
   MaxEnemyCount: 5
   CurrentEnemyCount: 0
   enemyName: Golem
+  enemyParent: {fileID: 1519462850}
   DeathCount: 0
   materials:
   - {fileID: 2100000, guid: 63d68c3ba5d7b90418069b96d9c35a4a, type: 2}
@@ -61016,7 +61021,7 @@ Transform:
   m_GameObject: {fileID: 8236187708463222532}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 324.9, y: 2.4900002, z: 430.13}
+  m_LocalPosition: {x: 184.287, y: 12.282999, z: 411}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -70117,7 +70122,7 @@ Transform:
   m_GameObject: {fileID: 7248956790218200424}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 324.4, y: 0.44, z: 433.63}
+  m_LocalPosition: {x: 183.787, y: 10.233, z: 414.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -77747,7 +77752,7 @@ Transform:
   m_GameObject: {fileID: 8944336656349189697}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 324.9, y: 2.4900002, z: 430.13}
+  m_LocalPosition: {x: 184.287, y: 12.282999, z: 411}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

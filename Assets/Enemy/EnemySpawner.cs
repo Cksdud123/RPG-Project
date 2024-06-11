@@ -11,10 +11,13 @@ public class EnemySpawner : MonoBehaviour
     public int MaxEnemyCount = 5;
     public int CurrentEnemyCount = 0;
     public string enemyName;
+    public GameObject enemyParent;
 
     [HideInInspector] public int DeathCount;
 
     public Material[] materials;
+
+    private string clonename = "(Clone)";
     private void Awake()
     {
         Nav = GetComponent<NavMeshSurface>();
@@ -23,11 +26,33 @@ public class EnemySpawner : MonoBehaviour
     {
         CurrentEnemyCount = 0;
     }
+    // 머무는 중일때
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             RandomSpawner();
+        }
+    }
+    // 나올때
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log(enemyParent.transform.childCount);
+            for (int i = 0; i < enemyParent.transform.childCount; i++)
+            {
+                GameObject enemy = enemyParent.transform.GetChild(i).gameObject;
+
+                // 자식 객체의 이름이 enemyName과 일치하는 경우에만 비활성화
+                if (enemy.name.StartsWith(enemyName) && enemy.activeSelf)
+                {
+                    Enemy enemyDeactive = enemy.GetComponent<Enemy>();
+
+                    StartCoroutine(enemyDeactive.Respawner(3f));
+                }
+            }
+            CurrentEnemyCount = 0;
         }
     }
     private void RandomSpawner()
@@ -51,8 +76,8 @@ public class EnemySpawner : MonoBehaviour
             renderer.material = randomMaterial;
         }
 
+        // 생성값 설정
         enemyHP.InitializeHealth();
-        // Enemy 클래스의 참조해서 
         enemyHP.SetSpawner(this);
 
         enemy.transform.position = randomSpawnPosition;

@@ -53,8 +53,6 @@ public class Enemy : Poolable, IDamageable
 
     public virtual void Die()
     {
-        spawner.DecrementEnemyCount();
-
         CurrentHealth = 0;
 
         levelManaged.AddExperience(Random.Range(10, 50));
@@ -67,7 +65,8 @@ public class Enemy : Poolable, IDamageable
     }
     public IEnumerator Respawner(float waitTime)
     {
-        yield return new WaitForSeconds(waitTime); 
+        yield return new WaitForSeconds(waitTime);
+        spawner.DecrementEnemyCount();
         ReleaseObject();
     }
     public void SetSpawner(EnemySpawner spawner)
