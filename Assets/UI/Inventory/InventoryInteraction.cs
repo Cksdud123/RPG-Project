@@ -103,7 +103,6 @@ public class InventoryInteraction : MonoBehaviour
             else
             {
                 txt_item.text = $"아이템 줍기(F)";
-                txt_item.color = Color.white;
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
@@ -118,12 +117,11 @@ public class InventoryInteraction : MonoBehaviour
             else
             {
                 txt_item.text = $"상점이용(F)";
-                txt_item.color = Color.white;
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    ShopPanel.gameObject.SetActive(true);
-                    txt_item.gameObject.SetActive(false);
+                    // 함수
+                    ActiveShop();
                 }
             }
         }
@@ -131,6 +129,18 @@ public class InventoryInteraction : MonoBehaviour
         {
             txt_item.text = string.Empty;
         }
+    }
+    private void ActiveShop()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        // 상점, 인벤토리패널 활성화
+        ShopPanel.gameObject.SetActive(true);
+        PanelInventory.gameObject.SetActive(true);
+
+        CrossHair.SetActive(false);
+        txt_item.gameObject.SetActive(false);
+
+        // 가서 상점패널을 열고 인벤토리도 같이 열린다음 I키를 누르면 인벤토리만 닫힘 I키를 누르면 상점패널과 인벤토리패널이 동시에 닫혔으면 좋겠음
     }
     private void OnDrawGizmos()
     {
