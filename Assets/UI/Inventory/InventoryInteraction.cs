@@ -116,11 +116,9 @@ public class InventoryInteraction : MonoBehaviour
 
             else
             {
-                txt_item.text = $"상점이용(F)";
-
-                if (Input.GetKeyDown(KeyCode.F))
+                txt_item.text = $"상점이용(I)";
+                if (Input.GetKeyDown(KeyCode.I))
                 {
-                    // 함수
                     ActiveShop();
                 }
             }
@@ -132,15 +130,28 @@ public class InventoryInteraction : MonoBehaviour
     }
     private void ActiveShop()
     {
-        Cursor.lockState = CursorLockMode.None;
-        // 상점, 인벤토리패널 활성화
-        ShopPanel.gameObject.SetActive(true);
-        PanelInventory.gameObject.SetActive(true);
+        if (!ShopPanel.activeInHierarchy)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            // 상점, 인벤토리패널 활성화
+            ShopPanel.SetActive(true);
+            PanelInventory.SetActive(true);
 
-        CrossHair.SetActive(false);
-        txt_item.gameObject.SetActive(false);
+            CrossHair.SetActive(false);
+            txt_item.gameObject.SetActive(false);
+            PlayerCamera.SetActive(false);
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            // 상점, 인벤토리패널 비활성화
+            ShopPanel.SetActive(false);
+            PanelInventory.SetActive(false);
 
-        // 가서 상점패널을 열고 인벤토리도 같이 열린다음 I키를 누르면 인벤토리만 닫힘 I키를 누르면 상점패널과 인벤토리패널이 동시에 닫혔으면 좋겠음
+            CrossHair.SetActive(true);
+            txt_item.gameObject.SetActive(true);
+            PlayerCamera.SetActive(true);
+        }
     }
     private void OnDrawGizmos()
     {

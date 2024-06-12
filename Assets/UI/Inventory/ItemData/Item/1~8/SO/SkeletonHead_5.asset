@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f107cc09f69dc4ab89ade5968b5600, type: 3}
+  m_Name: SkeletonHead_5
+  m_EditorClassIdentifier: 
+  _id: 5
+  _name: "\uC2A4\uCF08\uB808\uD1A4\uC758 \uBA38\uB9AC"
+  rarity: 1
+  itemtype: 2
+  description: "\uC2A4\uCF08\uB808\uD1A4\uC758 \uBA38\uB9AC\uBF08"
+  maxStack: 1
+  price: 100
+  weight: 0.3
+  durability: 0
+  itemPrefab: {fileID: 7268973070511305291, guid: 5b6647de606eab944ab867be548b5a6f,
+    type: 3}
+  itemIcon: {fileID: 2800000, guid: 9ff50538df4a44c47a91e4db16d66b89, type: 3}

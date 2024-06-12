@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b8b07ac4cae034798e19ddacd6eb5c, type: 3}
+  m_Name: 12_AxeBasic3_3
+  m_EditorClassIdentifier: 
+  _id: 12
+  _name: "\uB4DC\uC6CC\uD504\uC758 \uB3C4\uB07C"
+  rarity: 1
+  itemtype: 0
+  description: "\uB4DC\uC6CC\uD504\uAC00 \uC0AC\uC6A9\uD558\uB294 \uB3C4\uB07C"
+  maxStack: 1
+  price: 300
+  weight: 5
+  durability: 100
+  itemPrefab: {fileID: 1695051412753456746, guid: 417a3681ac3250d45acb5a14d011fa1a,
+    type: 3}
+  itemIcon: {fileID: 2800000, guid: eebc80dbf9c654b4099438e4a9e7a6e4, type: 3}
