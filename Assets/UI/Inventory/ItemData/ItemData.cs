@@ -42,7 +42,7 @@ public class ItemData : ScriptableObject
     public string Name => _name;
     public int MAXSTACK => maxStack;
     public float Weight => weight;
-    public float Price => price;
+    public int Price => price;
     public Rarity RARITY => rarity;
     public ItemType ITEMTYPE => itemtype;
     public float Durability => durability;

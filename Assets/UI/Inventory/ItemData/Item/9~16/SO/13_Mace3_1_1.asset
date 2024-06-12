@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b8b07ac4cae034798e19ddacd6eb5c, type: 3}
+  m_Name: 13_Mace3_1_1
+  m_EditorClassIdentifier: 
+  _id: 13
+  _name: "\uB4DC\uC6CC\uD504\uC758 \uBA54\uC774\uC2A4"
+  rarity: 1
+  itemtype: 0
+  description: "\uB4DC\uC6CC\uD504\uAC00 \uC0AC\uC6A9\uD558\uB294 \uBA54\uC774\uC2A4"
+  maxStack: 1
+  price: 600
+  weight: 5
+  durability: 100
+  itemPrefab: {fileID: 5527825859747042223, guid: b2abcd6239e38444bb51ca8ddac7bb4b,
+    type: 3}
+  itemIcon: {fileID: 2800000, guid: 11dc646861acf934f94834cdd8a1fda6, type: 3}

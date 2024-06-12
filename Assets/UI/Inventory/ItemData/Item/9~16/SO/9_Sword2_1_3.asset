@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b8b07ac4cae034798e19ddacd6eb5c, type: 3}
+  m_Name: 9_Sword2_1_3
+  m_EditorClassIdentifier: 
+  _id: 9
+  _name: "\uAE30\uC0AC\uB2E8\uC758 \uAC80"
+  rarity: 1
+  itemtype: 0
+  description: "\uAC00\uC7A5 \uD754\uD55C \uAC80\uC774\uB2E4."
+  maxStack: 1
+  price: 200
+  weight: 5
+  durability: 100
+  itemPrefab: {fileID: 1551566962929508929, guid: 7c75c9e0ce6183e47ade7036789b7aa8,
+    type: 3}
+  itemIcon: {fileID: 2800000, guid: 2996d74a74fd41d4eb3a8c56b224fb55, type: 3}

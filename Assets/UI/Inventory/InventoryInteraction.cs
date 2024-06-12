@@ -106,7 +106,7 @@ public class InventoryInteraction : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    inventory.pickUpItem(hit.collider.GetComponent<ItemInfo>());
+                    inventory.pickUpItem(hit.collider.GetComponent<ItemInfo>(), true);
                 }
             }
         }
