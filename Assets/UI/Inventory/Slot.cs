@@ -226,4 +226,7 @@ public class Slot : MonoBehaviour, IDropHandler
         }
         return null;
     }
+
+    public RawImage SellIcon => icon;
+    public TextMeshProUGUI SellAmount => txt_amount;
 }

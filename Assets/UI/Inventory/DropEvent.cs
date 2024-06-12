@@ -7,10 +7,10 @@ public class DropEvent : MonoBehaviour,IDropHandler
 {
     [SerializeField] private DropItem dropItems;
 
-    RectTransform inventoryPanel;
+    RectTransform ShopPanel;
     private void Awake()
     {
-        inventoryPanel = GetComponent<RectTransform>();
+        ShopPanel = GetComponent<RectTransform>();
     }
     public void OnDrop(PointerEventData eventData)
     {
@@ -22,7 +22,7 @@ public class DropEvent : MonoBehaviour,IDropHandler
         Slot slot = draggableItem.originParent.GetComponentInParent<Slot>();
         if (slot.ItemInSlot != null)
         {
-            if (!RectTransformUtility.RectangleContainsScreenPoint(inventoryPanel, eventData.pointerDrag.transform.position, Camera.main) && eventData.button != PointerEventData.InputButton.Right)
+            if (!RectTransformUtility.RectangleContainsScreenPoint(ShopPanel, eventData.pointerDrag.transform.position, Camera.main) && eventData.button != PointerEventData.InputButton.Right)
             {
                 dropItems.GetComponent<DropItem>().DropSlot = slot;
                 dropItems.gameObject.SetActive(true);

@@ -13,6 +13,11 @@ public class DropItem : MonoBehaviour
     [SerializeField] TextMeshProUGUI txt_DropItemName;
 
     [HideInInspector] public int dropAmount = 0;
+    [HideInInspector] public PlayerStatus playerStatus;
+    private void Awake()
+    {
+        playerStatus = FindObjectOfType<PlayerStatus>();
+    }
     private void OnEnable()
     {
         txt_DropItemName.text = DropSlot.ItemInSlot.Name.ToString();
@@ -20,6 +25,7 @@ public class DropItem : MonoBehaviour
     private void Start()
     {
         DropCountSlider.maxValue = DropSlot.AmountInSlot;
+        Debug.Log(DropSlot.name);
     }
     private void Update()
     {
@@ -57,4 +63,40 @@ public class DropItem : MonoBehaviour
         DropSlot = null;
         gameObject.SetActive(false);
     }
+
+    public void SellItemButton()
+    {
+        // 현재 버릴 총량을 구함
+        int MoneyAmount = dropAmount * DropSlot.ItemInSlot.Price;
+
+        // PlayerStatus에 저장
+        playerStatus.PlayerMoney += MoneyAmount;
+        playerStatus.UpdateMonney();
+
+        // 아이템 삭제 로직 추가
+        if (dropAmount > 0)
+        {
+            if (dropAmount >= DropSlot.AmountInSlot)
+            {
+                DropSlot.ItemInSlot = null;
+                DropSlot.AmountInSlot = 0;
+
+                DropSlot.SellAmount.text = DropSlot.AmountInSlot.ToString();
+                DropSlot.SellAmount.gameObject.SetActive(false);
+                DropSlot.SellIcon.texture = null;
+                DropSlot.SellIcon.gameObject.SetActive(false);
+            }
+            else
+            {
+                DropSlot.AmountInSlot -= dropAmount;
+                DropSlot.SellAmount.text = DropSlot.AmountInSlot.ToString();
+            }
+
+            DropSlot.UpdateSlot();
+        }
+
+        // DropItem의 Slider 최대 갯수를 줄임
+        DropCountSlider.maxValue = DropSlot.AmountInSlot;
+    }
+
 }

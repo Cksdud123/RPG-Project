@@ -137,6 +137,7 @@ public class InventoryInteraction : MonoBehaviour
             ShopPanel.SetActive(true);
             PanelInventory.SetActive(true);
 
+            DropEventPanel.SetActive(false);
             CrossHair.SetActive(false);
             txt_item.gameObject.SetActive(false);
             PlayerCamera.SetActive(false);
@@ -148,6 +149,7 @@ public class InventoryInteraction : MonoBehaviour
             ShopPanel.SetActive(false);
             PanelInventory.SetActive(false);
 
+            DropEventPanel.SetActive(true);
             CrossHair.SetActive(true);
             txt_item.gameObject.SetActive(true);
             PlayerCamera.SetActive(true);
