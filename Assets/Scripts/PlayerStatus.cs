@@ -9,6 +9,8 @@ public class PlayerStatus : MonoBehaviour
     public int PlayerMoney = 2000;
     public TextMeshProUGUI MoneyText;
 
+    // 플레이어 상태
+
     private void Update()
     {
         UpdateMonney();

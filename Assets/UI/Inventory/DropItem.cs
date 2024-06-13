@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class DropItem : MonoBehaviour
 {
     [SerializeField] public Slot DropSlot;
-    [SerializeField] public Slider DropCountSlider;
     [SerializeField] TextMeshProUGUI txt_ButtonText;
     [SerializeField] TextMeshProUGUI txt_DropItemName;
+    [SerializeField] public Slider DropCountSlider;
 
     [HideInInspector] public int dropAmount = 0;
     [HideInInspector] public PlayerStatus playerStatus;
@@ -20,12 +20,11 @@ public class DropItem : MonoBehaviour
     }
     private void OnEnable()
     {
-        txt_DropItemName.text = DropSlot.ItemInSlot.Name.ToString();
+        txt_DropItemName.text = DropSlot.ItemInSlot.Name;
     }
     private void Start()
     {
         DropCountSlider.maxValue = DropSlot.AmountInSlot;
-        Debug.Log(DropSlot.name);
     }
     private void Update()
     {
@@ -72,6 +71,8 @@ public class DropItem : MonoBehaviour
         // PlayerStatus에 저장
         playerStatus.PlayerMoney += MoneyAmount;
         playerStatus.UpdateMonney();
+
+        if (DropSlot.AmountInSlot == 0) return;
 
         // 아이템 삭제 로직 추가
         if (dropAmount > 0)

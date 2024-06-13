@@ -11,6 +11,7 @@ public class InventoryInteraction : MonoBehaviour
     [SerializeField] private int hitrange = 10;
     [SerializeField] private LayerMask itemLayer;
     [SerializeField] private LayerMask ShopLayer;
+    [SerializeField] private LayerMask ForgeLayer;
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject PlayerCamera;
 
@@ -120,6 +121,19 @@ public class InventoryInteraction : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.I))
                 {
                     ActiveShop();
+                }
+            }
+        }
+        else if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, hitrange, ForgeLayer))
+        {
+            if (!hit.collider.GetComponent<Collider>()) return;
+
+            else
+            {
+                txt_item.text = $"강화하기(I)";
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    //
                 }
             }
         }

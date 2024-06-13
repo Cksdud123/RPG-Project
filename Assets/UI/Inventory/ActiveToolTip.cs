@@ -27,7 +27,7 @@ public class ActiveToolTip : MonoBehaviour
 
     private void SettingToolTip()
     {
-        txt_Name.text = clickedSlot.ItemInSlot.name;
+        txt_Name.text = clickedSlot.ItemInSlot.Name;
         txt_Weight.text = $"무게 : {clickedSlot.ItemInSlot.Weight * clickedSlot.AmountInSlot}kg";
         txt_Price.text = $"가격 : {clickedSlot.ItemInSlot.Price}원";
         txt_Durability.text = $"내구도 : {clickedSlot.ItemInSlot.Durability}";
