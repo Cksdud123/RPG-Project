@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,11 +12,13 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     private ThirdPersonController thirdPersonController;
     private CharacterController characterController;
-    
+
 
     //장비 파라미터
+    [Header("Equipment Param")]
     [SerializeField]
     private GameObject sword;
+
     [SerializeField]
     private GameObject swordOnShoulder;
     public bool isEquipping;
@@ -36,8 +39,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AnimationCurve dodgeCurve;
     //회피
     public bool isDodgeing;
+    public bool isDamaged;
 
     float dodgeTimer, dodge_coolDown;
+
+    [Header("Sound")]
+    public AudioSource audioSource;
+    public AudioClip EquipmentSword;
+
+    [Header("Attack Sound")]
+    public AudioClip Attack1Sound;
+    public AudioClip Attack2Sound;
+    public AudioClip Attack3Sound;
+
+    [Header("Pain Sound")]
+    public AudioClip painSound;
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
@@ -97,19 +113,9 @@ public class PlayerController : MonoBehaviour
             isBlocking = false;
         }
     }
-
     public void Kick()
     {
-        if (Input.GetKey(KeyCode.LeftControl) && playerAnim.GetBool("Grounded"))
-        {
-            playerAnim.SetBool("Kick", true);
-            isKicking = true;
-        }
-        else
-        {
-            playerAnim.SetBool("Kick", false);
-            isKicking = false;
-        }
+        if (Input.GetKeyDown(KeyCode.G) && playerAnim.GetBool("Grounded")) playerAnim.SetTrigger("Kick");
     }
 
     private void Attack()
@@ -183,9 +189,44 @@ public class PlayerController : MonoBehaviour
         isDodgeing = false;
     }
 
-
+    void SwordSound()
+    {
+        audioSource.clip = EquipmentSword;
+        audioSource.Play();
+    }
+    void SwordAttack1()
+    {
+        audioSource.clip = Attack1Sound;
+        audioSource.Play();
+    }
+    void SwordAttack2()
+    {
+        audioSource.clip = Attack2Sound;
+        audioSource.Play();
+    }
+    void SwordAttack3()
+    {
+        audioSource.clip = Attack3Sound;
+        audioSource.Play();
+    }
+    void PainSound()
+    {
+        audioSource.clip = painSound;
+        audioSource.volume = 0.3f;
+        audioSource.Play();
+        audioSource.volume = 0.7f;
+    }
     public void ResetAttack()
     {
         isAttacking = false;
+    }
+
+    void OffPlayerMove()
+    {
+        isDamaged = true;
+    }
+    void OnPlayerMove()
+    {
+        isDamaged = false;
     }
 }

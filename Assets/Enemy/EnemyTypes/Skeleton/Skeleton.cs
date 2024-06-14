@@ -16,7 +16,7 @@ public class Skeleton : Enemy
     {
         base.Awake();
         rigid = GetComponent<Rigidbody>();
-        MaxHealth = 20; // Skeleton 클래스의 MaxHealth 설정
+        MaxHealth = 100; // Skeleton 클래스의 MaxHealth 설정
     }
     void Start()
     {
@@ -26,6 +26,7 @@ public class Skeleton : Enemy
     public override void Damage(float damageAmount)
     {
         base.Damage(damageAmount);
+        healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
     }
     public override void Die()
     {

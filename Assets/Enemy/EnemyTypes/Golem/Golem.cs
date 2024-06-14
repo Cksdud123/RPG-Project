@@ -25,17 +25,8 @@ public class Golem : Enemy
     }
     public override void Damage(float damageAmount)
     {
-        CurrentHealth -= damageAmount;
+        base.Damage(damageAmount);
         healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
-
-        if (CurrentHealth <= 0f)
-        {
-            Die();
-        }
-        else
-        {
-            animator.SetTrigger("Damage");
-        }
     }
     public override void Die()
     {

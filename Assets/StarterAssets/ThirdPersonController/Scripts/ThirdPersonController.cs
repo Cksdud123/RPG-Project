@@ -218,7 +218,9 @@ namespace StarterAssets
         public void Move()
         {
             // 플레이어 컨트롤러 파라미터 (장비를 착용중일때는 움직이지 않음)
-            if (playerController.isEquipping || playerController.isBlocking || playerController.isKicking || playerController.isAttacking) return;
+            if (playerController.isEquipping || playerController.isBlocking 
+                || playerController.isKicking || playerController.isAttacking 
+                || playerController.isDamaged) return;
 
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;

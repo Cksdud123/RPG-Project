@@ -8,6 +8,9 @@ public class EpicBossSountManager : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip ScreamClip;
+    public AudioClip SwingSound;
+    public AudioClip Swing360Sound;
+    public AudioClip StampSound;
     private void Awake()
     {
         if (Instance == null)
@@ -21,6 +24,21 @@ public class EpicBossSountManager : MonoBehaviour
     public void Enemy_Scream()
     {
         audioSource.clip = ScreamClip;
+        audioSource.Play();
+    }
+    public void Enemy_Swing360()
+    {
+        audioSource.clip = Swing360Sound;
+        audioSource.Play();
+    }
+    public void Enemy_SwingSound()
+    {
+        audioSource.clip = SwingSound;
+        audioSource.Play();
+    }
+    public void Enemy_StampSound()
+    {
+        audioSource.clip = StampSound;
         audioSource.Play();
     }
 }
