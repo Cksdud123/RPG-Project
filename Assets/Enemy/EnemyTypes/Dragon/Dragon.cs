@@ -43,7 +43,7 @@ public class Dragon : Enemy
         ItemDropEnemy();
         rigid.isKinematic = true;
     }
-    public override void ItemDropEnemy()
+    public void ItemDropEnemy()
     {
         lootTable.Value = nondrop;
         GameObject dropItem = lootTable.GetRandom();

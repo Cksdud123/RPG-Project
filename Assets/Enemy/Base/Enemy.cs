@@ -73,6 +73,4 @@ public class Enemy : Poolable, IDamageable
     {
         this.spawner = spawner;
     }
-
-    public virtual void ItemDropEnemy() { }
 }

@@ -102,7 +102,7 @@ namespace StarterAssets
         private PlayerInput _playerInput;
 #endif
         private Animator _animator;
-        private CharacterController _controller;
+        [HideInInspector]public CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
@@ -122,6 +122,7 @@ namespace StarterAssets
             }
         }
 
+        public float rotationPlayer;
         // 플레이어 컨트롤러 파라미터
         private PlayerController playerController;
 
@@ -263,11 +264,11 @@ namespace StarterAssets
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                                   _mainCamera.transform.eulerAngles.y;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                rotationPlayer = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     RotationSmoothTime);
 
                 // rotate to face input direction relative to camera position
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                transform.rotation = Quaternion.Euler(0.0f, rotationPlayer, 0.0f);
             }
 
 

@@ -6,8 +6,6 @@ using UnityEngine.AI;
 public class MinoTaurIdleState : StateMachineBehaviour
 {
     private float idleRange = 3;
-    private float chaseRange = 8;
-    private float attackCooldown = 3.0f; // 공격 후 대기 시간
 
     float timer;
 

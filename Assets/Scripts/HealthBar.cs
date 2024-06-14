@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealthBar : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
     public Slider healthSlider;
 
@@ -22,11 +22,9 @@ public class PlayerHealthBar : MonoBehaviour
     void Update()
     {
         if(healthSlider.value != health) healthSlider.value = Mathf.Lerp(healthSlider.value, health, lerfSpeed);
-
-        if (Input.GetKeyDown(KeyCode.X)) takeDamage(10);
     }
 
-    void takeDamage(float damage)
+    public void takeDamage(float damage)
     {
         health -= damage;
     }

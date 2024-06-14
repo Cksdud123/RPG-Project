@@ -8,7 +8,6 @@ public class MinoWalkState : StateMachineBehaviour
     [HideInInspector] public int attackIndex;
 
     private float WalkRange = 3;
-    private float chaseRange = 8;
 
     NavMeshAgent agent;
     Transform player;

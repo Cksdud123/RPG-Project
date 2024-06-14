@@ -25,17 +25,7 @@ public class Skeleton : Enemy
     }
     public override void Damage(float damageAmount)
     {
-        CurrentHealth -= damageAmount;
-        healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
-
-        if (CurrentHealth <= 0f)
-        {
-            Die();
-        }
-        else
-        {
-            animator.SetTrigger("Damage");
-        }
+        base.Damage(damageAmount);
     }
     public override void Die()
     {
@@ -43,7 +33,7 @@ public class Skeleton : Enemy
         ItemDropEnemy();
         rigid.isKinematic = true;
     }
-    public override void ItemDropEnemy()
+    public void ItemDropEnemy()
     {
         lootTable.Value = nondrop;
         GameObject dropItem = lootTable.GetRandom();
