@@ -12,8 +12,8 @@ public class Slot : MonoBehaviour, IDropHandler
     public int AmountInSlot;
     [SerializeField] private DropItem dropItems;
 
-    RawImage icon;
-    TextMeshProUGUI txt_amount;
+    [HideInInspector] public RawImage icon;
+    [HideInInspector] public TextMeshProUGUI txt_amount;
 
     // 슬롯 초기화
     public void initSlot()
@@ -54,7 +54,22 @@ public class Slot : MonoBehaviour, IDropHandler
             txt_amount.enabled = false;
         }
     }
+    // 슬롯 초기화
+    public void ResetSlot()
+    {
+        ItemInSlot = null;
+        AmountInSlot = 0;
 
+        // 아이콘과 텍스트 비활성화
+        if (icon != null || txt_amount != null)
+        {
+            icon.gameObject.SetActive(false);
+            icon.texture = null;
+
+            txt_amount.gameObject.SetActive(false);
+            txt_amount.text = AmountInSlot.ToString();
+        }
+    }
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerDrag;
@@ -78,7 +93,7 @@ public class Slot : MonoBehaviour, IDropHandler
         else if(ItemInSlot != null && ItemInSlot.ID == slot.ItemInSlot.ID) AddItems(draggableItem, slot);
     }
     // 아이템을 빈 슬롯으로 가져다 놓음
-    private void ChangeEmptySlot(DragSlot draggableItem, Slot slot)
+    public void ChangeEmptySlot(DragSlot draggableItem, Slot slot)
     {
         // 옮겨진 아이템의 아이콘을 현재 슬롯으로 옮김
         draggableItem.dragItemIcon.SetParent(transform);
@@ -89,13 +104,7 @@ public class Slot : MonoBehaviour, IDropHandler
         ItemInSlot = slot.ItemInSlot;
         AmountInSlot = slot.AmountInSlot;
 
-        // 원래 슬롯의 아이템 데이터 초기화
-        slot.ItemInSlot = null;
-        slot.AmountInSlot = 0;
-
-        // 원래 슬롯의 자식객체에 있는 텍스트 정보 초기화
-        slot.txt_amount.text = slot.AmountInSlot.ToString();
-        slot.txt_amount.gameObject.SetActive(false);
+        slot.ResetSlot();
 
         // RawImage의 값이 null인 객체를 찾아서 변경
         Transform emptyRawImage = FindEmptyRawImage(transform);
@@ -150,17 +159,7 @@ public class Slot : MonoBehaviour, IDropHandler
             AmountInSlot += slot.AmountInSlot;
             UpdateSlot();
 
-            // 원래 슬롯의 아이템 데이터 초기화
-            slot.ItemInSlot = null;
-            slot.AmountInSlot = 0;
-
-            // 원래 슬롯의 자식객체에 있는 데이터를 초기화
-            slot.icon.texture = null;
-            slot.icon.gameObject.SetActive(false);
-            slot.txt_amount.text = slot.AmountInSlot.ToString();
-            slot.txt_amount.gameObject.SetActive(false);
-
-            slot.UpdateSlot();
+            slot.ResetSlot();
         }
         // 두개의 슬롯에 있는 아이템을 더했을때 최대 수량을 넘길때
         else if (AmountInSlot + slot.AmountInSlot >= ItemInSlot.MAXSTACK)
@@ -183,21 +182,8 @@ public class Slot : MonoBehaviour, IDropHandler
         if (slot.AmountInSlot == 0) return;
 
         // 버리는 값이 현재 스택값과 같다면
-        if (dropItems.dropAmount == slot.AmountInSlot)
-        {
-            // 원래 슬롯의 아이템 데이터 초기화
-            slot.ItemInSlot = null;
-            slot.AmountInSlot = 0;
+        if (dropItems.dropAmount == slot.AmountInSlot) slot.ResetSlot();
 
-            // 원래 슬롯의 자식객체에 있는 텍스트 정보 초기화
-            slot.txt_amount.text = AmountInSlot.ToString();
-            slot.txt_amount.gameObject.SetActive(false);
-            // 원래 슬롯의 아이콘 초기화
-            slot.icon.texture = null;
-            slot.icon.gameObject.SetActive(false);
-
-            slot.UpdateSlot();
-        }
         // 최대스택이 아니라면
         else if (dropItems.dropAmount <= slot.ItemInSlot.MAXSTACK)
         {

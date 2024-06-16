@@ -24,3 +24,8 @@ MonoBehaviour:
   itemPrefab: {fileID: 5599570508376023345, guid: 7ad47a2233e379e4da9fbb28cbca59ab,
     type: 3}
   itemIcon: {fileID: 2800000, guid: 4e6bf94feef28d642a5b48a023262608, type: 3}
+  equipmentType: 2
+  StrikingPower: 0
+  DefensivePower: 0
+  Damage: 0
+  Speed: 0

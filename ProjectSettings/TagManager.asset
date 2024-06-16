@@ -9,6 +9,13 @@ TagManager:
   - WayPoints
   - Dragon
   - InventoryCanvas
+  - Helmet
+  - Weapon
+  - Shield
+  - BodyPlate
+  - Pants
+  - Shoes
+  - Inventory
   layers:
   - Default
   - TransparentFX

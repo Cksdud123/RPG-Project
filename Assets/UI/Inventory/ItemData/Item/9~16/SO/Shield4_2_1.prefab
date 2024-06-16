@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8833031547551749551}
   - component: {fileID: 6733387412811342181}
   - component: {fileID: -5491168080915042254}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shield4_2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 5381900015501388295}
   - component: {fileID: 5381900015501388293}
   - component: {fileID: 5381900015501388294}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShieldHandle_Hand1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
