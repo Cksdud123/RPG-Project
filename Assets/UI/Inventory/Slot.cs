@@ -129,7 +129,7 @@ public class Slot : MonoBehaviour, IDropHandler
         slot.UpdateSlot();
     }
     // 두 아이템을 교체
-    private void SwapItems(DragSlot draggableItem,Slot slot)
+    public void SwapItems(DragSlot draggableItem,Slot slot)
     {
         // 현재 슬롯의 아이템 데이터를 임시 변수에 저장
         ItemData tempItem = ItemInSlot;
