@@ -48,7 +48,7 @@ public class InventoryInteraction : MonoBehaviour
         else if (!PanelInventory.activeInHierarchy && Input.GetKeyDown(KeyCode.I))
         {
             Cursor.lockState = CursorLockMode.None;
-            PanelInventory.transform.position = new Vector3(Camera.main.pixelWidth / 2 + 500.0f, (Camera.main.pixelHeight / 2));
+            PanelInventory.transform.position = new Vector3(Camera.main.pixelWidth / 2 + 600.0f, (Camera.main.pixelHeight / 2));
             DropEventPanel.SetActive(true);
             PanelInventory.SetActive(true);
             PlayerCamera.SetActive(false);

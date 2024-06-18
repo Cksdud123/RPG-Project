@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -78,6 +79,17 @@ public class Slot : MonoBehaviour, IDropHandler
         if (draggableItem == null || draggableItem.originParent == null) return;
 
         Slot slot = draggableItem.originParent.GetComponent<Slot>();
+
+        // 현재 슬롯이 EquipmentPanel에 있고 드래그된 아이템이 Equipment 타입이 아닌 경우 리턴
+        if (transform.parent.name == "EquipmentPanel")
+        {
+            // ItemType이 Equipment이 아닌 경우 리턴
+            if (slot.ItemInSlot.ITEMTYPE != ItemType.Equipment) return;
+
+            // 현재 장비의 타입과 태그가 불일치하면 리턴
+            EquipmentData equipmentData = slot.ItemInSlot as EquipmentData;
+            if (equipmentData.equipmentType.ToString() != transform.tag) return;
+        }
 
         // 현재 아이템 슬롯이 비었을때
         if (ItemInSlot == null)
