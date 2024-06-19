@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Dragon : Enemy
@@ -11,17 +12,24 @@ public class Dragon : Enemy
     [SerializeField] private float nondrop;
     public WeightedRandomList<GameObject> lootTable;
 
-    private Rigidbody rigid;
+    [Header("Monster Level")]
+    [HideInInspector] public int MonsterLevel;
+    public TextMeshProUGUI MonsterName;
+    [SerializeField] private string monster;
+
+    //private Rigidbody rigid;
     protected override void Awake()
     {
         base.Awake();
-        rigid = GetComponent<Rigidbody>();
-        MaxHealth = 20; // Skeleton 클래스의 MaxHealth 설정
+        //rigid = GetComponent<Rigidbody>();
+        MaxHealth = 350; 
     }
     void Start()
     {
+        MonsterLevel = Random.Range(21, 31);
         CurrentHealth = MaxHealth;
         healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+        MonsterName.text = MonsterLevel.ToString() + ". " + monster;
     }
     public override void Damage(float damageAmount)
     {
@@ -32,7 +40,6 @@ public class Dragon : Enemy
     {
         base.Die(); // 기본 클래스 Die 메서드 호출
         ItemDropEnemy();
-        rigid.isKinematic = true;
     }
     public void ItemDropEnemy()
     {

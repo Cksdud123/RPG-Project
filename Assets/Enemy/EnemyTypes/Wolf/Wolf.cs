@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Wolf : Enemy
@@ -11,17 +12,24 @@ public class Wolf : Enemy
     [SerializeField] private float nondrop;
     public WeightedRandomList<GameObject> lootTable;
 
+    [Header("Monster Level")]
+    [HideInInspector] public int MonsterLevel;
+    public TextMeshProUGUI MonsterName;
+    [SerializeField] private string monster;
+
     private Rigidbody rigid;
     protected override void Awake()
     {
         base.Awake();
         rigid = GetComponent<Rigidbody>();
-        MaxHealth = 20; // Skeleton 클래스의 MaxHealth 설정
+        MaxHealth = 200; 
     }
     void Start()
     {
+        MonsterLevel = Random.Range(11, 16);
         CurrentHealth = MaxHealth;
         healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+        MonsterName.text = MonsterLevel.ToString() + ". " + monster;
     }
     public override void Damage(float damageAmount)
     {

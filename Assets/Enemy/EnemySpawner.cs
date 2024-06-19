@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,13 +9,15 @@ public class EnemySpawner : MonoBehaviour
 {
     NavMeshSurface Nav;
 
+    [Header("Enemy")]
     public int MaxEnemyCount = 5;
     public int CurrentEnemyCount = 0;
     public string enemyName;
     public GameObject enemyParent;
+    public TextMeshProUGUI EnterText;
 
     [HideInInspector] public int DeathCount;
-
+    [Header("Material")]
     public Material[] materials;
 
     private void Awake()
@@ -24,6 +27,14 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         CurrentEnemyCount = 0;
+    }
+    // 들어갈때
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            StartCoroutine(EnterMessage());
+        }
     }
     // 머무는 중일때
     private void OnTriggerStay(Collider other)
@@ -83,7 +94,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.transform.rotation = Quaternion.identity;
         enemy.GetComponent<Collider>().enabled = true;
 
-        enemyRigid.isKinematic = false;
+        if(enemyRigid != null) enemyRigid.isKinematic = false;
 
         enemyAgent.enabled = true;
 
@@ -93,5 +104,13 @@ public class EnemySpawner : MonoBehaviour
     {
         CurrentEnemyCount = Mathf.Max(0, CurrentEnemyCount - 1);
         if (CurrentEnemyCount == 0) CurrentEnemyCount = MaxEnemyCount;
+    }
+    IEnumerator EnterMessage()
+    {
+        EnterText.text = enemyName + "의 영역";
+        EnterText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        EnterText.gameObject.SetActive(false);
+        EnterText.text = string.Empty;
     }
 }
