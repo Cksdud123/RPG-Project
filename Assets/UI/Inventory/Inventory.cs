@@ -35,10 +35,7 @@ public class Inventory : MonoBehaviour
                     // 아이템의 수량을 추가해 줌
                     slots[i].AmountInSlot += itemObj.amount;
                     slots[i].UpdateSlot();
-                    if (destroyAfterPickup)
-                    {
-                        Destroy(itemObj.gameObject);
-                    }
+                    if (destroyAfterPickup) Destroy(itemObj.gameObject);
                     return;
                 }
                 // 최대스택에 도달했다면
@@ -60,10 +57,7 @@ public class Inventory : MonoBehaviour
                 slots[i].ItemInSlot = itemObj.iteminfo;
                 slots[i].AmountInSlot = itemObj.amount;
                 slots[i].SetSlot();
-                if (destroyAfterPickup)
-                {
-                    Destroy(itemObj.gameObject);
-                }
+                if (destroyAfterPickup) Destroy(itemObj.gameObject);
                 return;
             }
         }

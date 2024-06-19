@@ -17,9 +17,9 @@ public class EquipmentData : ItemData
 {
     public EquipmentType equipmentType;
 
+    // 공격력 방어력 체력 스피드
     [Header("Status")]
-    [SerializeField] private float StrikingPower;
-    [SerializeField] private float DefensivePower;
-    [SerializeField] private float Damage;
-    [SerializeField] private float Speed;
+    [SerializeField] public float Damage;
+    [SerializeField] public float Defensive;
+    [SerializeField] public float Health;
 }

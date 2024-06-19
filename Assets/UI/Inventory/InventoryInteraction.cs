@@ -12,6 +12,7 @@ public class InventoryInteraction : MonoBehaviour
     [SerializeField] private LayerMask itemLayer;
     [SerializeField] private LayerMask ShopLayer;
     [SerializeField] private LayerMask ForgeLayer;
+    [SerializeField] private LayerMask QuestNPCLayer;
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject PlayerCamera;
 
@@ -132,6 +133,19 @@ public class InventoryInteraction : MonoBehaviour
             {
                 txt_item.text = $"강화하기(I)";
                 if (Input.GetKeyDown(KeyCode.I))
+                {
+                    //
+                }
+            }
+        }
+        else if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, hitrange, QuestNPCLayer))
+        {
+            if (!hit.collider.GetComponent<Collider>()) return;
+
+            else
+            {
+                txt_item.text = $"대화하기(Q)";
+                if (Input.GetKeyDown(KeyCode.Q))
                 {
                     //
                 }
