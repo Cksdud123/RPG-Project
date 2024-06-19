@@ -13,6 +13,7 @@ public class Enemy : Poolable, IDamageable
     private ExperienceManager levelManaged;
     private EnemySpawner spawner;
     private EnemyHealthBar enemyhealthBar;
+    private PlayerStatus playerStatus;
 
     NavMeshAgent agent;
 
@@ -21,6 +22,7 @@ public class Enemy : Poolable, IDamageable
         agent = GetComponent<NavMeshAgent>();
         levelManaged = FindObjectOfType<ExperienceManager>();
         enemyhealthBar = GetComponentInChildren<EnemyHealthBar>();
+        playerStatus = FindObjectOfType<PlayerStatus>();
         spawner = FindObjectOfType<EnemySpawner>();
     }
 
@@ -55,7 +57,8 @@ public class Enemy : Poolable, IDamageable
     {
         CurrentHealth = 0;
 
-        levelManaged.AddExperience(Random.Range(10, 50));
+        levelManaged.AddExperience(Random.Range(5, 15));
+        playerStatus.PlayerMoney += Random.Range(5, 15);
         animator.SetTrigger("Die");
 
         GetComponent<Collider>().enabled = false;

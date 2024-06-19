@@ -23,6 +23,7 @@ public class InventoryInteraction : MonoBehaviour
     [SerializeField] private GameObject DropEventPanel;
     [SerializeField] private GameObject equipment;
     [SerializeField] private GameObject ShopPanel;
+    [SerializeField] private GameObject MinimapPanel;
 
     private bool isEquipmentActive = false;
 
@@ -43,6 +44,7 @@ public class InventoryInteraction : MonoBehaviour
             PanelInventory.SetActive(false);
 
             CrossHair.SetActive(true);
+            MinimapPanel.SetActive(true);
             PlayerCamera.SetActive(true);
             txt_item.gameObject.SetActive(true);
         }
@@ -52,8 +54,9 @@ public class InventoryInteraction : MonoBehaviour
             PanelInventory.transform.position = new Vector3(Camera.main.pixelWidth / 2 + 600.0f, (Camera.main.pixelHeight / 2));
             DropEventPanel.SetActive(true);
             PanelInventory.SetActive(true);
-            PlayerCamera.SetActive(false);
 
+            PlayerCamera.SetActive(false);
+            MinimapPanel.SetActive(false);
             CrossHair.SetActive(false);
             txt_item.gameObject.SetActive(false);
         }
