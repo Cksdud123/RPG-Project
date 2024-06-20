@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AttackPoint : MonoBehaviour
 {
-    public float damage = 20f;
+    public float damage = 40f;
     public float radius = 1f;
     public LayerMask layerMask;
 
@@ -50,7 +50,7 @@ public class AttackPoint : MonoBehaviour
             else if (player != null)
             {
                 PlayerController playerController = player.GetComponentInParent<PlayerController>();
-                if (playerController.isBlocking && hits[0].transform.name == "Shield") return;
+                if (playerController.isBlocking) return;
 
                 player.PlayerDamage(damage);
                 if (attackManager != null && attackManager.isNormalEnemy)

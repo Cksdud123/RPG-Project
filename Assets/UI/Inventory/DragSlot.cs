@@ -52,20 +52,19 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         // 슬롯에 저장된 아이템이 없다면 리턴
         if (transform.GetComponent<Slot>().ItemInSlot == null) return;
-
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            isShiftMode = true;
-        }
+        // 우클릭을 한채 누르면 수량을 반만 가져가게 해놓음
+        if (eventData.button == PointerEventData.InputButton.Right) isShiftMode = true;
         else isShiftMode = false;
 
         // 드래그할 오브젝트의 정보를 가져옴
         dragItemIcon = transform.GetComponentInChildren<RawImage>().transform;
         dragItemIcon.GetComponent<RawImage>().raycastTarget = false;
 
+        // 원래 정보를 저장
         originParent = transform;
         originalSiblingIndex = dragItemIcon.GetSiblingIndex();
 
+        // 텍스트 정보는 드래그 중에 비활성화
         dragItemAmount = transform;
         dragItemAmount.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
 
@@ -109,7 +108,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             dragItemAmount = null;
         }
     }
-
+    // 슬롯을 클릭할 때 호출
     public void OnPointerClick(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerDrag;
@@ -146,6 +145,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             }
         }
     }
+    // 슬롯에서 나갈때 호출
     public void OnPointerExit(PointerEventData eventData)
     {
         Tooltip.SetActive(false);
@@ -178,6 +178,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 break;
         }
     }
+    // 장비 슬롯으로 아이템 이동
     public void MoveEquip(Slot Equipment, Slot slot)
     {
         // 아이템이 존재하는 경우에만 처리
@@ -207,6 +208,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         // 현재 슬롯의 정보 초기화
         slot.ResetSlot();
     }
+    // 장비 슬롯에서 인벤토리로 아이템 이동
     public void UpdateEquipment(Slot slot)
     {
         for(int i = 0; i < inventoryPanel.slots.Length; i++)
@@ -220,22 +222,6 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             }
         }
     }
-    public void SwapEquipment(Slot equipment, Slot slot)
-    {
-        // 장비 슬롯의 현재 상태를 임시 변수에 저장
-        ItemData tempEquipItem = equipment.ItemInSlot;
-        int tempEquipAmount = equipment.AmountInSlot;
-
-        // 아이템 교환
-        equipment.ItemInSlot = slot.ItemInSlot;
-        equipment.AmountInSlot = slot.AmountInSlot;
-
-        slot.ItemInSlot = tempEquipItem;
-        slot.AmountInSlot = tempEquipAmount;
-
-        // 두 슬롯의 UI를 업데이트
-        equipment.SetSlot();
-        slot.SetSlot();
-    }
     public bool ShihtMode => isShiftMode;
 }
+

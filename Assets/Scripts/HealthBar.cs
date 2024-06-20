@@ -7,7 +7,7 @@ public class HealthBar : MonoBehaviour
 {
     public Slider healthSlider;
 
-    public float maxHealth = 100f;
+    public float maxHealth;
     public float health;
 
     private float lerfSpeed = 0.05f;
@@ -16,6 +16,7 @@ public class HealthBar : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        healthSlider.maxValue = maxHealth;
     }
 
     // Update is called once per frame

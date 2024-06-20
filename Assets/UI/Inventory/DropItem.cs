@@ -20,11 +20,13 @@ public class DropItem : MonoBehaviour
     }
     private void OnEnable()
     {
-        txt_DropItemName.text = DropSlot.ItemInSlot.Name;
-    }
-    private void Start()
-    {
-        DropCountSlider.maxValue = DropSlot.AmountInSlot;
+        if (DropSlot != null && DropSlot.ItemInSlot != null)
+        {
+            txt_DropItemName.text = DropSlot.ItemInSlot.Name;
+            DropCountSlider.maxValue = DropSlot.AmountInSlot;  // maxValue를 여기서 업데이트
+            DropCountSlider.value = 0;  // 슬라이더 값을 초기화
+            SetButtonText();  // 버튼 텍스트 업데이트
+        }
     }
     private void Update()
     {

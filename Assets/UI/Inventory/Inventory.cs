@@ -27,7 +27,8 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < slots.Length; i++)
         {
             // 슬롯에 아이템이 있고 아이템의 아이디가 같으면서 최대스택이 아닐때
-            if (slots[i].ItemInSlot != null && slots[i].ItemInSlot.ID == itemObj.iteminfo.ID && slots[i].ItemInSlot.MAXSTACK != slots[i].AmountInSlot)
+            if (slots[i].ItemInSlot != null && slots[i].ItemInSlot.ID == itemObj.iteminfo.ID 
+                                            && slots[i].ItemInSlot.MAXSTACK != slots[i].AmountInSlot)
             {
                 // 최대스택에 도달하지 않았다면
                 if (!limitStack(i, itemObj.amount))

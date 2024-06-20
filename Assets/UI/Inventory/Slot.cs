@@ -16,7 +16,7 @@ public class Slot : MonoBehaviour, IDropHandler
     [HideInInspector] public RawImage icon;
     [HideInInspector] public TextMeshProUGUI txt_amount;
 
-    // 슬롯 초기화
+    // 슬롯 비활성화
     public void initSlot()
     {
         for(int i = 0; i < transform.childCount; i++)
@@ -115,7 +115,7 @@ public class Slot : MonoBehaviour, IDropHandler
         // 현재 슬롯의 아이템 데이터 갱신
         ItemInSlot = slot.ItemInSlot;
         AmountInSlot = slot.AmountInSlot;
-
+        // 슬롯 초기화
         slot.ResetSlot();
 
         // RawImage의 값이 null인 객체를 찾아서 변경
@@ -126,6 +126,7 @@ public class Slot : MonoBehaviour, IDropHandler
 
         SetSlot();
     }
+    // 아이템의 수량을 반만 이동시킴
     private void HalfItemAmount(DragSlot draggableItem, Slot slot)
     {
         // 현재 수량이 1이면 리턴
