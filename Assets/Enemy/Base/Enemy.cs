@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
 
 public class Enemy : Poolable, IDamageable
 {
-    [SerializeField] public float MaxHealth { get; set; } = 100f;
+    [SerializeField] public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
+    public int MonsterLevel { get; set; }
+    public TextMeshProUGUI MonsterName { get; set; }
+
     public Animator animator;
 
     private ExperienceManager levelManaged;
@@ -22,6 +26,7 @@ public class Enemy : Poolable, IDamageable
         agent = GetComponent<NavMeshAgent>();
         levelManaged = FindObjectOfType<ExperienceManager>();
         enemyhealthBar = GetComponentInChildren<EnemyHealthBar>();
+        MonsterName = GetComponentInChildren<TextMeshProUGUI>();
         playerStatus = FindObjectOfType<PlayerStatus>();
         spawner = FindObjectOfType<EnemySpawner>();
     }
@@ -29,6 +34,18 @@ public class Enemy : Poolable, IDamageable
     private void Start()
     {
         CurrentHealth = MaxHealth;
+    }
+    private void Update()
+    {
+        // 플레이어의 현재 레벨보다 몬스터의 레벨이 높은 경우 색상 변경
+        if (MonsterLevel > levelManaged.currentLevel + 5)
+        {
+            MonsterName.color = Color.red;
+        }
+        else
+        {
+            MonsterName.color = Color.white; // 기본 색상
+        }
     }
     public void InitializeHealth()
     {

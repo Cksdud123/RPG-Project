@@ -65659,6 +65659,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  currentLevel: 0
+  totalExperience: 0
   levelText: {fileID: 9092348647228859951}
   experienceText: {fileID: 8555405057287533990}
   experienceFill: {fileID: 5243480871463312476}
@@ -80717,7 +80719,7 @@ Transform:
   m_GameObject: {fileID: 8236187708463222532}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 299.66, y: 7, z: 44}
+  m_LocalPosition: {x: 331.45, y: 3.5800002, z: 368.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -81159,6 +81161,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1323901038264890768, guid: 10ea5ea39f344834ebcbb17b5e3ef452,
+        type: 3}
+      propertyPath: experienceManager
+      value: 
+      objectReference: {fileID: 3400396409420892042}
     - target: {fileID: 3560504242715327742, guid: 10ea5ea39f344834ebcbb17b5e3ef452,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -90003,7 +90010,7 @@ Transform:
   m_GameObject: {fileID: 7248956790218200424}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 299.16, y: 4.95, z: 47.5}
+  m_LocalPosition: {x: 330.95, y: 1.53, z: 372.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -97769,7 +97776,7 @@ Transform:
   m_GameObject: {fileID: 8944336656349189697}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 299.66, y: 7, z: 44}
+  m_LocalPosition: {x: 331.45, y: 3.5800002, z: 368.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

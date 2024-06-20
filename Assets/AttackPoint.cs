@@ -9,6 +9,11 @@ public class AttackPoint : MonoBehaviour
     public float radius = 1f;
     public LayerMask layerMask;
 
+    ExperienceManager experienceManager;
+    private void Awake()
+    {
+        experienceManager = FindObjectOfType<ExperienceManager>();
+    }
     void Update()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, radius, layerMask);
@@ -24,8 +29,18 @@ public class AttackPoint : MonoBehaviour
             AttackManager attackManager = GetComponentInParent<AttackManager>();
             if (enemy != null)
             {
-                enemy.Damage(damage);
-                gameObject.SetActive(false);
+                float damageToDeal;
+                if (experienceManager.currentLevel + 5 < enemy.MonsterLevel)
+                {
+                    damageToDeal = 1f;
+                    enemy.Damage(damageToDeal);
+                    gameObject.SetActive(false);
+                }
+                else
+                {
+                    enemy.Damage(damage);
+                    gameObject.SetActive(false);
+                }
             }
             else if (epicEnemy != null)
             {

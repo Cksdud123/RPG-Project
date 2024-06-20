@@ -9,7 +9,7 @@ public class ExperienceManager : MonoBehaviour
     [Header("Experience")]
     [SerializeField] AnimationCurve experienceCurve;
 
-    int currentLevel, totalExperience;
+    [HideInInspector] public int currentLevel, totalExperience;
     int previousLevelsExperience, nextLevelsExperience;
 
     [Header("Interface")]

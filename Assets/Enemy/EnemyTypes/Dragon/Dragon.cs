@@ -12,9 +12,7 @@ public class Dragon : Enemy
     [SerializeField] private float nondrop;
     public WeightedRandomList<GameObject> lootTable;
 
-    [Header("Monster Level")]
-    [HideInInspector] public int MonsterLevel;
-    public TextMeshProUGUI MonsterName;
+    [Header("Monster Name")]
     [SerializeField] private string monster;
 
     //private Rigidbody rigid;
