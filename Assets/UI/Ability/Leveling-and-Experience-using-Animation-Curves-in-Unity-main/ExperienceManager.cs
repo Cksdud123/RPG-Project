@@ -38,7 +38,7 @@ public class ExperienceManager : MonoBehaviour
         }
     }
 
-    void UpdateLevel()
+    public void UpdateLevel()
     {
         previousLevelsExperience = (int)experienceCurve.Evaluate(currentLevel);
         nextLevelsExperience = (int)experienceCurve.Evaluate(currentLevel + 1);

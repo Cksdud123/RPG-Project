@@ -22,7 +22,7 @@ public class Muscomorph : Enemy
         rigid = GetComponent<Rigidbody>();
         MaxHealth = 250;
     }
-    void Start()
+    protected override void Start()
     {
         MonsterLevel = Random.Range(16, 21);
         CurrentHealth = MaxHealth;

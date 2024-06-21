@@ -22,7 +22,7 @@ public class Skeleton : Enemy
         rigid = GetComponent<Rigidbody>();
         MaxHealth = 100; 
     }
-    void Start()
+    protected override void Start()
     {
         MonsterLevel = Random.Range(1, 6);
         CurrentHealth = MaxHealth;

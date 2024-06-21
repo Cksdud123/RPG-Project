@@ -94323,9 +94323,9 @@ MonoBehaviour:
   MoneyText: {fileID: 1230157053}
   healthBar: {fileID: 1075864538}
   CurrentHealth: 0
-  animator: {fileID: 658143809545108176}
   MaxHealth: 0
-  characterController: {fileID: 0}
+  experienceManager: {fileID: 3400396409420892042}
+  animator: {fileID: 658143809545108176}
 --- !u!82 &8115070165574925336
 AudioSource:
   m_ObjectHideFlags: 0

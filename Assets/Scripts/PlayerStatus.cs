@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -14,15 +13,12 @@ public class PlayerStatus : MonoBehaviour
     [Header("Player Health")]
     public HealthBar healthBar;
     public float CurrentHealth;
-    public Animator animator;
-
     [SerializeField] public float MaxHealth;
 
-    [HideInInspector] public CharacterController characterController;
-    private void Awake()
-    {
-        characterController = GetComponent<CharacterController>();
-    }
+    [Header("Player Level")]
+    public ExperienceManager experienceManager;
+
+    public Animator animator;
     // 플레이어 상태
     private void Start()
     {
@@ -48,9 +44,34 @@ public class PlayerStatus : MonoBehaviour
     private void Update()
     {
         UpdateMonney();
+
+        if (Input.GetKeyDown(KeyCode.O)) SavePlayer();
+
+        if (Input.GetKeyDown(KeyCode.P)) LoadPlayer();
     }
     public void UpdateMonney()
     {
         MoneyText.text = PlayerMoney.ToString();
+    }
+
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+    public void LoadPlayer()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        healthBar.health = data.health;
+        experienceManager.currentLevel = data.level;
+        PlayerMoney = data.money;
+
+        experienceManager.UpdateLevel();
+
+        Vector3 position;
+        position.x = data.position[0];
+        position.y = data.position[1];
+        position.z = data.position[2];
+        transform.position = position;
     }
 }

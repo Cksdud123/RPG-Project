@@ -22,7 +22,7 @@ public class Golem : Enemy
         rigid = GetComponent<Rigidbody>();
         MaxHealth = 150; 
     }
-    void Start()
+    protected override void Start()
     {
         MonsterLevel = Random.Range(6, 11);
         CurrentHealth = MaxHealth;

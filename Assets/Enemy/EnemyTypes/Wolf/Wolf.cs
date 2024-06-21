@@ -22,7 +22,7 @@ public class Wolf : Enemy
         rigid = GetComponent<Rigidbody>();
         MaxHealth = 200; 
     }
-    void Start()
+    protected override void Start()
     {
         MonsterLevel = Random.Range(11, 16);
         CurrentHealth = MaxHealth;

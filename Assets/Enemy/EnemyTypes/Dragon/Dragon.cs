@@ -22,7 +22,7 @@ public class Dragon : Enemy
         //rigid = GetComponent<Rigidbody>();
         MaxHealth = 350; 
     }
-    void Start()
+    protected override void Start()
     {
         MonsterLevel = Random.Range(21, 31);
         CurrentHealth = MaxHealth;

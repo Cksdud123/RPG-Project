@@ -31,21 +31,15 @@ public class Enemy : Poolable, IDamageable
         spawner = FindObjectOfType<EnemySpawner>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         CurrentHealth = MaxHealth;
     }
     private void Update()
     {
         // 플레이어의 현재 레벨보다 몬스터의 레벨이 높은 경우 색상 변경
-        if (MonsterLevel > levelManaged.currentLevel + 5)
-        {
-            MonsterName.color = Color.red;
-        }
-        else
-        {
-            MonsterName.color = Color.white; // 기본 색상
-        }
+        if (MonsterLevel > levelManaged.currentLevel + 5) MonsterName.color = Color.red;
+        else MonsterName.color = Color.white; // 기본 색상
     }
     public void InitializeHealth()
     {
