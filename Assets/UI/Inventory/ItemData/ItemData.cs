@@ -17,6 +17,7 @@ public enum ItemType
     Consumable,
     Misecellaneous
 }
+
 public class ItemData : ScriptableObject
 {
     [Header("Item serial number")]

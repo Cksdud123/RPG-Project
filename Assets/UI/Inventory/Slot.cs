@@ -8,10 +8,12 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
+    [Header("Item Info")]
     public ItemData ItemInSlot;
     public int AmountInSlot;
     [SerializeField] private DropItem dropItems;
 
+    [HideInInspector] public int slotIndex;
     [HideInInspector] public RawImage icon;
     [HideInInspector] public TextMeshProUGUI txt_amount;
 

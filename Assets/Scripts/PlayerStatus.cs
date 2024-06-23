@@ -18,6 +18,9 @@ public class PlayerStatus : MonoBehaviour
     [Header("Player Level")]
     public ExperienceManager experienceManager;
 
+    [Header("Save & Load")]
+    public ItemData[] allItems;
+
     public Animator animator;
     // 플레이어 상태
     private void Start()
@@ -56,7 +59,8 @@ public class PlayerStatus : MonoBehaviour
 
     public void SavePlayer()
     {
-        SaveSystem.SavePlayer(this);
+        Inventory inventory = FindObjectOfType<Inventory>();
+        SaveSystem.SavePlayer(this, inventory);
     }
     public void LoadPlayer()
     {
@@ -73,5 +77,36 @@ public class PlayerStatus : MonoBehaviour
         position.y = data.position[1];
         position.z = data.position[2];
         transform.position = position;
+
+        Inventory inventory = FindObjectOfType<Inventory>();
+
+        for (int i = 0; i < data.SaveSlotData.Length; i++)
+        {
+            if (data.SaveSlotData[i].itemDataID == -1)
+            {
+                inventory.slots[i].ResetSlot();
+            }
+            else
+            {
+                ItemData itemData = GetItemDataByID(data.SaveSlotData[i].itemDataID);
+                if (itemData != null)
+                {
+                    inventory.slots[data.SaveSlotData[i].slotIndex].ItemInSlot = itemData;
+                    inventory.slots[data.SaveSlotData[i].slotIndex].AmountInSlot = data.SaveSlotData[i].amount;
+                    inventory.slots[data.SaveSlotData[i].slotIndex].SetSlot();
+                }
+            }
+        }
+    }
+
+    // ID를 기준으로 ItemData를 반환
+    public ItemData GetItemDataByID(int id)
+    {
+        foreach (ItemData item in allItems)
+        {
+            if (item.ID == id)
+                return item;
+        }
+        return null;
     }
 }

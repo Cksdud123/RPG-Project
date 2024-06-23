@@ -10,17 +10,18 @@ using UnityEngine.UIElements;
 public class Inventory : MonoBehaviour
 {
     public Slot[] slots = new Slot[31];
-
     private void Awake()
     {
         for (int i = 0; i < slots.Length; i++)
         {
+            slots[i].slotIndex = i;
             if (slots[i].ItemInSlot == null)
             {
                 slots[i].initSlot();
             }
         }
     }
+
     // 아이템의 정보와 오브젝트를 파괴할지 말지 정하는 변수를 할당함
     public void pickUpItem(ItemInfo itemObj, bool destroyAfterPickup)
     {

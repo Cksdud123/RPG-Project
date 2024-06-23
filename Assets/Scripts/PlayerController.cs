@@ -54,6 +54,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Pain Sound")]
     public AudioClip painSound;
+
+    [Header("InventoryisAcrive?")]
+    [SerializeField] private GameObject PanelInventory;
+    [SerializeField] private GameObject equipment;
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
@@ -120,6 +124,7 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
+        if (PanelInventory.activeInHierarchy || equipment.activeInHierarchy) return;
 
         if (Input.GetMouseButtonDown(0) && playerAnim.GetBool("Grounded") && timeSinceAttack > 0.7f)
         {

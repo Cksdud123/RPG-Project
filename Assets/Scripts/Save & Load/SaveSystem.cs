@@ -1,17 +1,18 @@
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
 
 public static class SaveSystem
 {
-    public static void SavePlayer(PlayerStatus playerStatus)
+    public static void SavePlayer(PlayerStatus playerStatus, Inventory inventory)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/player.fun";
         Debug.Log(path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(playerStatus);
+        PlayerData data = new PlayerData(playerStatus, inventory);
 
         formatter.Serialize(stream, data);
         stream.Close();
@@ -33,7 +34,7 @@ public static class SaveSystem
         }
         else
         {
-            Debug.LogError("Save file not fount in " + path);
+            Debug.LogError("저장 파일을 찾을 수 없습니다: " + path);
             return null;
         }
     }
