@@ -37,7 +37,8 @@ public class PlayerData
 
     public SlotData[] SaveSlotData;
 
-    public PlayerData(PlayerStatus playerStatus, Inventory inventory)
+    public List<SlotData[]> allInventoryData;
+    public PlayerData(PlayerStatus playerStatus)
     {
         level = playerStatus.experienceManager.currentLevel;
         money = playerStatus.PlayerMoney;
@@ -48,11 +49,20 @@ public class PlayerData
         position[1] = playerStatus.transform.position.y;
         position[2] = playerStatus.transform.position.z;
 
-        // 퀵슬롯 데이터
-        SaveSlotData = new SlotData[inventory.slots.Length];
-        for (int i = 0; i < inventory.slots.Length; i++)
+        // 슬롯데이터를 저장할 리스트를 초기화
+        allInventoryData = new List<SlotData[]>();
+        // 인벤토리 스크립트가 있는 만큼 for문을 돌면서
+        foreach (var inventory in playerStatus.inventories)
         {
-            SaveSlotData[i] = new SlotData(inventory.slots[i]);
+            // 슬롯 배열을 초기화하고
+            SlotData[] slotDataArray = new SlotData[inventory.slots.Length];
+            // 슬롯을 저장
+            for (int i = 0; i < inventory.slots.Length; i++)
+            {
+                slotDataArray[i] = new SlotData(inventory.slots[i]);
+            }
+            // 저장한 슬롯데이터를 리스트에 저장
+            allInventoryData.Add(slotDataArray);
         }
     }
 }

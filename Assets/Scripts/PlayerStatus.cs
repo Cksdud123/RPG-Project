@@ -20,6 +20,7 @@ public class PlayerStatus : MonoBehaviour
 
     [Header("Save & Load")]
     public ItemData[] allItems;
+    public Inventory[] inventories;
 
     public Animator animator;
     // 플레이어 상태
@@ -59,8 +60,7 @@ public class PlayerStatus : MonoBehaviour
 
     public void SavePlayer()
     {
-        Inventory inventory = FindObjectOfType<Inventory>();
-        SaveSystem.SavePlayer(this, inventory);
+        SaveSystem.SavePlayer(this);
     }
     public void LoadPlayer()
     {
@@ -78,22 +78,30 @@ public class PlayerStatus : MonoBehaviour
         position.z = data.position[2];
         transform.position = position;
 
-        Inventory inventory = FindObjectOfType<Inventory>();
-
-        for (int i = 0; i < data.SaveSlotData.Length; i++)
+        // 인벤토리 스크립트를 가지고 있는 갯수만큼 
+        for (int i = 0; i < inventories.Length; i++)
         {
-            if (data.SaveSlotData[i].itemDataID == -1)
+            // 저장한 슬롯데이터를 가져와서
+            SlotData[] slotDataArray = data.allInventoryData[i];
+
+            for (int j = 0; j < slotDataArray.Length; j++)
             {
-                inventory.slots[i].ResetSlot();
-            }
-            else
-            {
-                ItemData itemData = GetItemDataByID(data.SaveSlotData[i].itemDataID);
-                if (itemData != null)
+                // 각 슬롯의 갯수만큼 할당한 뒤에
+                SlotData slotData = slotDataArray[j];
+                // 인덱스 처리
+                if (slotData.itemDataID == -1)
                 {
-                    inventory.slots[data.SaveSlotData[i].slotIndex].ItemInSlot = itemData;
-                    inventory.slots[data.SaveSlotData[i].slotIndex].AmountInSlot = data.SaveSlotData[i].amount;
-                    inventory.slots[data.SaveSlotData[i].slotIndex].SetSlot();
+                    inventories[i].slots[j].ResetSlot();
+                }
+                else
+                {
+                    ItemData itemData = GetItemDataByID(slotData.itemDataID);
+                    if (itemData != null)
+                    {
+                        inventories[i].slots[j].ItemInSlot = itemData;
+                        inventories[i].slots[j].AmountInSlot = slotData.amount;
+                        inventories[i].slots[j].SetSlot();
+                    }
                 }
             }
         }

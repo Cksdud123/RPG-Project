@@ -1252,7 +1252,7 @@ GameObject:
   - component: {fileID: 58560624}
   - component: {fileID: 58560627}
   - component: {fileID: 58560626}
-  - component: {fileID: 58560628}
+  - component: {fileID: 58560630}
   - component: {fileID: 58560629}
   m_Layer: 5
   m_Name: HotBarSlotPanel
@@ -1324,25 +1324,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 58560623}
   m_CullTransparentMesh: 1
---- !u!114 &58560628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 58560623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e481cb64740ad74c93e4819ff853219, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slots:
-  - {fileID: 705491447}
-  - {fileID: 1014144099}
-  - {fileID: 515757795}
-  - {fileID: 1146416436}
-  - {fileID: 1350091290}
-  - {fileID: 1393437797}
 --- !u!114 &58560629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1367,6 +1348,25 @@ MonoBehaviour:
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &58560630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58560623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e481cb64740ad74c93e4819ff853219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots:
+  - {fileID: 705491447}
+  - {fileID: 1014144099}
+  - {fileID: 515757795}
+  - {fileID: 1146416436}
+  - {fileID: 1350091290}
+  - {fileID: 1393437797}
 --- !u!1 &65357771
 GameObject:
   m_ObjectHideFlags: 0
@@ -94623,6 +94623,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 367dbbe3a0bdf8a40abe5edb920a2961, type: 2}
   - {fileID: 11400000, guid: 8f9adeefe2315fd4abf824787ee26d6c, type: 2}
   - {fileID: 11400000, guid: 44990690cd1254a4ca5ff47fd5202fb2, type: 2}
+  inventories:
+  - {fileID: 284621562}
+  - {fileID: 1148966412}
+  - {fileID: 58560630}
   animator: {fileID: 658143809545108176}
 --- !u!82 &8115070165574925336
 AudioSource:

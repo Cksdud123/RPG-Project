@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 public static class SaveSystem
 {
-    public static void SavePlayer(PlayerStatus playerStatus, Inventory inventory)
+    public static void SavePlayer(PlayerStatus playerStatus)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/player.fun";
         Debug.Log(path);
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(playerStatus, inventory);
+        PlayerData data = new PlayerData(playerStatus);
 
         formatter.Serialize(stream, data);
         stream.Close();
