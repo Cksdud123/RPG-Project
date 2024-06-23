@@ -14,7 +14,6 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            slots[i].slotIndex = i;
             if (slots[i].ItemInSlot == null)
             {
                 slots[i].initSlot();

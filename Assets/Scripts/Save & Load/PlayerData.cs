@@ -7,22 +7,18 @@ public class SlotData
 {
     public int itemDataID;
     public int amount;
-    public int slotIndex;
 
     public SlotData(Slot slot)
     {
-        // 슬롯이 있을때만
         if (slot.ItemInSlot != null)
         {
             itemDataID = slot.ItemInSlot.ID;
             amount = slot.AmountInSlot;
-            slotIndex = slot.slotIndex;
         }
         else
         {
             itemDataID = -1;
             amount = 0;
-            slotIndex = slot.slotIndex;
         }
     }
 }

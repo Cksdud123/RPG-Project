@@ -2017,7 +2017,6 @@ MonoBehaviour:
   ItemInSlot: {fileID: 0}
   AmountInSlot: 0
   dropItems: {fileID: 181352952}
-  slotIndex: 0
   icon: {fileID: 0}
   txt_amount: {fileID: 0}
 --- !u!114 &93466407
@@ -9746,7 +9745,6 @@ MonoBehaviour:
   ItemInSlot: {fileID: 0}
   AmountInSlot: 0
   dropItems: {fileID: 181352952}
-  slotIndex: 0
   icon: {fileID: 0}
   txt_amount: {fileID: 0}
 --- !u!114 &521905345
@@ -14116,7 +14114,6 @@ MonoBehaviour:
   ItemInSlot: {fileID: 0}
   AmountInSlot: 0
   dropItems: {fileID: 181352952}
-  slotIndex: 0
   icon: {fileID: 0}
   txt_amount: {fileID: 0}
 --- !u!114 &722413554
@@ -19919,7 +19916,6 @@ MonoBehaviour:
   ItemInSlot: {fileID: 0}
   AmountInSlot: 0
   dropItems: {fileID: 181352952}
-  slotIndex: 0
   icon: {fileID: 0}
   txt_amount: {fileID: 0}
 --- !u!114 &1005276389
@@ -39326,7 +39322,6 @@ MonoBehaviour:
   ItemInSlot: {fileID: 0}
   AmountInSlot: 0
   dropItems: {fileID: 181352952}
-  slotIndex: 0
   icon: {fileID: 0}
   txt_amount: {fileID: 0}
 --- !u!114 &1763018736
@@ -40866,7 +40861,6 @@ MonoBehaviour:
   ItemInSlot: {fileID: 0}
   AmountInSlot: 0
   dropItems: {fileID: 181352952}
-  slotIndex: 0
   icon: {fileID: 0}
   txt_amount: {fileID: 0}
 --- !u!114 &1824055684
