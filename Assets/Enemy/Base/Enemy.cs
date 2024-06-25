@@ -53,6 +53,8 @@ public class Enemy : Poolable, IDamageable
     public virtual void Damage(float damageAmount)
     {
         CurrentHealth -= damageAmount;
+        Vector3 randomness = new Vector3(Random.Range(0f, 0.25f), Random.Range(0.5f, 0.75f), Random.Range(0f, 0.25f));
+        DamagePopUpGenerator.current.CreatePopUp(transform.position + randomness, damageAmount.ToString(), Color.yellow);
 
         if (CurrentHealth <= 0f)
         {

@@ -22,7 +22,8 @@ public class DropEvent : MonoBehaviour,IDropHandler
         Slot slot = draggableItem.originParent.GetComponentInParent<Slot>();
         if (slot.ItemInSlot != null)
         {
-            if (!RectTransformUtility.RectangleContainsScreenPoint(ShopPanel, eventData.pointerDrag.transform.position, Camera.main) && eventData.button != PointerEventData.InputButton.Right)
+            if (!RectTransformUtility.RectangleContainsScreenPoint(ShopPanel, eventData.pointerDrag.transform.position, Camera.main) 
+                && eventData.button != PointerEventData.InputButton.Right)
             {
                 dropItems.GetComponent<DropItem>().DropSlot = slot;
                 dropItems.gameObject.SetActive(true);
@@ -30,3 +31,4 @@ public class DropEvent : MonoBehaviour,IDropHandler
         }
     }
 }
+

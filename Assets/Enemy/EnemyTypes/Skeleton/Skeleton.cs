@@ -32,6 +32,7 @@ public class Skeleton : Enemy
     public override void Damage(float damageAmount)
     {
         base.Damage(damageAmount);
+
         healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
     }
     public override void Die()

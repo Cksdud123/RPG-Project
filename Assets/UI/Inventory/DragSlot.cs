@@ -122,6 +122,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             Tooltip.GetComponent<ActiveToolTip>().clickedSlot = slot;
             Tooltip.SetActive(true);
         }
+
         // 마우스 오른쪽 버튼을 클릭했고 장비타입 일때만
         else if (eventData.button == PointerEventData.InputButton.Right && slot.ItemInSlot.ITEMTYPE == ItemType.Equipment)
         {
