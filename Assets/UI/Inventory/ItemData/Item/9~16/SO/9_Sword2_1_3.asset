@@ -25,7 +25,6 @@ MonoBehaviour:
     type: 3}
   itemIcon: {fileID: 2800000, guid: 2996d74a74fd41d4eb3a8c56b224fb55, type: 3}
   equipmentType: 1
-  StrikingPower: 0
-  DefensivePower: 0
-  Damage: 0
-  Speed: 0
+  Damage: 15
+  Defensive: 10
+  Health: 20

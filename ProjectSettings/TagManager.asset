@@ -16,6 +16,7 @@ TagManager:
   - Pants
   - Shoes
   - Inventory
+  - Rainforcement
   layers:
   - Default
   - TransparentFX

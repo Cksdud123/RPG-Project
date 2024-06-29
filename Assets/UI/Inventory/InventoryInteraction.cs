@@ -23,6 +23,7 @@ public class InventoryInteraction : MonoBehaviour
     [SerializeField] private GameObject DropEventPanel;
     [SerializeField] private GameObject equipment;
     [SerializeField] private GameObject ShopPanel;
+    [SerializeField] private GameObject ForgePanel;
     [SerializeField] private GameObject MinimapPanel;
 
     private bool isEquipmentActive = false;
@@ -137,7 +138,7 @@ public class InventoryInteraction : MonoBehaviour
                 txt_item.text = $"강화하기(I)";
                 if (Input.GetKeyDown(KeyCode.I))
                 {
-                    //
+                    ActiveForge();
                 }
             }
         }
@@ -178,6 +179,33 @@ public class InventoryInteraction : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             // 상점, 인벤토리패널 비활성화
             ShopPanel.SetActive(false);
+            PanelInventory.SetActive(false);
+
+            DropEventPanel.SetActive(true);
+            CrossHair.SetActive(true);
+            txt_item.gameObject.SetActive(true);
+            PlayerCamera.SetActive(true);
+        }
+    }
+    private void ActiveForge()
+    {
+        if (!ForgePanel.activeInHierarchy)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            // 상점, 인벤토리패널 활성화
+            ForgePanel.SetActive(true);
+            PanelInventory.SetActive(true);
+
+            DropEventPanel.SetActive(false);
+            CrossHair.SetActive(false);
+            txt_item.gameObject.SetActive(false);
+            PlayerCamera.SetActive(false);
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            // 상점, 인벤토리패널 비활성화
+            ForgePanel.SetActive(false);
             PanelInventory.SetActive(false);
 
             DropEventPanel.SetActive(true);

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject Tooltip;
+    [SerializeField] private GameObject EquipTooltip;
 
     public Transform dragItemIcon;
     public Transform dragItemAmount;
@@ -116,11 +117,22 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         if (slot.ItemInSlot == null) return;
 
-        // 마우스 왼쪽을 눌렀을때만 
+        if (slot.tag == "Rainforcement") return;
+
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Tooltip.GetComponent<ActiveToolTip>().clickedSlot = slot;
-            Tooltip.SetActive(true);
+            // 아이템이 장비 타입인 경우 EquipTooltip을 사용
+            if (slot.ItemInSlot.ITEMTYPE == ItemType.Equipment && EquipTooltip != null)
+            {
+                EquipTooltip.GetComponent<ActiveEquipToolTip>().clickedSlot = slot;
+                EquipTooltip.gameObject.SetActive(true);
+            }
+            // 장비 타입이 아닌 경우 일반 Tooltip을 사용
+            else if (Tooltip != null)
+            {
+                Tooltip.GetComponent<ActiveToolTip>().clickedSlot = slot;
+                Tooltip.SetActive(true);
+            }
         }
 
         // 마우스 오른쪽 버튼을 클릭했고 장비타입 일때만
@@ -149,16 +161,17 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     // 슬롯에서 나갈때 호출
     public void OnPointerExit(PointerEventData eventData)
     {
-        Tooltip.SetActive(false);
+        if (Tooltip != null) Tooltip.SetActive(false);
+        if (EquipTooltip != null) EquipTooltip.SetActive(false);
     }
     // 각각의 장비 아이템에 맞게 할당
     public void Equipment(Slot slot, EquipmentType equipmentType)
     {
+        // 슬롯의 장비에 맞는 태그를 찾아서 초기화
         InitializeEquipmentSlots();
         // 장비 아이템 처리 로직
         switch (equipmentType)
         {
-            // slot을 현재 인벤토리에 Helmet에 이동시킴
             case EquipmentType.Helmet:
                 MoveEquip(HelmetSlot, slot);
                 break;
