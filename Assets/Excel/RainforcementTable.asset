@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74625002dbceb0840b2658a73ebba1d0, type: 3}
+  m_Name: RainforcementTable
+  m_EditorClassIdentifier: 
+  Rainforcement:
+  - upgrade: 0
+    successful: 100
+    fail: 0
+    Damage: 0
+    Defensive: 0
+    Health: 0
+    Gold: 0
+  - upgrade: 1
+    successful: 90
+    fail: 10
+    Damage: 10
+    Defensive: 10
+    Health: 10
+    Gold: 100
+  - upgrade: 2
+    successful: 80
+    fail: 20
+    Damage: 15
+    Defensive: 15
+    Health: 15
+    Gold: 200
+  - upgrade: 3
+    successful: 70
+    fail: 30
+    Damage: 20
+    Defensive: 20
+    Health: 20
+    Gold: 300
+  - upgrade: 4
+    successful: 60
+    fail: 40
+    Damage: 25
+    Defensive: 25
+    Health: 25
+    Gold: 400
+  - upgrade: 5
+    successful: 50
+    fail: 50
+    Damage: 30
+    Defensive: 30
+    Health: 30
+    Gold: 500
+  - upgrade: 6
+    successful: 40
+    fail: 60
+    Damage: 35
+    Defensive: 35
+    Health: 35
+    Gold: 600
+  - upgrade: 7
+    successful: 30
+    fail: 70
+    Damage: 40
+    Defensive: 40
+    Health: 40
+    Gold: 800
+  - upgrade: 8
+    successful: 20
+    fail: 80
+    Damage: 50
+    Defensive: 50
+    Health: 50
+    Gold: 1000
+  - upgrade: 9
+    successful: 10
+    fail: 90
+    Damage: 60
+    Defensive: 60
+    Health: 60
+    Gold: 1500
+  - upgrade: 10
+    successful: 5
+    fail: 95
+    Damage: 70
+    Defensive: 70
+    Health: 70
+    Gold: 2000

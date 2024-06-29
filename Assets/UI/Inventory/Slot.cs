@@ -71,6 +71,7 @@ public class Slot : MonoBehaviour, IDropHandler
             txt_amount.text = AmountInSlot.ToString();
         }
     }
+    // 강화슬롯 찾기
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerDrag;

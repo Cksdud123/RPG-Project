@@ -22,4 +22,5 @@ public class EquipmentData : ItemData
     [SerializeField] public float Damage;
     [SerializeField] public float Defensive;
     [SerializeField] public float Health;
+    [SerializeField] public int Rainforement;
 }

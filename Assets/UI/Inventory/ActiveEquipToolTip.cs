@@ -33,12 +33,13 @@ public class ActiveEquipToolTip : MonoBehaviour
     }
     private void SettingToolTip()
     {
-        txt_Name.text = clickedSlot.ItemInSlot.Name;
+        EquipmentData clickEquipSlot = clickedSlot.ItemInSlot as EquipmentData;
+
+        txt_Name.text = clickedSlot.ItemInSlot.Name + $"+{clickEquipSlot.Rainforement}강";
         txt_Weight.text = $"무게 : {clickedSlot.ItemInSlot.Weight * clickedSlot.AmountInSlot}kg";
         txt_Price.text = $"가격 : {clickedSlot.ItemInSlot.Price}원";
         txt_Durability.text = $"내구도 : {clickedSlot.ItemInSlot.Durability}";
 
-        EquipmentData clickEquipSlot = clickedSlot.ItemInSlot as EquipmentData;
         txt_Damage.text = $"데미지 : {clickEquipSlot.Damage.ToString()}";
         txt_PlusHealth.text = $"추가체력 : {clickEquipSlot.Health.ToString()}";
         txt_Defensive.text = $"방어력 : {clickEquipSlot.Defensive.ToString()}";
