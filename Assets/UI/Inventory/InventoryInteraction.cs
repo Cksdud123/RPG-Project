@@ -24,6 +24,9 @@ public class InventoryInteraction : MonoBehaviour
     [SerializeField] private GameObject equipment;
     [SerializeField] private GameObject ShopPanel;
     [SerializeField] private GameObject ForgePanel;
+    [SerializeField] private GameObject DialougePanel;
+    [SerializeField] private GameObject HotBarPanel;
+    [SerializeField] private GameObject LevelBarPanel;
     [SerializeField] private GameObject MinimapPanel;
 
     private bool isEquipmentActive = false;
@@ -86,14 +89,8 @@ public class InventoryInteraction : MonoBehaviour
     // 둘중하나라도 열려있으면 정지
     private void UpdateTimeScale()
     {
-        if (PanelInventory.activeInHierarchy || isEquipmentActive)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1.0f;
-        }
+        if (PanelInventory.activeInHierarchy || isEquipmentActive || DialougePanel.activeInHierarchy) Time.timeScale = 0f;
+        else Time.timeScale = 1.0f;
     }
     public void CheckItem()
     {
@@ -102,57 +99,39 @@ public class InventoryInteraction : MonoBehaviour
         // 카메라에서 앞으로 레이를 발사합니다.
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, hitrange, itemLayer))
         {
-
             // 아이템 레이어가 아니면 리턴
             if (!hit.collider.GetComponent<ItemInfo>()) return;
-
             else
             {
                 txt_item.text = $"아이템 줍기(F)";
-
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    inventory.pickUpItem(hit.collider.GetComponent<ItemInfo>(), true);
-                }
+                if (Input.GetKeyDown(KeyCode.F)) inventory.pickUpItem(hit.collider.GetComponent<ItemInfo>(), true);
             }
         }
         else if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, hitrange, ShopLayer))
         {
             if (!hit.collider.GetComponent<Collider>()) return;
-
             else
             {
                 txt_item.text = $"상점이용(I)";
-                if (Input.GetKeyDown(KeyCode.I))
-                {
-                    ActiveShop();
-                }
+                if (Input.GetKeyDown(KeyCode.I)) ActiveShop();
             }
         }
         else if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, hitrange, ForgeLayer))
         {
             if (!hit.collider.GetComponent<Collider>()) return;
-
             else
             {
                 txt_item.text = $"강화하기(I)";
-                if (Input.GetKeyDown(KeyCode.I))
-                {
-                    ActiveForge();
-                }
+                if (Input.GetKeyDown(KeyCode.I)) ActiveForge();
             }
         }
         else if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, hitrange, QuestNPCLayer))
         {
             if (!hit.collider.GetComponent<Collider>()) return;
-
             else
             {
                 txt_item.text = $"대화하기(Q)";
-                if (Input.GetKeyDown(KeyCode.Q))
-                {
-                    //
-                }
+                if (Input.GetKeyDown(KeyCode.Q)) ActiveDialouge();
             }
         }
         else
@@ -164,61 +143,77 @@ public class InventoryInteraction : MonoBehaviour
     {
         if (!ShopPanel.activeInHierarchy)
         {
-            Cursor.lockState = CursorLockMode.None;
             // 상점, 인벤토리패널 활성화
             ShopPanel.SetActive(true);
             PanelInventory.SetActive(true);
 
-            DropEventPanel.SetActive(false);
-            CrossHair.SetActive(false);
-            txt_item.gameObject.SetActive(false);
-            PlayerCamera.SetActive(false);
+            DeactivePlayerUI();
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
             // 상점, 인벤토리패널 비활성화
             ShopPanel.SetActive(false);
             PanelInventory.SetActive(false);
 
-            DropEventPanel.SetActive(true);
-            CrossHair.SetActive(true);
-            txt_item.gameObject.SetActive(true);
-            PlayerCamera.SetActive(true);
+            ActivePlayerUI();
         }
     }
     private void ActiveForge()
     {
         if (!ForgePanel.activeInHierarchy)
         {
-            Cursor.lockState = CursorLockMode.None;
             // 상점, 인벤토리패널 활성화
             ForgePanel.SetActive(true);
             PanelInventory.SetActive(true);
 
-            DropEventPanel.SetActive(false);
-            CrossHair.SetActive(false);
-            txt_item.gameObject.SetActive(false);
-            PlayerCamera.SetActive(false);
+            DeactivePlayerUI();
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
             // 상점, 인벤토리패널 비활성화
             ForgePanel.SetActive(false);
             PanelInventory.SetActive(false);
 
-            DropEventPanel.SetActive(true);
-            CrossHair.SetActive(true);
-            txt_item.gameObject.SetActive(true);
-            PlayerCamera.SetActive(true);
+            ActivePlayerUI();
         }
     }
-    private void OnDrawGizmos()
+    private void ActiveDialouge()
     {
-        if (cam == null) return;
+        if (!DialougePanel.activeInHierarchy)
+        {
+            DialougePanel.SetActive(true);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(cam.transform.position, cam.transform.forward * hitrange);
+            HotBarPanel.SetActive(false);
+            LevelBarPanel.SetActive(false);
+            MinimapPanel.SetActive(false);
+
+            DeactivePlayerUI();
+        }
+        else
+        {
+            DialougePanel.SetActive(false);
+
+            HotBarPanel.SetActive(true);
+            LevelBarPanel.SetActive(true);
+            MinimapPanel.SetActive(true);
+
+            ActivePlayerUI();
+        }
+    }
+    private void ActivePlayerUI()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        DropEventPanel.SetActive(true);
+        CrossHair.SetActive(true);
+        txt_item.gameObject.SetActive(true);
+        PlayerCamera.SetActive(true);
+    }
+    private void DeactivePlayerUI()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        DropEventPanel.SetActive(false);
+        CrossHair.SetActive(false);
+        txt_item.gameObject.SetActive(false);
+        PlayerCamera.SetActive(false);
     }
 }
