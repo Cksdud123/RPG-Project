@@ -29,6 +29,9 @@ public class InventoryInteraction : MonoBehaviour
     [SerializeField] private GameObject LevelBarPanel;
     [SerializeField] private GameObject MinimapPanel;
 
+    [Header("Dialogue")]
+    [SerializeField] private DialogueTrigger dialogueTrigger;
+
     private bool isEquipmentActive = false;
 
     // Update is called once per frame
@@ -131,7 +134,11 @@ public class InventoryInteraction : MonoBehaviour
             else
             {
                 txt_item.text = $"대화하기(Q)";
-                if (Input.GetKeyDown(KeyCode.Q)) ActiveDialouge();
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    dialogueTrigger.TriggerDialogue();
+                    ActiveDialouge();
+                }
             }
         }
         else
