@@ -19,7 +19,6 @@ public class InventoryInteraction : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] private Inventory inventory;
     [SerializeField] TextMeshProUGUI txt_item;
-    [SerializeField] private GameObject CrossHair;
     [SerializeField] private GameObject DropEventPanel;
     [SerializeField] private GameObject equipment;
     [SerializeField] private GameObject ShopPanel;
@@ -46,7 +45,6 @@ public class InventoryInteraction : MonoBehaviour
             DropEventPanel.SetActive(false);
             PanelInventory.SetActive(false);
 
-            CrossHair.SetActive(true);
             MinimapPanel.SetActive(true);
             PlayerCamera.SetActive(true);
             txt_item.gameObject.SetActive(true);
@@ -60,7 +58,6 @@ public class InventoryInteraction : MonoBehaviour
 
             PlayerCamera.SetActive(false);
             MinimapPanel.SetActive(false);
-            CrossHair.SetActive(false);
             txt_item.gameObject.SetActive(false);
         }
     }
@@ -171,7 +168,6 @@ public class InventoryInteraction : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         DropEventPanel.SetActive(true);
-        CrossHair.SetActive(true);
         txt_item.gameObject.SetActive(true);
         PlayerCamera.SetActive(true);
     }
@@ -179,7 +175,6 @@ public class InventoryInteraction : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         DropEventPanel.SetActive(false);
-        CrossHair.SetActive(false);
         txt_item.gameObject.SetActive(false);
         PlayerCamera.SetActive(false);
     }

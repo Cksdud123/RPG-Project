@@ -21,8 +21,14 @@ public class PlayerStatus : MonoBehaviour
     [Header("Save & Load")]
     public ItemData[] allItems;
     public Inventory[] inventories;
+    public GameObject OptionPanel;
 
     public Animator animator;
+
+    // 위치 업데이트를 위한 변수
+    private bool updatePositionFlag = false;
+    private Vector3 newPosition;
+
     // 플레이어 상태
     private void Start()
     {
@@ -49,21 +55,44 @@ public class PlayerStatus : MonoBehaviour
     {
         UpdateMonney();
 
-        if (Input.GetKeyDown(KeyCode.O)) SavePlayer();
+        if (Input.GetKeyDown(KeyCode.Escape)) ActiveOption();
 
-        if (Input.GetKeyDown(KeyCode.P)) LoadPlayer();
+        // 플래그가 설정되어 있으면 위치를 업데이트
+        if (updatePositionFlag)
+        {
+            transform.position = newPosition;
+            updatePositionFlag = false;
+        }
     }
     public void UpdateMonney()
     {
         MoneyText.text = PlayerMoney.ToString();
     }
-
+    public void ActiveOption()
+    {
+        if (!OptionPanel.activeInHierarchy)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            OptionPanel.SetActive(true);
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            OptionPanel.SetActive(false);
+        }
+    }
     public void SavePlayer()
     {
         SaveSystem.SavePlayer(this);
     }
     public void LoadPlayer()
     {
+        if(OptionPanel.activeInHierarchy)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            OptionPanel.SetActive(false);
+        }
+
         PlayerData data = SaveSystem.LoadPlayer();
 
         healthBar.health = data.health;
@@ -72,11 +101,9 @@ public class PlayerStatus : MonoBehaviour
 
         experienceManager.UpdateLevel();
 
-        Vector3 position;
-        position.x = data.position[0];
-        position.y = data.position[1];
-        position.z = data.position[2];
-        transform.position = position;
+        // 위치 데이터를 설정하고 플래그를 활성화
+        newPosition = new Vector3(data.position[0], data.position[1], data.position[2]);
+        updatePositionFlag = true;
 
         // 인벤토리 스크립트를 가지고 있는 갯수만큼 
         for (int i = 0; i < inventories.Length; i++)
