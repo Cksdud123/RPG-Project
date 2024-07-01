@@ -24,13 +24,9 @@ public class InventoryInteraction : MonoBehaviour
     [SerializeField] private GameObject equipment;
     [SerializeField] private GameObject ShopPanel;
     [SerializeField] private GameObject ForgePanel;
-    [SerializeField] private GameObject DialougePanel;
     [SerializeField] private GameObject HotBarPanel;
     [SerializeField] private GameObject LevelBarPanel;
     [SerializeField] private GameObject MinimapPanel;
-
-    [Header("Dialogue")]
-    [SerializeField] private DialogueTrigger dialogueTrigger;
 
     private bool isEquipmentActive = false;
 
@@ -92,7 +88,7 @@ public class InventoryInteraction : MonoBehaviour
     // 둘중하나라도 열려있으면 정지
     private void UpdateTimeScale()
     {
-        if (PanelInventory.activeInHierarchy || isEquipmentActive || DialougePanel.activeInHierarchy) Time.timeScale = 0f;
+        if (PanelInventory.activeInHierarchy || isEquipmentActive) Time.timeScale = 0f;
         else Time.timeScale = 1.0f;
     }
     public void CheckItem()
@@ -126,19 +122,6 @@ public class InventoryInteraction : MonoBehaviour
             {
                 txt_item.text = $"강화하기(I)";
                 if (Input.GetKeyDown(KeyCode.I)) ActiveForge();
-            }
-        }
-        else if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, hitrange, QuestNPCLayer))
-        {
-            if (!hit.collider.GetComponent<Collider>()) return;
-            else
-            {
-                txt_item.text = $"대화하기(Q)";
-                if (Input.GetKeyDown(KeyCode.Q))
-                {
-                    dialogueTrigger.TriggerDialogue();
-                    ActiveDialouge();
-                }
             }
         }
         else
@@ -180,29 +163,6 @@ public class InventoryInteraction : MonoBehaviour
             // 상점, 인벤토리패널 비활성화
             ForgePanel.SetActive(false);
             PanelInventory.SetActive(false);
-
-            ActivePlayerUI();
-        }
-    }
-    private void ActiveDialouge()
-    {
-        if (!DialougePanel.activeInHierarchy)
-        {
-            DialougePanel.SetActive(true);
-
-            HotBarPanel.SetActive(false);
-            LevelBarPanel.SetActive(false);
-            MinimapPanel.SetActive(false);
-
-            DeactivePlayerUI();
-        }
-        else
-        {
-            DialougePanel.SetActive(false);
-
-            HotBarPanel.SetActive(true);
-            LevelBarPanel.SetActive(true);
-            MinimapPanel.SetActive(true);
 
             ActivePlayerUI();
         }
