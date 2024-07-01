@@ -14,6 +14,7 @@ public class UpdateRainforcement : MonoBehaviour
     [SerializeField] TextMeshProUGUI FailRateTxt;
     [SerializeField] TextMeshProUGUI RainforceCost;
     [SerializeField] GameObject EquipGoldPanel;
+    [SerializeField] GameObject EquipFailPanel;
     [Header("CSV")]
     [SerializeField] RainforcementTable RainforcementTable;
     [Header("PlayerStatus")]
@@ -112,10 +113,15 @@ public class UpdateRainforcement : MonoBehaviour
         else
         {
             playerStatus.PlayerMoney -= Gold[currentLevel];
+            EquipFailPanel.gameObject.SetActive(true);
         }
     }
     public void CheckButton()
     {
         EquipGoldPanel.gameObject.SetActive(false);
+    }
+    public void CheckFailButton()
+    {
+        EquipFailPanel.gameObject.SetActive(false);
     }
 }
