@@ -38,7 +38,6 @@ public class Muscomorph : Enemy
     {
         base.Die(); // 기본 클래스 Die 메서드 호출
         ItemDropEnemy();
-        rigid.isKinematic = true;
     }
     public void ItemDropEnemy()
     {

@@ -29,4 +29,8 @@ public class HealthBar : MonoBehaviour
     {
         health -= damage;
     }
+    public void HeallingHP(float healling)
+    {
+        health += healling;
+    }
 }

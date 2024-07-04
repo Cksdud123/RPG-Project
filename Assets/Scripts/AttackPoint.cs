@@ -34,7 +34,6 @@ public class AttackPoint : MonoBehaviour
 
             if (enemy != null)
             {
-
                 float damageToDeal;
                 if (experienceManager.currentLevel + 5 < enemy.MonsterLevel)
                 {
@@ -45,7 +44,14 @@ public class AttackPoint : MonoBehaviour
                 else
                 {
                     ChangeDamage();
-                    enemy.Damage(damage + WeaponEquipment.Damage);
+                    if (WeaponSlot.ItemInSlot != null)
+                    {
+                        enemy.Damage(damage + WeaponEquipment.Damage);
+                    }
+                    else
+                    {
+                        enemy.Damage(damage);
+                    }
                     gameObject.SetActive(false);
                 }
             }

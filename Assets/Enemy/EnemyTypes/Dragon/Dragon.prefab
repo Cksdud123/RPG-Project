@@ -589,7 +589,6 @@ GameObject:
   - component: {fileID: 5263257733461001481}
   - component: {fileID: 7504588687883029158}
   - component: {fileID: 7916389291692836673}
-  - component: {fileID: -2816104124384671600}
   m_Layer: 8
   m_Name: Dragon
   m_TagString: Dragon
@@ -706,21 +705,7 @@ MonoBehaviour:
     - item: {fileID: 3621125714051429211, guid: ef32e39a3ba899f498d281d9ba9afdb0,
         type: 3}
       weight: 2
-  MonsterLevel: 0
-  MonsterName: {fileID: 329207088831161931}
   monster: "\uC0C8\uB07C\uB4DC\uB798\uACE4"
---- !u!114 &-2816104124384671600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1988015665072521389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f64f35a52aa1efa49b6224b36bb9682c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1995541615986713465
 GameObject:
   m_ObjectHideFlags: 0

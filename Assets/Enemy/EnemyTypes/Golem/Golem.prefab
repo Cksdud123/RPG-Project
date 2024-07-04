@@ -173,7 +173,6 @@ GameObject:
   - component: {fileID: 7843232798882707280}
   - component: {fileID: 7720960390265685138}
   - component: {fileID: 171233198371821767}
-  - component: {fileID: 5569487281198104749}
   m_Layer: 8
   m_Name: Golem
   m_TagString: Untagged
@@ -290,36 +289,7 @@ MonoBehaviour:
     - item: {fileID: 3465875873062568494, guid: 6c264ba3d3b890246b60e64696750c97,
         type: 3}
       weight: 2
-  MonsterLevel: 0
-  MonsterName: {fileID: 6838223269135998727}
   monster: "\uAD11\uC0B0\uACE8\uB818"
---- !u!54 &5569487281198104749
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2528585531481130774}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!1 &3590165870702002369
 GameObject:
   m_ObjectHideFlags: 0

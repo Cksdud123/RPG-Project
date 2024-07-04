@@ -54,6 +54,7 @@ public class PlayerStatus : MonoBehaviour
     private void Update()
     {
         UpdateMonney();
+        if(Input.GetKeyDown(KeyCode.Q)) experienceManager.AddExperience(50);
 
         if (Input.GetKeyDown(KeyCode.Escape)) ActiveOption();
 

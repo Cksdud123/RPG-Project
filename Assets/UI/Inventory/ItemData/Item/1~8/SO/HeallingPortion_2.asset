@@ -24,3 +24,4 @@ MonoBehaviour:
   itemPrefab: {fileID: 3465875873062568494, guid: 6c264ba3d3b890246b60e64696750c97,
     type: 3}
   itemIcon: {fileID: 2800000, guid: e52ea25af699fd445b7046374f81a5b9, type: 3}
+  Healling: 20

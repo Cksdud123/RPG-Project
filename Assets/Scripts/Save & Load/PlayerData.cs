@@ -45,8 +45,6 @@ public class PlayerData
         position[1] = playerStatus.transform.position.y;
         position[2] = playerStatus.transform.position.z;
 
-        Debug.Log(position[0] + position[1] + position[2]);
-
         // 슬롯데이터를 저장할 리스트를 초기화
         allInventoryData = new List<SlotData[]>();
         // 인벤토리 스크립트가 있는 만큼 for문을 돌면서

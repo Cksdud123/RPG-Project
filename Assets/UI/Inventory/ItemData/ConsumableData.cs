@@ -6,5 +6,5 @@ using UnityEngine;
 [System.Serializable]
 public class ConsumableData : ItemData
 {
-    // 추후 구현 예정
+
 }

@@ -65,65 +65,66 @@ public class Inventory : MonoBehaviour
     }
     public void SortInventory()
     {
-        // SortSlot이라는 변수를 선언한 뒤
-        var SortSlot = slots
-            // 각 slots에서 아이템이 있는 경우에만
-            .Where(slot => slot.ItemInSlot != null)
-            // 같은 아이디끼리 그룹화
-            .GroupBy(slot => slot.ItemInSlot.ID)
-            // 그룹 내에서 아이템의 총량을 계산
-            .Select(group => new {Item = group.First().ItemInSlot, TotalAmount = group.Sum(slot => slot.AmountInSlot) })
-            // ID 순으로 정렬
-            .OrderBy(slot => slot.Item.ID)
-            // 리스트로 저장후 SortSlot에 반환
-            .ToList();
+        // 딕셔너리와 아이템 데이터를 설정
+        Dictionary<int, int> itemCounts = new Dictionary<int, int>();
+        List<ItemData> items = new List<ItemData>();
+
+        // Count total amounts for each item
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].ItemInSlot != null)
+            {
+                // 딕셔너리에 해당 키가 존재하는지 확인해서 없다면
+                if (!itemCounts.ContainsKey(slots[i].ItemInSlot.ID))
+                {
+                    // 딕셔너리에 추가
+                    itemCounts[slots[i].ItemInSlot.ID] = 0;
+                    // 리스트에 해당 아이템 추가
+                    items.Add(slots[i].ItemInSlot);
+                }
+                itemCounts[slots[i].ItemInSlot.ID] += slots[i].AmountInSlot;
+            }
+        }
+        // 델리게이트로 Sort 완료
+        items.Sort(delegate (ItemData A, ItemData B)
+        {
+            if (A.ID > B.ID) return 1;
+            else if (A.ID < B.ID) return -1;
+            return 0;
+        });
 
         int slotIndex = 0;
 
-        // SortSlot에 아이템이 저장되 있는 경우에만
-        foreach (var itemGroup in SortSlot)
+        // Distribute items back to slots
+        foreach (ItemData item in items)
         {
-            // 아이템의 최대값을 저장한 뒤에
-            int CurrentAmount = itemGroup.TotalAmount;
-
-            // 남은 아이템이 있고, 슬롯 인덱스가 슬롯의 길이보다 작은 경우 
-            while (CurrentAmount > 0 && slotIndex < slots.Length)
+            int totalAmount = itemCounts[item.ID];
+            while (totalAmount > 0 && slotIndex < slots.Length)
             {
-                // 현재 아이템의 최대값이 최대스택보다 크다면
-                if (CurrentAmount > itemGroup.Item.MAXSTACK)
+                if (totalAmount > item.MAXSTACK)
                 {
-                    // 최대스택을 할당한 뒤에
-                    slots[slotIndex].ItemInSlot = itemGroup.Item;
-                    slots[slotIndex].AmountInSlot = itemGroup.Item.MAXSTACK;
-                    // 남은양을 구한뒤에
-                    CurrentAmount -= itemGroup.Item.MAXSTACK;
+                    slots[slotIndex].ItemInSlot = item;
+                    slots[slotIndex].AmountInSlot = item.MAXSTACK;
+                    totalAmount -= item.MAXSTACK;
                 }
-                // 현재 아이템의 최대값이 최대스택보다 작다면
                 else
                 {
-                    // 남은양을 슬롯에 할당한 뒤에
-                    slots[slotIndex].ItemInSlot = itemGroup.Item;
-                    slots[slotIndex].AmountInSlot = CurrentAmount;
-                    // 현재 아이템의 값을 0으로 설정
-                    CurrentAmount = 0;
+                    slots[slotIndex].ItemInSlot = item;
+                    slots[slotIndex].AmountInSlot = totalAmount;
+                    totalAmount = 0;
                 }
-                // 현재 인덱스의 슬롯을 설정한 뒤
                 slots[slotIndex].SetSlot();
-                // 아이템이 없는 슬롯을 비활성화 
-                if (slots[slotIndex].ItemInSlot == null) slots[slotIndex].initSlot();
-                // 인덱스 증가
                 slotIndex++;
             }
         }
 
-        // 남은 슬롯 초기화
+        // Clear remaining slots
         while (slotIndex < slots.Length)
         {
             slots[slotIndex].ItemInSlot = null;
             slots[slotIndex].AmountInSlot = 0;
             slots[slotIndex].SetSlot();
-
-            if (slots[slotIndex].ItemInSlot == null) slots[slotIndex].initSlot();
+            slots[slotIndex].initSlot();
             slotIndex++;
         }
     }
