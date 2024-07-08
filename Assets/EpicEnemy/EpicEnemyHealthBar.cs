@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EpicEnemyHealthBar : MonoBehaviour
 {
-    public HealthBar healthBar;
+    public EpicHealthBar healthBar;
     [SerializeField] public float MaxHealth;
     public float CurrentHealth;
     public Animator animator;

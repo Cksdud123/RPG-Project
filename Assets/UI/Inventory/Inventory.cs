@@ -85,7 +85,7 @@ public class Inventory : MonoBehaviour
                 itemCounts[slots[i].ItemInSlot.ID] += slots[i].AmountInSlot;
             }
         }
-        // 델리게이트로 Sort 완료
+        // 델리게이트로 Sort
         items.Sort(delegate (ItemData A, ItemData B)
         {
             if (A.ID > B.ID) return 1;

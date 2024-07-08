@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    public static HealthBar instance;
+
     public Slider healthSlider;
 
     public float maxHealth;
@@ -12,6 +14,10 @@ public class HealthBar : MonoBehaviour
 
     private float lerfSpeed = 0.05f;
 
+    private void Awake()
+    {
+        instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {

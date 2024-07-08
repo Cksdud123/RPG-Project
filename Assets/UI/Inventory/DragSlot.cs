@@ -115,9 +115,20 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         GameObject dropped = eventData.pointerDrag;
         Slot slot = dropped.GetComponent<Slot>();
 
+        // 아이템이 없다면 나오지 않게
         if (slot.ItemInSlot == null) return;
 
+        // 강화창이라면 정보창은 나오지 않게
         if (slot.tag == "Rainforcement") return;
+
+        // 우클릭을 눌렀을때 슬롯의 타입이 소비타입 이라면 아이템 사용
+        if(slot.ItemInSlot.ITEMTYPE == ItemType.Consumable)
+        {
+            ConsumableData consumableData = slot.ItemInSlot as ConsumableData;
+            consumableData.UseHP();
+            slot.AmountInSlot -= 1;
+            slot.UpdateSlot();
+        }
 
         if (eventData.button == PointerEventData.InputButton.Left)
         {
@@ -237,4 +248,3 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }
     public bool ShihtMode => isShiftMode;
 }
-

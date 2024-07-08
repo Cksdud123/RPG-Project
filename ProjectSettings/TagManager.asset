@@ -17,6 +17,7 @@ TagManager:
   - Shoes
   - Inventory
   - Rainforcement
+  - PlayerHealthBar
   layers:
   - Default
   - TransparentFX
