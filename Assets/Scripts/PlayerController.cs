@@ -24,11 +24,11 @@ public class PlayerController : MonoBehaviour
     public bool isEquipping;
     public bool isEquipped;
 
-    //막기
-    public bool isBlocking;
-
     //발차기
     public bool isKicking;
+
+    //회복
+    public bool isDrinking;
 
     //공격
     public bool isAttacking;
@@ -70,9 +70,9 @@ public class PlayerController : MonoBehaviour
         Attack();
 
         Equip();
-        Block();
         Kick();
         Dodge();
+        Drink();
     }
     private void Equip()
     {
@@ -104,22 +104,13 @@ public class PlayerController : MonoBehaviour
         isEquipping = false;
     }
 
-    private void Block()
-    {
-        if (Input.GetKey(KeyCode.Mouse1) && playerAnim.GetBool("Grounded"))
-        {
-            playerAnim.SetBool("Block", true);
-            isBlocking = true;
-        }
-        else
-        {
-            playerAnim.SetBool("Block", false);
-            isBlocking = false;
-        }
-    }
     public void Kick()
     {
         if (Input.GetKeyDown(KeyCode.G) && playerAnim.GetBool("Grounded")) playerAnim.SetTrigger("Kick");
+    }
+    public void Drink()
+    {
+        if (Input.GetKeyDown(KeyCode.Q)) playerAnim.SetTrigger("Drinking");
     }
 
     private void Attack()

@@ -28,6 +28,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     [HideInInspector] public GameObject inventory;
     [HideInInspector] public Inventory inventoryPanel;
+
     private void Awake()
     {
         canvas = GameObject.FindGameObjectWithTag("InventoryCanvas").transform;
@@ -122,7 +123,7 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (slot.tag == "Rainforcement") return;
 
         // 우클릭을 눌렀을때 슬롯의 타입이 소비타입 이라면 아이템 사용
-        if(slot.ItemInSlot.ITEMTYPE == ItemType.Consumable)
+        if(slot.ItemInSlot.ITEMTYPE == ItemType.Consumable && eventData.button == PointerEventData.InputButton.Right)
         {
             ConsumableData consumableData = slot.ItemInSlot as ConsumableData;
             consumableData.UseHP();
@@ -246,5 +247,6 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             }
         }
     }
+
     public bool ShihtMode => isShiftMode;
 }

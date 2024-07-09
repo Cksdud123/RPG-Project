@@ -54,8 +54,6 @@ public class PlayerStatus : MonoBehaviour
     private void Update()
     {
         UpdateMonney();
-        if(Input.GetKeyDown(KeyCode.Q)) experienceManager.AddExperience(50);
-
         if (Input.GetKeyDown(KeyCode.Escape)) ActiveOption();
 
         // 플래그가 설정되어 있으면 위치를 업데이트

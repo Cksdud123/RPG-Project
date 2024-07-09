@@ -63,7 +63,6 @@ public class AttackPoint : MonoBehaviour
             else if (player != null)
             {
                 PlayerController playerController = player.GetComponentInParent<PlayerController>();
-                if (playerController.isBlocking) return;
 
                 player.PlayerDamage(damage);
                 if (attackManager != null && attackManager.isNormalEnemy)

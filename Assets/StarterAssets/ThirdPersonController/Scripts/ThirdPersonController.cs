@@ -219,7 +219,7 @@ namespace StarterAssets
         public void Move()
         {
             // 플레이어 컨트롤러 파라미터 (장비를 착용중일때는 움직이지 않음)
-            if (playerController.isEquipping  || playerController.isBlocking
+            if (playerController.isEquipping || playerController.isDrinking
                 || playerController.isKicking || playerController.isAttacking
                 || playerController.isDamaged ) return;
 
@@ -310,7 +310,7 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f && !playerController.isBlocking)
+                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
