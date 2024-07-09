@@ -20,11 +20,11 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private bool isShiftMode = false; // 쉬프트 모드 여부
 
-    [Header("Equipment GameObject")]
     GameObject Helmet, Weapon, Shield, BodyPlate, Pants, Shoes;
-
-    [Header("Equipment Slot")]
     Slot HelmetSlot, WeaponSlot, ShieldSlot, BodyPlateSlot, PantsSlot, ShoesSlot;
+
+    GameObject Portion;
+    Slot PortionSlot;
 
     [HideInInspector] public GameObject inventory;
     [HideInInspector] public Inventory inventoryPanel;
@@ -48,6 +48,12 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (BodyPlate != null) BodyPlateSlot = BodyPlate.GetComponent<Slot>();
         if (Pants != null) PantsSlot = Pants.GetComponent<Slot>();
         if (Shoes != null) ShoesSlot = Shoes.GetComponent<Slot>();
+    }
+    private void InitializeQuickSlots()
+    {
+        Portion = GameObject.FindGameObjectWithTag("Portion");
+
+        if(Portion != null) PortionSlot = Portion.GetComponent<Slot>();
     }
     // 드래그를 시작할 때 호출
     public void OnBeginDrag(PointerEventData eventData)
@@ -113,60 +119,22 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     // 슬롯을 클릭할 때 호출
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameObject dropped = eventData.pointerDrag;
-        Slot slot = dropped.GetComponent<Slot>();
-
-        // 아이템이 없다면 나오지 않게
-        if (slot.ItemInSlot == null) return;
+        Slot slot = GetSlotFromEvent(eventData);
+        if (slot == null || slot.ItemInSlot == null) return;
 
         // 강화창이라면 정보창은 나오지 않게
         if (slot.tag == "Rainforcement") return;
 
-        // 우클릭을 눌렀을때 슬롯의 타입이 소비타입 이라면 아이템 사용
-        if(slot.ItemInSlot.ITEMTYPE == ItemType.Consumable && eventData.button == PointerEventData.InputButton.Right)
-        {
-            ConsumableData consumableData = slot.ItemInSlot as ConsumableData;
-            consumableData.UseHP();
-            slot.AmountInSlot -= 1;
-            slot.UpdateSlot();
-        }
+        // 인벤토리 초기화
+        InitializeInventory();
 
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            // 아이템이 장비 타입인 경우 EquipTooltip을 사용
-            if (slot.ItemInSlot.ITEMTYPE == ItemType.Equipment && EquipTooltip != null)
-            {
-                EquipTooltip.GetComponent<ActiveEquipToolTip>().clickedSlot = slot;
-                EquipTooltip.gameObject.SetActive(true);
-            }
-            // 장비 타입이 아닌 경우 일반 Tooltip을 사용
-            else if (Tooltip != null)
-            {
-                Tooltip.GetComponent<ActiveToolTip>().clickedSlot = slot;
-                Tooltip.SetActive(true);
-            }
+            HandleLeftClick(slot);
         }
-        // 마우스 오른쪽 버튼을 클릭했고 장비타입 일때만
-        else if (eventData.button == PointerEventData.InputButton.Right && slot.ItemInSlot.ITEMTYPE == ItemType.Equipment)
+        else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            // ItemInSlot을 EquipmentData로 캐스팅하여 EquipmentType에 접근
-            EquipmentData equipmentData = slot.ItemInSlot as EquipmentData;
-
-            if (equipmentData != null)
-            {
-                EquipmentType equipmentType = equipmentData.equipmentType;
-                // 위치가 장비패널이라면
-                if (slot.transform.parent.name == "EquipmentPanel")
-                {
-                    inventory = GameObject.FindGameObjectWithTag("Inventory");
-                    inventoryPanel = inventory.GetComponent<Inventory>();
-                    // 인벤토리에 집어넣고
-                    UpdateEquipment(slot);
-                    // 현재 슬롯을 비활성화 함
-                    slot.ResetSlot();
-                }
-                else Equipment(slot, equipmentType);
-            }
+            HandleRightClick(slot);
         }
     }
     // 슬롯에서 나갈때 호출
@@ -175,6 +143,9 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (Tooltip != null) Tooltip.SetActive(false);
         if (EquipTooltip != null) EquipTooltip.SetActive(false);
     }
+
+
+
     // 각각의 장비 아이템에 맞게 할당
     public void Equipment(Slot slot, EquipmentType equipmentType)
     {
@@ -184,50 +155,55 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         switch (equipmentType)
         {
             case EquipmentType.Helmet:
-                MoveEquip(HelmetSlot, slot);
+                MoveItem(HelmetSlot, slot);
                 break;
             case EquipmentType.Weapon:
-                MoveEquip(WeaponSlot, slot);
+                MoveItem(WeaponSlot, slot);
                 break;
             case EquipmentType.Shield:
-                MoveEquip(ShieldSlot, slot);
+                MoveItem(ShieldSlot, slot);
                 break;
             case EquipmentType.BodyPlate:
-                MoveEquip(BodyPlateSlot, slot);
+                MoveItem(BodyPlateSlot, slot);
                 break;
             case EquipmentType.Pants:
-                MoveEquip(PantsSlot, slot);
+                MoveItem(PantsSlot, slot);
                 break;
             case EquipmentType.Shoes:
-                MoveEquip(ShoesSlot, slot);
+                MoveItem(ShoesSlot, slot);
                 break;
         }
     }
+    public void MoveToQuickSlot(Slot slot)
+    {
+        InitializeQuickSlots();
+        MoveItem(PortionSlot, slot);
+    }
     // 장비 슬롯으로 아이템 이동
-    public void MoveEquip(Slot Equipment, Slot slot)
+    public void MoveItem(Slot ItemSlot, Slot slot)
     {
         // 아이템이 존재하는 경우에만 처리
         if (slot.ItemInSlot != null)
         {
             // 동일한 장비가 이미 장착되어 있는 경우 반환
-            if (Equipment.ItemInSlot != null && Equipment.ItemInSlot.ID == slot.ItemInSlot.ID) return;
+            if (ItemSlot.ItemInSlot != null && ItemSlot.ItemInSlot.ID == slot.ItemInSlot.ID) return;
             // 동일한 장비칸 이지만 아이디가 다른경우
-            else if (Equipment.ItemInSlot != null && Equipment.ItemInSlot.ID != slot.ItemInSlot.ID) return;
+            else if (ItemSlot.ItemInSlot != null && ItemSlot.ItemInSlot.ID != slot.ItemInSlot.ID) return;
             else
             {
-                Equipment.ItemInSlot = slot.ItemInSlot;
-                Equipment.AmountInSlot = slot.AmountInSlot;
+                ItemSlot.ItemInSlot = slot.ItemInSlot;
+                ItemSlot.AmountInSlot = slot.AmountInSlot;
 
                 // 아이콘과 텍스트 활성화
-                if (Equipment.icon != null || Equipment.txt_amount != null)
+                if (ItemSlot.icon != null || ItemSlot.txt_amount != null)
                 {
-                    Equipment.icon.gameObject.SetActive(true);
-                    Equipment.icon.texture = slot.ItemInSlot.ITEMICON;
+                    ItemSlot.icon.gameObject.SetActive(true);
+                    ItemSlot.icon.texture = slot.ItemInSlot.ITEMICON;
 
-                    Equipment.txt_amount.gameObject.SetActive(true);
-                    Equipment.txt_amount.text = slot.AmountInSlot.ToString();
+                    ItemSlot.txt_amount.gameObject.SetActive(true);
+                    ItemSlot.txt_amount.text = slot.AmountInSlot.ToString();
                 }
-                Equipment.SetSlot();
+                ItemSlot.SetSlot();
             }
         }
         // 현재 슬롯의 정보 초기화
@@ -245,6 +221,86 @@ public class DragSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 inventoryPanel.slots[i].SetSlot();
                 return;
             }
+        }
+    }
+
+    // 슬롯 객체 가져오기
+    private Slot GetSlotFromEvent(PointerEventData eventData)
+    {
+        GameObject dropped = eventData.pointerDrag;
+        if (dropped == null) return null;
+        return dropped.GetComponent<Slot>();
+    }
+    // 인벤토리 찾아서 초기화
+    private void InitializeInventory()
+    {
+        if (inventory == null)
+        {
+            inventory = GameObject.FindGameObjectWithTag("Inventory");
+            inventoryPanel = inventory.GetComponent<Inventory>();
+        }
+    }
+    // 마우스 좌클릭이 눌렸을때
+    private void HandleLeftClick(Slot slot)
+    {
+        // 아이템이 장비 타입인 경우 EquipTooltip을 사용
+        if (slot.ItemInSlot.ITEMTYPE == ItemType.Equipment && EquipTooltip != null)
+        {
+            EquipTooltip.GetComponent<ActiveEquipToolTip>().clickedSlot = slot;
+            EquipTooltip.gameObject.SetActive(true);
+        }
+        // 장비 타입이 아닌 경우 일반 Tooltip을 사용
+        else if (Tooltip != null)
+        {
+            Tooltip.GetComponent<ActiveToolTip>().clickedSlot = slot;
+            Tooltip.SetActive(true);
+        }
+    }
+    // 마우스 우클릭이 눌렸을때
+    private void HandleRightClick(Slot slot)
+    {
+        // 장비 타입인 경우
+        if (slot.ItemInSlot.ITEMTYPE == ItemType.Equipment)
+        {
+            HandleEquipmentSlot(slot);
+        }
+        // 소비 타입인 경우
+        else if (slot.ItemInSlot.ITEMTYPE == ItemType.Consumable)
+        {
+            HandleConsumableSlot(slot);
+        }
+    }
+    // 장비 패널에서 인벤토리 패널로 아이템 이동
+    private void HandleEquipmentSlot(Slot slot)
+    {
+        EquipmentData equipmentData = slot.ItemInSlot as EquipmentData;
+        if (equipmentData == null) return;
+
+        EquipmentType equipmentType = equipmentData.equipmentType;
+
+        // 위치가 장비패널이라면 인벤토리에 집어넣고 슬롯 초기화
+        if (slot.transform.parent.name == "EquipmentPanel")
+        {
+            UpdateEquipment(slot);
+            slot.ResetSlot();
+        }
+        else
+        {
+            Equipment(slot, equipmentType);
+        }
+    }
+    // 퀵 슬롯 패널에서 인벤토리 패널로 아이템 이동
+    private void HandleConsumableSlot(Slot slot)
+    {
+        if (slot.transform.parent.name == "PortionUI")
+        {
+            // 인벤토리에 집어넣고 슬롯 초기화
+            UpdateEquipment(slot);
+            slot.ResetSlot();
+        }
+        else
+        {
+            MoveToQuickSlot(slot);
         }
     }
 

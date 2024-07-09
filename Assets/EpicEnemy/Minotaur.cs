@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EpicEnemyHealthBar : MonoBehaviour
+public class Minotaur : MonoBehaviour
 {
     public EpicHealthBar healthBar;
     [SerializeField] public float MaxHealth;

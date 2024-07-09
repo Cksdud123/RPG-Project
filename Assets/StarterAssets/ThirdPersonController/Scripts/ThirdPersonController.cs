@@ -125,10 +125,12 @@ namespace StarterAssets
         public float rotationPlayer;
         // 플레이어 컨트롤러 파라미터
         private PlayerController playerController;
+        private UsePortionItem usePortionItem;
 
         private void Awake()
         {
             playerController = GetComponent<PlayerController>();
+            usePortionItem = FindObjectOfType<UsePortionItem>();
             // get a reference to our main camera
             if (_mainCamera == null)
             {
@@ -219,7 +221,7 @@ namespace StarterAssets
         public void Move()
         {
             // 플레이어 컨트롤러 파라미터 (장비를 착용중일때는 움직이지 않음)
-            if (playerController.isEquipping || playerController.isDrinking
+            if (playerController.isEquipping || usePortionItem.isDrinking
                 || playerController.isKicking || playerController.isAttacking
                 || playerController.isDamaged ) return;
 

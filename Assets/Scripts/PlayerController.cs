@@ -27,9 +27,6 @@ public class PlayerController : MonoBehaviour
     //발차기
     public bool isKicking;
 
-    //회복
-    public bool isDrinking;
-
     //공격
     public bool isAttacking;
     private float timeSinceAttack;
@@ -72,7 +69,6 @@ public class PlayerController : MonoBehaviour
         Equip();
         Kick();
         Dodge();
-        Drink();
     }
     private void Equip()
     {
@@ -107,10 +103,6 @@ public class PlayerController : MonoBehaviour
     public void Kick()
     {
         if (Input.GetKeyDown(KeyCode.G) && playerAnim.GetBool("Grounded")) playerAnim.SetTrigger("Kick");
-    }
-    public void Drink()
-    {
-        if (Input.GetKeyDown(KeyCode.Q)) playerAnim.SetTrigger("Drinking");
     }
 
     private void Attack()

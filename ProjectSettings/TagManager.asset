@@ -18,6 +18,7 @@ TagManager:
   - Inventory
   - Rainforcement
   - PlayerHealthBar
+  - Portion
   layers:
   - Default
   - TransparentFX

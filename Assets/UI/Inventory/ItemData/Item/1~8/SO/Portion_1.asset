@@ -17,7 +17,7 @@ MonoBehaviour:
   rarity: 0
   itemtype: 1
   description: "\uB9C8\uB098\uB97C \uD68C\uBCF5 \uC2DC\uCF1C \uC900\uB2E4"
-  maxStack: 32
+  maxStack: 5
   price: 5
   weight: 0.1
   durability: 0

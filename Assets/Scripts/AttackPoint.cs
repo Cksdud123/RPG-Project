@@ -29,7 +29,7 @@ public class AttackPoint : MonoBehaviour
             PlayerStatus player = hits[0].gameObject.GetComponentInParent<PlayerStatus>();
 
             Enemy enemy = hits[0].gameObject.GetComponentInParent<Enemy>();
-            EpicEnemyHealthBar epicEnemy = hits[0].gameObject.GetComponentInParent<EpicEnemyHealthBar>();
+            Minotaur epicEnemy = hits[0].gameObject.GetComponentInParent<Minotaur>();
             AttackManager attackManager = GetComponentInParent<AttackManager>();
 
             if (enemy != null)
