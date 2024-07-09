@@ -22,10 +22,8 @@ public class UsePortionItem : MonoBehaviour
     }
     void Update()
     {
-        if (PortionSlot.ItemInSlot != null)
-            PortionInPlayer.SetActive(true);
-        else
-            PortionInPlayer.SetActive(false);
+        if (PortionSlot.ItemInSlot != null) PortionInPlayer.SetActive(true);
+        else PortionInPlayer.SetActive(false);
 
         if (Input.GetKeyUp(KeyCode.Q) && PortionSlot.ItemInSlot != null)
         {
