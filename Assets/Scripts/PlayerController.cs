@@ -102,7 +102,11 @@ public class PlayerController : MonoBehaviour
 
     public void Kick()
     {
-        if (Input.GetKeyDown(KeyCode.G) && playerAnim.GetBool("Grounded")) playerAnim.SetTrigger("Kick");
+        if (Input.GetKeyDown(KeyCode.G) && playerAnim.GetBool("Grounded"))
+        {
+            playerAnim.SetTrigger("Kick");
+            StaminaBar.instance.UseStamina(5);
+        }
     }
 
     private void Attack()
@@ -134,7 +138,11 @@ public class PlayerController : MonoBehaviour
     private void Dodge()
     {
         if (Input.GetKeyDown(KeyCode.C))
-            if (thirdPersonController.MoveSpeed != 0) StartCoroutine(Rolling());
+            if (thirdPersonController.MoveSpeed != 0)
+            {
+                StartCoroutine(Rolling());
+                StaminaBar.instance.UseStamina(10);
+            }
     }
     private IEnumerator Rolling()
     {

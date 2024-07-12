@@ -52,7 +52,7 @@ public class UsePortionItem : MonoBehaviour
 
             disable.fillAmount = cooltime / cooltime_max;
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         disable.fillAmount = 0.0f;
