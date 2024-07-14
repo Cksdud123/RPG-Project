@@ -26,6 +26,7 @@ public class InventoryInteraction : MonoBehaviour
     [SerializeField] private GameObject HotBarPanel;
     [SerializeField] private GameObject LevelBarPanel;
     [SerializeField] private GameObject MinimapPanel;
+    [SerializeField] private GameObject SkillTreePanel;
 
     private bool isEquipmentActive = false;
 
@@ -34,6 +35,8 @@ public class InventoryInteraction : MonoBehaviour
     {
         ActiveInventory();
         ActiveEquipment();
+        ActiveSkillTree();
+
         UpdateTimeScale();
         CheckItem();
     }
@@ -143,6 +146,22 @@ public class InventoryInteraction : MonoBehaviour
             PanelInventory.SetActive(false);
 
             ActivePlayerUI();
+        }
+    }
+    private void ActiveSkillTree()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            if (!SkillTreePanel.activeInHierarchy)
+            {
+                SkillTreePanel.SetActive(true);
+                DeactivePlayerUI();
+            }
+            else
+            {
+                SkillTreePanel.SetActive(false);
+                ActivePlayerUI();
+            }
         }
     }
     private void ActiveForge()

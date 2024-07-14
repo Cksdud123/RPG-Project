@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483b4fcb6559e9c4cba501a2805ddd74, type: 3}
+  m_Name: Skill3
+  m_EditorClassIdentifier: 
+  damage: 100
+  cool: 30
+  mana: 100
+  Level: 10
+  description: "\uACF5\uC911\uC73C\uB85C \uB3C4\uC57D\uD574 \uB545 \uBC11\uC73C\uB85C
+    \uAC15\uB825\uD55C \uB0B4\uB824\uCC0D\uAE30\uB97C \uC0AC\uC6A9\uD55C\uB2E4."
+  animationName: Skill3
+  SkillName: "\uB0B4\uB824\uCC0D\uAE30"
+  icon: {fileID: 2800000, guid: c890dd06d4a350946ab11e4778bf47d8, type: 3}

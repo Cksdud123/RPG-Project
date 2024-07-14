@@ -24,9 +24,6 @@ public class PlayerController : MonoBehaviour
     public bool isEquipping;
     public bool isEquipped;
 
-    //발차기
-    public bool isKicking;
-
     //공격
     public bool isAttacking;
     private float timeSinceAttack;
@@ -65,9 +62,7 @@ public class PlayerController : MonoBehaviour
         timeSinceAttack += Time.deltaTime;
 
         Attack();
-
         Equip();
-        Kick();
         Dodge();
     }
     private void Equip()
@@ -99,16 +94,6 @@ public class PlayerController : MonoBehaviour
     {
         isEquipping = false;
     }
-
-    public void Kick()
-    {
-        if (Input.GetKeyDown(KeyCode.G) && playerAnim.GetBool("Grounded"))
-        {
-            playerAnim.SetTrigger("Kick");
-            StaminaBar.instance.UseStamina(5);
-        }
-    }
-
     private void Attack()
     {
         if (PanelInventory.activeInHierarchy || equipment.activeInHierarchy) return;
@@ -137,7 +122,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Dodge()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) && !isDodgeing && StaminaBar.instance.stamina >= 10)
             if (thirdPersonController.MoveSpeed != 0)
             {
                 StartCoroutine(Rolling());

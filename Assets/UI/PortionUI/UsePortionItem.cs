@@ -12,6 +12,8 @@ public class UsePortionItem : MonoBehaviour
     public bool isDrinking { get; set; }
     public Image disable;
     public Animator playerAnim;
+
+    [Header("Object")]
     public GameObject PortionInPlayer;
 
     Slot PortionSlot;
@@ -22,10 +24,17 @@ public class UsePortionItem : MonoBehaviour
     }
     void Update()
     {
-        if (PortionSlot.ItemInSlot != null) PortionInPlayer.SetActive(true);
-        else PortionInPlayer.SetActive(false);
+        // 포션 슬롯에 아이템이 있다면
+        if (PortionSlot.ItemInSlot != null)
+        {
+            PortionInPlayer.SetActive(true);
+        }
+        else
+        {
+            PortionInPlayer.SetActive(false);
+        }
 
-        if (Input.GetKeyUp(KeyCode.Q) && PortionSlot.ItemInSlot != null)
+        if (Input.GetKeyUp(KeyCode.Q) && PortionSlot.ItemInSlot != null && disable.fillAmount == 0)
         {
             playerAnim.SetTrigger("Drinking");
             UseItem();

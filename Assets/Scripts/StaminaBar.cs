@@ -11,8 +11,6 @@ public class StaminaBar : MonoBehaviour
 
     public float maxStamina;
     public float stamina;
-    public bool isUsed;
-    public float ResetTime = 5.0f;
 
     private float lerfSpeed = 0.05f;
 
@@ -20,22 +18,12 @@ public class StaminaBar : MonoBehaviour
     {
         instance = this;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        stamina = maxStamina;
-        StaminaSlider.maxValue = maxStamina;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (StaminaSlider.value != stamina) StaminaSlider.value = Mathf.Lerp(StaminaSlider.value, stamina, lerfSpeed);
-
-        if(StaminaSlider.value >= 0.0f && StaminaSlider.value <= maxStamina)
-        {
-            HeallingStamina(0.5f * Time.deltaTime);
-        }
+        if (StaminaSlider.value != stamina)
+            StaminaSlider.value = Mathf.Lerp(StaminaSlider.value, stamina, lerfSpeed);
+        
+        HeallingStamina(0.5f * Time.deltaTime);
     }
 
     public void UseStamina(float damage)
