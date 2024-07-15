@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 483b4fcb6559e9c4cba501a2805ddd74, type: 3}
   m_Name: Skill3
   m_EditorClassIdentifier: 
-  damage: 100
-  cool: 30
-  mana: 100
+  damage: 70
+  cool: 15
+  mana: 20
   Level: 10
   description: "\uACF5\uC911\uC73C\uB85C \uB3C4\uC57D\uD574 \uB545 \uBC11\uC73C\uB85C
     \uAC15\uB825\uD55C \uB0B4\uB824\uCC0D\uAE30\uB97C \uC0AC\uC6A9\uD55C\uB2E4."

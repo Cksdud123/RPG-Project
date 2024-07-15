@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Skill1
   m_EditorClassIdentifier: 
   damage: 40
-  cool: 10
-  mana: 50
+  cool: 5
+  mana: 15
   Level: 2
   description: "\uC801\uC5D0\uAC8C \uBE60\uB974\uAC8C \uAC80\uC744 \uCC14\uB7EC \uAC15\uB825\uD55C
     \uD53C\uD574\uB97C \uC8FC\uB294 \uACF5\uACA9\uC744 \uD569\uB2C8\uB2E4."

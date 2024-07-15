@@ -9,83 +9,98 @@ public class AttackPoint : MonoBehaviour
     public float radius = 1f;
     public LayerMask layerMask;
 
-    [SerializeField] private GameObject Weapon;
-    ExperienceManager experienceManager;
-    Slot WeaponSlot;
-    EquipmentData WeaponEquipment;
+    [SerializeField] private GameObject weapon;
+    private ExperienceManager experienceManager;
+    private Slot weaponSlot;
+    private EquipmentData weaponEquipment;
 
     private void Awake()
     {
         experienceManager = FindObjectOfType<ExperienceManager>();
+        InitializeWeapon();
     }
-    void Update()
+
+    private void Update()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, radius, layerMask);
 
         if (hits.Length > 0)
         {
-            // 플레이어 데미지 레이어 랜덤 재생
-            int RandomHit = Random.Range(1, 3);
-            PlayerStatus player = hits[0].gameObject.GetComponentInParent<PlayerStatus>();
+            HandleHit(hits[0]);
+        }
+    }
 
-            Enemy enemy = hits[0].gameObject.GetComponentInParent<Enemy>();
-            Minotaur epicEnemy = hits[0].gameObject.GetComponentInParent<Minotaur>();
-            AttackManager attackManager = GetComponentInParent<AttackManager>();
-
-            if (enemy != null)
+    private void InitializeWeapon()
+    {
+        if (weapon != null)
+        {
+            weaponSlot = weapon.GetComponent<Slot>();
+            if (weaponSlot != null)
             {
-                float damageToDeal;
-                if (experienceManager.currentLevel + 5 < enemy.MonsterLevel)
-                {
-                    damageToDeal = 1f;
-                    enemy.Damage(damageToDeal);
-                    gameObject.SetActive(false);
-                }
-                else
-                {
-                    ChangeDamage();
-                    if (WeaponSlot.ItemInSlot != null)
-                    {
-                        enemy.Damage(damage + WeaponEquipment.Damage);
-                    }
-                    else
-                    {
-                        enemy.Damage(damage);
-                    }
-                    gameObject.SetActive(false);
-                }
-            }
-            else if (epicEnemy != null)
-            {
-                epicEnemy.Damage(damage);
-                gameObject.SetActive(false);
-            }
-            else if (player != null)
-            {
-                PlayerController playerController = player.GetComponentInParent<PlayerController>();
-
-                player.PlayerDamage(damage);
-                if (attackManager != null && attackManager.isNormalEnemy)
-                {
-                    player.animator.SetTrigger("HitNormalEnemy");
-                }
-                else
-                {
-                    player.animator.SetTrigger("Hit" + RandomHit);
-                }
-                gameObject.SetActive(false);
+                weaponEquipment = weaponSlot.ItemInSlot as EquipmentData;
             }
         }
     }
-    public void ChangeDamage()
+
+    private void HandleHit(Collider hit)
     {
-        if (Weapon != null)
+        PlayerStatus player = hit.GetComponentInParent<PlayerStatus>();
+        Enemy enemy = hit.GetComponentInParent<Enemy>();
+        Minotaur epicEnemy = hit.GetComponentInParent<Minotaur>();
+        AttackManager attackManager = GetComponentInParent<AttackManager>();
+
+        if (enemy != null)
         {
-            WeaponSlot = Weapon.GetComponent<Slot>();
-            if (WeaponSlot != null)
-            {
-                WeaponEquipment = WeaponSlot.ItemInSlot as EquipmentData;
-            }
+            HandleEnemyHit(enemy);
         }
+        else if (epicEnemy != null)
+        {
+            HandleEpicEnemyHit(epicEnemy);
+        }
+        else if (player != null)
+        {
+            HandlePlayerHit(player, attackManager);
+        }
+    }
+
+    private void HandleEnemyHit(Enemy enemy)
+    {
+        if (experienceManager.currentLevel + 5 < enemy.MonsterLevel)
+        {
+            enemy.Damage(1f);
+        }
+        else
+        {
+            float totalDamage = damage;
+            if (weaponEquipment != null)
+            {
+                totalDamage += weaponEquipment.Damage;
+            }
+            enemy.Damage(totalDamage);
+        }
+        gameObject.SetActive(false);
+    }
+
+    private void HandleEpicEnemyHit(Minotaur epicEnemy)
+    {
+        epicEnemy.Damage(damage);
+        gameObject.SetActive(false);
+    }
+
+    private void HandlePlayerHit(PlayerStatus player, AttackManager attackManager)
+    {
+        player.PlayerDamage(damage);
+
+        int randomHit = Random.Range(1, 3);
+        if (attackManager != null && attackManager.isNormalEnemy)
+        {
+            player.animator.SetTrigger("HitNormalEnemy");
+        }
+        else
+        {
+            player.animator.SetTrigger("Hit" + randomHit);
+        }
+
+        gameObject.SetActive(false);
     }
 }

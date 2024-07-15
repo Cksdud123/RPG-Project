@@ -6,6 +6,8 @@ using UnityEngine;
 public class AttackManager : MonoBehaviour
 {
     public GameObject attack_Point;
+    public SkillSO skill;
+    public AttackPoint attackPoint;
     [HideInInspector] public bool isNormalEnemy;
     void Turn_On_AttackPoint()
     {
@@ -17,6 +19,20 @@ public class AttackManager : MonoBehaviour
         if (attack_Point.activeInHierarchy)
         {
             attack_Point.SetActive(false);
+        }
+    }
+    void Turn_On_AttackPointSkill()
+    {
+        attack_Point.SetActive(true);
+        attackPoint.damage = skill.damage;
+    }
+
+    void Turn_Off_AttackPointSkill()
+    {
+        if (attack_Point.activeInHierarchy)
+        {
+            attack_Point.SetActive(false);
+            attackPoint.damage = 20f;
         }
     }
 

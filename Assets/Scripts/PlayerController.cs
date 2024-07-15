@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     //Third Person Controller References
     [SerializeField]
-    private Animator playerAnim;
+    public Animator playerAnim;
     private ThirdPersonController thirdPersonController;
     private CharacterController characterController;
 
@@ -64,6 +64,11 @@ public class PlayerController : MonoBehaviour
         Attack();
         Equip();
         Dodge();
+    }
+    // 스킬 애니메이션을 실행시키는 함수
+    public void ActivateSkill(SkillSO skill)
+    {
+        playerAnim.Play(skill.animationName);
     }
     private void Equip()
     {

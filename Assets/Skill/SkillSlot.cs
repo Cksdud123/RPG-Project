@@ -15,6 +15,7 @@ public class SkillSlot : MonoBehaviour, IPointerClickHandler, IPointerExitHandle
 
     [Header("Skill Info Panel")]
     public GameObject Skill_Info_Panel;
+    public QuickSkillSlotPanel QuickSkillSlotPanel;
 
     public void SetSkill()
     {
@@ -24,7 +25,6 @@ public class SkillSlot : MonoBehaviour, IPointerClickHandler, IPointerExitHandle
             transform.GetChild(i).gameObject.SetActive(true);
         }
     }
-
     private void SetUpdateSkill()
     {
         SkillImage.texture = SkillObject.icon;
@@ -41,5 +41,12 @@ public class SkillSlot : MonoBehaviour, IPointerClickHandler, IPointerExitHandle
         Skill_Info_Panel.SetActive(false);
     }
 
-
+    public void Register()
+    {
+        QuickSkillSlotPanel.SkillRegistration(SkillObject);
+    }
+    public void Cancel()
+    {
+        QuickSkillSlotPanel.SkillCancel(SkillObject);
+    }
 }
