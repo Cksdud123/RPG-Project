@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UsePortionItem : MonoBehaviour
 {
-
     private float cooltime = 4f;
     private float cooltime_max = 4f;
 
@@ -55,6 +54,7 @@ public class UsePortionItem : MonoBehaviour
     {
         isDrinking = true;
         cooltime = cooltime_max;
+        EffectManager.instance.HeallingEffect.Play();
         while (cooltime > 0.0f)
         {
             cooltime -= Time.deltaTime;
@@ -63,7 +63,7 @@ public class UsePortionItem : MonoBehaviour
 
             yield return null;
         }
-
+        EffectManager.instance.HeallingEffect.Stop();
         disable.fillAmount = 0.0f;
         isDrinking = false;
     }

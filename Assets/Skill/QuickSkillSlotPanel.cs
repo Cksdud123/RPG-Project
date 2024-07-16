@@ -10,7 +10,7 @@ public class QuickSkillSlotPanel : MonoBehaviour
     public PlayerController controller;
     public AttackManager attackManager;
 
-    private bool isUsed = false;
+    [HideInInspector]public bool isUsed = false;
     private void Awake()
     {
         for (int i = 0; i < quickSkillSlot.Length; i++)

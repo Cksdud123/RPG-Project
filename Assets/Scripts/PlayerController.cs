@@ -8,8 +8,8 @@ using UnityEngine.InputSystem.XR;
 public class PlayerController : MonoBehaviour
 {
     //Third Person Controller References
-    [SerializeField]
-    public Animator playerAnim;
+    [SerializeField] public Animator playerAnim;
+    [SerializeField] private ParticleSystem AttackTrail;
     private ThirdPersonController thirdPersonController;
     private CharacterController characterController;
 
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     [Header("InventoryisAcrive?")]
     [SerializeField] private GameObject PanelInventory;
     [SerializeField] private GameObject equipment;
+    [SerializeField] private GameObject SkillTreePanel;
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
@@ -101,10 +102,12 @@ public class PlayerController : MonoBehaviour
     }
     private void Attack()
     {
-        if (PanelInventory.activeInHierarchy || equipment.activeInHierarchy) return;
+        if (PanelInventory.activeInHierarchy || equipment.activeInHierarchy || SkillTreePanel.activeInHierarchy) return;
 
         if (Input.GetMouseButtonDown(0) && playerAnim.GetBool("Grounded") && timeSinceAttack > 0.7f)
         {
+            AttackTrail.Play();
+
             if (!isEquipped)
                 return;
 
