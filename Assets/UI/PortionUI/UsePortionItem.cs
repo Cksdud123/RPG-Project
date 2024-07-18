@@ -37,6 +37,7 @@ public class UsePortionItem : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Q) && PortionSlot.ItemInSlot != null && disable.fillAmount == 0)
         {
             playerAnim.SetTrigger("Drinking");
+            EffectManager.Instance.HealEffect.Play();
             UseItem();
         }
     }
