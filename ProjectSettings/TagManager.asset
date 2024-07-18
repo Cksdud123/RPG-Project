@@ -19,6 +19,7 @@ TagManager:
   - Rainforcement
   - PlayerHealthBar
   - Portion
+  - Position
   layers:
   - Default
   - TransparentFX
