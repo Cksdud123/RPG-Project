@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scene/Playground.unity
     guid: e9017d5f96b9f09489b4b37e1d6eb914
   - enabled: 1
+    path: Assets/Scene/LoadingScene.unity
+    guid: d4053395b736b8e49bc3a9a16c3a9966
+  - enabled: 1
     path: Assets/Scene/BossMap.unity
     guid: 3b6ab4ed4412b0747b75507224840fd0
   m_configObjects:
